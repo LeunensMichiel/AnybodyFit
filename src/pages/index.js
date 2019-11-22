@@ -71,6 +71,13 @@ const ServiceCardTitle = styled.h2`
 
 const ServiceCardBody = styled.div``
 
+const Booking = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+`
+
 const IndexPage = () => (
   <Layout>
     <SEO
@@ -79,24 +86,12 @@ const IndexPage = () => (
     />
     <LogoContainer>
       <StyledLogo />
-      <p>Site nog in opbouw.</p>
     </LogoContainer>
     <Helmet>
       <script src="https://api.smoothbook.co/lib/calendar-embed.js"></script>
     </Helmet>
     <ServiceContainer>
       <ServiceTitle>Diensten</ServiceTitle>
-      <a
-        className="sb-calendar"
-        data-embed="true"
-        target="_blank"
-        href="https://cal.smoothbook.co/5d908d2784e31e7aa72a31ce"
-      >
-        <img
-          src="https://api.smoothbook.co/img/book-now-button.png"
-          alt="Online appointments by Smoothbook"
-        />
-      </a>
       <ServiceFlex>
         <ServiceCard>
           <ServiceCardTitle>Yoga</ServiceCardTitle>
@@ -106,21 +101,21 @@ const IndexPage = () => (
               Yoga in kleine groepjes, zodat iedereen kan genieten van een
               gepersonaliseerde aanpak.
             </p>
-            <p>
-              Heb je een beperking of speciale noden? Bel of mail voor een
-              gratis kennismakingsgesprek en dan kijken we samen welke
-              aanpassingen er kunnen gemaakt worden.
-            </p>
             <h3>Yoga Conditioning</h3>
             <p>Een dynamische mix van kracht, stabiliteit en flexibiliteit.</p>
             <h3>Yoga & Mindfulness</h3>
             <p>Trage les met focus op ademhaling, mindfulness en meditatie.</p>
+            <p>
+              Heb je een beperking of speciale noden? Boek een gratis in-take
+              gesprek, en dan kijken we samen welke aanpassingen er kunnen
+              gemaakt worden.
+            </p>
           </ServiceCardBody>
         </ServiceCard>
         <ServiceCard>
           <ServiceCardTitle>Lifestyle Coaching</ServiceCardTitle>
           <ServiceCardBody>
-            <p>€30 per uur*</p>
+            <p>€30 per uur</p>
             <p>
               Wil je een gezondere levensstijl maar weet je niet waar je moet
               beginnen? Samen stellen we doelen, en zoeken we strategieën om
@@ -133,13 +128,28 @@ const IndexPage = () => (
               <li>Motivatie, zelfvertrouwen & voldoening</li>
               <li>Mindset</li>
             </ul>
-            <p>Bel of mail om een gratis kennismakingsgesprek in te plannen!</p>
+            <p>
+              Niet zeker of het je ding is? Boek een gratis in-take gesprek.
+            </p>
           </ServiceCardBody>
         </ServiceCard>
       </ServiceFlex>
-      <p>
-        <i>Student? Vraag naar het kortingstarief!</i>
-      </p>
+      <Booking>
+        <a
+          className="sb-calendar"
+          data-embed="true"
+          target="_blank"
+          href="https://cal.smoothbook.co/5d908d2784e31e7aa72a31ce"
+        >
+          <img
+            src="https://api.smoothbook.co/img/book-now-button.png"
+            alt="Online appointments by Smoothbook"
+          />
+        </a>
+        <p>
+          <i>Student? Vraag naar het kortingstarief!</i>
+        </p>
+      </Booking>
     </ServiceContainer>
   </Layout>
 )

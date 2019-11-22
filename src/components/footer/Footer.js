@@ -18,7 +18,7 @@ const FooterContainer = styled.footer`
 const Contact = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   margin: 2.5em 0;
 
   span {
@@ -28,9 +28,10 @@ const Contact = styled.div`
 
 const SocialIcons = styled.div`
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-evenly;
   align-items: center;
   margin: 1em 0;
+  width: 66px;
 `
 
 const Footer = () => {
@@ -62,7 +63,7 @@ const Footer = () => {
         </SocialIcons>
       </Contact>
       &copy; {new Date().getFullYear()} Anybodyfit. Alle rechten voorbehouden.{" "}
-      <br /> Site in opbouw.
+      <br /> Site nog in opbouw.
     </FooterContainer>
   )
 }
