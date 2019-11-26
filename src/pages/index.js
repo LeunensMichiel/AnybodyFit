@@ -150,6 +150,10 @@ const IndexPage = () => (
           />
         </a>
         <p>
+          Lessen en coaching sessies gaan steeds door in het BlinkHuis
+          (Vlaanderenstraat 53, 9000 Gent)
+        </p>
+        <p>
           <i>Student? Vraag naar het kortingstarief!</i>
         </p>
       </Booking>
