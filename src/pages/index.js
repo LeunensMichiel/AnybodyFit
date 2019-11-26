@@ -88,7 +88,11 @@ const IndexPage = () => (
       <StyledLogo />
     </LogoContainer>
     <Helmet>
-      <script src="https://api.smoothbook.co/lib/calendar-embed.js"></script>
+      <script
+        id="setmore_script"
+        type="text/javascript"
+        src="https://my.setmore.com/webapp/js/src/others/setmore_iframe.js"
+      ></script>
     </Helmet>
     <ServiceContainer>
       <ServiceTitle>Diensten</ServiceTitle>
@@ -136,14 +140,13 @@ const IndexPage = () => (
       </ServiceFlex>
       <Booking>
         <a
-          className="sb-calendar"
-          data-embed="true"
-          target="_blank"
-          href="https://cal.smoothbook.co/5d908d2784e31e7aa72a31ce"
+          id="Setmore_button_iframe"
+          href="https://my.setmore.com/bookingpage/c2f88312-cc6e-4dd2-ad87-2d8811b1ed3b"
         >
           <img
-            src="https://api.smoothbook.co/img/book-now-button.png"
-            alt="Online appointments by Smoothbook"
+            border="none"
+            src="https://my.setmore.com/webapp/images/bookappt/SetMore-book-button.png"
+            alt="Book an appointment with AnyBodyFit using SetMore"
           />
         </a>
         <p>
