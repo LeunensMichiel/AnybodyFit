@@ -1,6 +1,8 @@
 import React from "react"
 import styled from "styled-components"
 import Helmet from "react-helmet"
+import Img from "gatsby-image/withIEPolyfill"
+import { graphql, Link } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -9,156 +11,114 @@ import screens from "../components/framework/Screens"
 
 import Logo from "../images/svg/logo.svg"
 
-const LogoContainer = styled.div`
-  width: 100%;
-  background: ${colors.secondaryWhite};
+const Landing = styled.div`
   display: flex;
-  flex-direction: column;
+  position: relative;
+  width: 100%;
+  min-height: 95vh;
   justify-content: center;
-  align-items: center;
-  padding: 6.6em 1.5em;
-
-  @media ${screens.tablet} {
-    padding: 6.6em 0;
-  }
 `
 
 const StyledLogo = styled(Logo)`
+  width: 20%;
+  z-index: 5;
+`
+const MainImage = styled.div`
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  max-width: 600px;
+  overflow: hidden;
+  opacity: 0.33;
+  clip-path: ellipse(100% 100% at 50% 0%);
 `
 
-const ServiceContainer = styled.div`
-  width: 100%;
-  max-width: 960px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-
-  padding: 0 1.5em;
-
-  @media ${screens.tablet} {
-    padding: 0;
-  }
-`
-
-const ServiceTitle = styled.h1`
-  font-size: 3em;
-`
-
-const ServiceFlex = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: stretch;
-  align-items: flex-start;
-  width: 100%;
-
-  @media ${screens.tablet} {
-    flex-direction: row;
-  }
-`
-
-const ServiceCard = styled.div`
-  flex: 0 0 50%;
-  margin-right: 20px;
-`
-
-const ServiceCardTitle = styled.h2`
-  font-size: 1.5em;
-`
-
-const ServiceCardBody = styled.div``
-
-const Booking = styled.div`
+const MainInfo = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  align-self: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1024px;
+  margin: 10em auto;
 `
 
-const IndexPage = () => (
+const MainHeader = styled.h1`
+  font-size: 5em;
+  text-align: center;
+  margin-top: 0;
+`
+
+const MainParagraph = styled.p`
+  margin: 0;
+  text-align: justify;
+`
+
+const MoreLink = styled(Link)`
+  color: ${colors.secondaryBlack};
+  text-decoration: none;
+  padding: 0.33em 1em;
+  transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  -webkit-backface-visibility: hidden;
+  border-bottom: 1px solid ${colors.secondaryBlack};
+  border-top: 1px solid ${colors.secondaryBlack};
+  margin-top: 50px;
+
+  &:hover {
+    color: ${colors.secondaryWhite};
+    border-color: ${colors.secondaryWhite};
+  }
+`
+
+const IndexPage = ({ data }) => (
   <Layout>
     <SEO
       title="Home"
       description="Homepage of Anybodyfit, a personal home coaching business based in Ghent, Belgium"
     />
-    <LogoContainer>
+    <Landing>
+      <MainImage>
+        <Img
+          fluid={data.mainImage.childImageSharp.fluid}
+          objectFit="cover"
+          objectPosition="50% 100%"
+          alt="Picture of someone doing yoga"
+          title="Main Page Header"
+          style={{ position: "static" }}
+        />
+      </MainImage>
       <StyledLogo />
-    </LogoContainer>
-    <Helmet>
-      <script
-        id="setmore_script"
-        type="text/javascript"
-        src="https://my.setmore.com/webapp/js/src/others/setmore_iframe.js"
-      ></script>
-    </Helmet>
-    <ServiceContainer>
-      <ServiceTitle>Diensten</ServiceTitle>
-      <ServiceFlex>
-        <ServiceCard>
-          <ServiceCardTitle>Yoga</ServiceCardTitle>
-          <ServiceCardBody>
-            <p>€9 per les, €80 voor 10</p>
-            <p>
-              Yoga in kleine groepjes, zodat iedereen kan genieten van een
-              gepersonaliseerde aanpak.
-            </p>
-            <h3>Yoga Conditioning</h3>
-            <p>Een dynamische mix van kracht, stabiliteit en flexibiliteit.</p>
-            <h3>Yoga & Mindfulness</h3>
-            <p>Trage les met focus op ademhaling, mindfulness en meditatie.</p>
-            <p>
-              Heb je een beperking of speciale noden? Boek een gratis in-take
-              gesprek, en dan kijken we samen welke aanpassingen er kunnen
-              gemaakt worden.
-            </p>
-          </ServiceCardBody>
-        </ServiceCard>
-        <ServiceCard>
-          <ServiceCardTitle>Lifestyle Coaching</ServiceCardTitle>
-          <ServiceCardBody>
-            <p>€30 per uur</p>
-            <p>
-              Wil je een gezondere levensstijl maar weet je niet waar je moet
-              beginnen? Samen stellen we doelen, en zoeken we strategieën om
-              gezonde gewoontes aan te leren & barrières te overwinnen. We
-              kijken naar:
-            </p>
-            <ul>
-              <li>Voeding & beweging</li>
-              <li>Slaap</li>
-              <li>Motivatie, zelfvertrouwen & voldoening</li>
-              <li>Mindset</li>
-            </ul>
-            <p>
-              Niet zeker of het je ding is? Boek een gratis in-take gesprek.
-            </p>
-          </ServiceCardBody>
-        </ServiceCard>
-      </ServiceFlex>
-      <Booking>
-        <a
-          id="Setmore_button_iframe"
-          href="https://my.setmore.com/bookingpage/c2f88312-cc6e-4dd2-ad87-2d8811b1ed3b"
-        >
-          <img
-            border="none"
-            src="https://my.setmore.com/webapp/images/bookappt/SetMore-book-button.png"
-            alt="Book an appointment with AnyBodyFit using SetMore"
-          />
-        </a>
-        <p>
-          Lessen en coaching sessies gaan steeds door in het BlinkHuis
-          (Vlaanderenstraat 53, 9000 Gent)
-        </p>
-        <p>
-          <i>Student? Vraag naar het kortingstarief!</i>
-        </p>
-      </Booking>
-    </ServiceContainer>
+    </Landing>
+    <MainInfo>
+      <MainHeader>
+        Yoga & <br />
+        Personal Coaching
+      </MainHeader>
+      <MainParagraph>
+        AnyBodyFit streeft ernaar om een gezonde levensstijl voor iedereen
+        toegankelijk te maken. Door het ondersteunen van de individuele groei,
+        het creëren van een sociaal vangnet, en het hanteren van een
+        allesomvattende aanpak, leggen we de basis voor een optimaal fysiek,
+        mentaal & emotioneel welzijn.
+      </MainParagraph>
+      <MoreLink to="/about/">meer over ons</MoreLink>
+    </MainInfo>
   </Layout>
 )
 
 export default IndexPage
+
+export const query = graphql`
+  query {
+    mainImage: file(relativePath: { eq: "home.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 2048, quality: 85) {
+          presentationWidth
+          presentationHeight
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+  }
+`

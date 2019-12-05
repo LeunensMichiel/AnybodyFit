@@ -2,23 +2,19 @@ import Typography from "typography"
 const typography = new Typography({
   baseFontSize: "18px",
   baseLineHeight: 1.5,
-  headerFontFamily: ["Open Sans", "sans-serif"],
-  bodyFontFamily: ["Montserrat", "Inconsolata", "sans-serif"],
-  headerColor: "#212121",
-  bodyColor: "#212121",
+  headerFontFamily: ["Playfair Display", "serif"],
+  bodyFontFamily: ["Raleway", "sans-serif"],
+  headerColor: "#262626",
+  bodyColor: "#262626",
   includeNormalize: false,
   googleFonts: [
     {
-      name: "Montserrat",
-      styles: ["400", "300"],
+      name: "Raleway",
+      styles: ["400", "400i", "600"],
     },
     {
-      name: "Inconsolata",
-      styles: ["400"],
-    },
-    {
-      name: "Open Sans",
-      styles: ["400", "300", "700"],
+      name: "Playfair Display",
+      styles: ["700"],
     },
   ],
 })
