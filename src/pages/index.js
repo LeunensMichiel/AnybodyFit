@@ -21,6 +21,7 @@ import innovation from "../images/svg/innovation.svg"
 import social from "../images/svg/social-care.svg"
 import startup from "../images/svg/startup.svg"
 import waves from "../images/svg/waves.svg"
+import check from "../images/svg/check.svg"
 
 const Landing = styled.div`
   display: flex;
@@ -90,6 +91,8 @@ const InfoCard = styled.div`
   text-align: right;
   display: flex;
   margin-bottom: 50px;
+  transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  -webkit-backface-visibility: hidden;
 
   &:nth-of-type(2n) {
     text-align: left;
@@ -170,12 +173,230 @@ const CardMoreInfo = styled(Link)`
   }
 `
 
+const Tom = styled.div`
+  width: 100%;
+  max-width: 1024px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  margin: 3em auto;
+`
+
+const TomHeader = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+`
+
+const TomTitle = styled.h1`
+  font-size: 5rem;
+  margin: 0;
+`
+
+const TomSubtitle = styled.h2`
+  font-size: 2rem;
+  color: ${colors.secondaryBlack};
+  margin-top: 0.66em;
+`
+
+const TomAbout = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+
+const TomPicture = styled.div`
+  height: 400px;
+  width: 400px;
+  background-color: ${colors.secondaryWhite};
+  border-radius: 100%;
+  position: relative;
+  border: 10px solid ${colors.secondaryWhite};
+
+  img {
+    border-radius: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    z-index: 3;
+  }
+
+  .circle {
+    width: 180px;
+    height: 180px;
+    position: absolute;
+    background-color: ${colors.secondaryWhite};
+    border-radius: 100%;
+    top: -30px;
+    left: -30px;
+    z-index: 1;
+
+    &.middle {
+      width: 100px;
+      height: 100px;
+      top: unset;
+      left: unset;
+      bottom: -80px;
+      right: -40px;
+    }
+
+    &.small {
+      width: 50px;
+      height: 50px;
+      top: unset;
+      left: unset;
+      bottom: -120px;
+      right: 90px;
+    }
+  }
+`
+
+const TomItems = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-evenly;
+  min-height: 200px;
+`
+
+const TomItem = styled.div`
+  font-size: 1.2em;
+  max-width: 400px;
+  text-align: right;
+
+  span {
+    font-weight: 600;
+  }
+
+  &:not(:last-child)::after {
+    display: block;
+    content: "";
+    width: 40px;
+    height: 1px;
+    background-color: ${colors.accent};
+    margin: 0.33em -15px 0.33em auto;
+  }
+`
+
+const Booking = styled.div`
+  width: 100%;
+  max-width: 1024px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 10em auto;
+  z-index: 5;
+`
+
+const BookingCard = styled.div`
+  width: 380px;
+  height: 500px;
+  background-color: ${colors.white};
+  border-radius: 50px;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.1), 0 15px 12px rgba(0, 0, 0, 0.1);
+  padding: 1.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+`
+
+const BookingType = styled.h3`
+  font-size: 1.33em;
+  align-self: center;
+  width: 100%;
+  color: ${colors.accent};
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  border-bottom: 1px solid ${colors.accent};
+  padding-bottom: 0.5em;
+`
+
+const BookingHeader = styled.div``
+
+const BookingPrice = styled.h2`
+  font-size: 4em;
+  margin: 0;
+  margin-bottom: 0.1em;
+  span {
+    font-size: 0.33em;
+    font-family: "Raleway", sans-serif;
+    color: ${colors.secondaryBlack};
+  }
+`
+
+const BookingDesc = styled.span`
+  color: ${colors.secondaryBlack};
+`
+
+const BookingItems = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+const BookingItem = styled.div`
+  display: flex;
+  justify-items: flex-start;
+  align-items: center;
+  margin-bottom: 16px;
+`
+
+const BookingText = styled.span`
+  line-height: 1;
+`
+
+const BookingIcon = styled.div`
+  background-image: url(${check});
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 20px;
+  width: 20px;
+  margin-right: 16px;
+`
+
+const BookingButton = styled.a`
+  align-self: center;
+  width: 100%;
+  padding: 1em 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid ${colors.accent};
+  border-radius: 50px;
+  color: ${colors.accent};
+  font-weight: 600;
+  transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  -webkit-backface-visibility: hidden;
+  text-decoration: none;
+
+  &:hover {
+    background-color: ${colors.accent};
+    color: ${colors.white};
+  }
+`
+
 const IndexPage = ({ data }) => (
   <Layout>
     <SEO
       title="Home"
       description="Homepage of Anybodyfit, a personal home coaching business based in Ghent, Belgium"
     />
+    <Helmet>
+      <script
+        id="setmore_script"
+        type="text/javascript"
+        src="https://my.setmore.com/webapp/js/src/others/setmore_iframe.js"
+      ></script>
+    </Helmet>
     <Landing>
       <MainImage>
         <Img
@@ -314,6 +535,104 @@ const IndexPage = ({ data }) => (
         </CardImageContainer>
       </CardImage>
     </InfoCard>
+    <Tom>
+      <TomHeader>
+        <TomTitle>Ontmoet Tom,</TomTitle>
+        <TomSubtitle>uw persoonlijke coach</TomSubtitle>
+      </TomHeader>
+      <TomAbout>
+        <TomPicture>
+          <Img
+            fluid={data.tom.childImageSharp.fluid}
+            objectFit="cover"
+            objectPosition="50% 50%"
+            alt="Tom"
+            title="Tom"
+            style={{ position: "static" }}
+          />
+          <div className="circle" />
+          <div className="circle middle" />
+          <div className="circle small" />
+        </TomPicture>
+        <TomItems>
+          <TomItem>
+            <span>NASM/EREPS4</span> Personal Trainer
+          </TomItem>
+          <TomItem>
+            <span>YA 200Hr</span> Yoga Instructeur
+          </TomItem>
+          <TomItem>4 jaar coaching-ervaring</TomItem>
+          <TomItem>
+            Student revalidatiewetenschappen & kinesitherapie @ UGent
+          </TomItem>
+          <TomItem>Student precision nutrition</TomItem>
+        </TomItems>
+      </TomAbout>
+    </Tom>
+    <Booking>
+      <BookingCard>
+        <BookingType>Yoga</BookingType>
+        <BookingHeader>
+          <BookingPrice>
+            €9<span> /sessie</span>
+          </BookingPrice>
+          <BookingDesc>
+            Om even tot rust te kunnen komen. U krijgt de volgende voordelen:
+          </BookingDesc>
+        </BookingHeader>
+        <BookingItems>
+          <BookingItem>
+            <BookingIcon />
+            <BookingText>Gratis proefles</BookingText>
+          </BookingItem>
+          <BookingItem>
+            <BookingIcon />
+            <BookingText>Kleine groepjes</BookingText>
+          </BookingItem>
+          <BookingItem>
+            <BookingIcon />
+            <BookingText>Oefeningen op maat</BookingText>
+          </BookingItem>
+        </BookingItems>
+        <BookingButton
+          id="Setmore_button_iframe"
+          href="https://my.setmore.com/bookingpage/c2f88312-cc6e-4dd2-ad87-2d8811b1ed3b"
+        >
+          Boek Yoga
+        </BookingButton>
+      </BookingCard>
+      <BookingCard>
+        <BookingType>Personal Coaching</BookingType>
+        <BookingHeader>
+          <BookingPrice>
+            €30<span> /uur</span>
+          </BookingPrice>
+          <BookingDesc>
+            Voor een gezondere levensstijl. U krijgt de volgende voordelen:
+          </BookingDesc>
+        </BookingHeader>
+        <BookingItems>
+          <BookingItem>
+            <BookingIcon />
+            <BookingText>Gratis intake gesprek</BookingText>
+          </BookingItem>
+          <BookingItem>
+            <BookingIcon />
+            <BookingText>Gedragsverandering leren</BookingText>
+          </BookingItem>
+          <BookingItem>
+            <BookingIcon />
+            <BookingText>Gezondheids- en mindset coaching</BookingText>
+          </BookingItem>
+        </BookingItems>
+        <BookingButton
+          id="Setmore_button_iframe"
+          href="https://my.setmore.com/bookingpage/c2f88312-cc6e-4dd2-ad87-2d8811b1ed3b"
+        >
+          Boek Coaching
+        </BookingButton>
+      </BookingCard>
+    </Booking>
   </Layout>
 )
 
@@ -349,6 +668,15 @@ export const query = graphql`
       }
     }
     thirdCard: file(relativePath: { eq: "thirdCard.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 1080, quality: 85) {
+          presentationWidth
+          presentationHeight
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+    tom: file(relativePath: { eq: "tom.jpg" }) {
       childImageSharp {
         fluid(maxWidth: 1080, quality: 85) {
           presentationWidth
