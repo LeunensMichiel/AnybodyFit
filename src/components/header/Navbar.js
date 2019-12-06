@@ -1,16 +1,20 @@
 import React from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
+import PropTypes, { bool } from "prop-types"
 
 import colors from "../framework/colors"
 import screens from "../framework/Screens"
 
-import SmallLogo from "../../images/svg/abf_only.svg"
+import SmallLogo from "../../images/svg/abf_only.inline.svg"
 
 const NavigationBar = styled.div`
   width: 100%;
   position: fixed;
   z-index: 50;
+  background-color: ${props => (props.show ? colors.white : "transparent")};
+  transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  padding: ${props => (props.show ? "25px" : "50px")} 0;
 `
 const Header = styled.div`
   width: 100%;
@@ -19,7 +23,6 @@ const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 50px 0;
 `
 
 const StyledLogo = styled(SmallLogo)`
@@ -49,10 +52,10 @@ const NavigationItem = styled(Link)`
   }
 `
 
-const Navbar = () => {
+const Navbar = ({ shouldChangeColor }) => {
   return (
     <>
-      <NavigationBar>
+      <NavigationBar show={shouldChangeColor}>
         <Header>
           <StyledLogo />
           <NavigationItems>
@@ -73,6 +76,10 @@ const Navbar = () => {
       </NavigationBar>
     </>
   )
+}
+
+Navbar.propTypes = {
+  shouldChangeColor: bool,
 }
 
 export default Navbar

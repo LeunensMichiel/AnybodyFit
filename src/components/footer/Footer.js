@@ -6,7 +6,7 @@ import colors from "../framework/Colors"
 import { FaFacebookSquare } from "react-icons/fa"
 import { FaInstagram } from "react-icons/fa"
 
-import Logo from "../../images/svg/logo.svg"
+import Logo from "../../images/svg/logo.inline.svg"
 
 const FooterContainer = styled.footer`
   width: 100%;
