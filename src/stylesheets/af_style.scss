@@ -4,21 +4,23 @@
 
 //  COLORS   //
 $black: #262626;
-$white: #F9F7F7;
-$accent: #E60F3A;
-$accent2: #FBF8C8;
-$secondaryWhite: #E8E5E5;
+$white: #f9f7f7;
+$accent: #e60f3a;
+$accent2: #fbf8c8;
+$secondaryWhite: #e8e5e5;
 $secondaryBlack: #26262680;
 
 //  FONTS   //
-$baseFont: 1.2em/1.5 "Montserrat",
-sans-serif;
-$headerFont: 4.5em/1.5 bold "Open Sans",
-sans-serif;
+$baseFont: 1.2em/1.5 "Montserrat", sans-serif;
+$headerFont: 4.5em/1.5 bold "Open Sans", sans-serif;
 
 ::selection {
   background-color: $accent;
   color: $white;
+}
+
+* {
+  outline-color: $accent;
 }
 
 html {
