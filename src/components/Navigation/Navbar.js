@@ -23,6 +23,10 @@ const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media ${screens.tablet} {
+    width: 90%;
+  }
 `
 
 const StyledLogo = styled(SmallLogo)`
@@ -63,16 +67,16 @@ class Navbar extends PureComponent {
     })
   }
 
-  componentDidMount() {
-    window.addEventListener("scroll", this.handleScroll)
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.handleScroll)
   }
 
-  componentWillUnmount() {
-    window.removeEventListener(
+  componentDidMount() {
+    window.addEventListener(
       "scroll",
       _.throttle(() => {
         this.handleScroll()
-      }, 500)
+      }, 250)
     )
   }
 

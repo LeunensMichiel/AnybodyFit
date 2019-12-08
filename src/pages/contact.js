@@ -249,7 +249,7 @@ class contact extends PureComponent {
               <span>Tom Janssens</span>
               <span>info@anybody.fitness</span>
               <span>+32 485 65 33 06</span>
-              <span>BE 0712.671.569</span>
+              <span>BE 0731.824.913</span>
             </Info>
             <Address>
               <span>De lessen gaan door in de</span>

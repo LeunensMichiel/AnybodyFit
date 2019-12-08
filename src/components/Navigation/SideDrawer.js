@@ -52,30 +52,33 @@ const NavigationItems = styled.ul`
   list-style: none;
   margin: 0;
   margin: 50% 0;
-  padding: 0 1.66em;
   display: flex;
   flex-direction: column;
   justify-content: center;
 `
 const NavigationItem = styled.li`
   margin-bottom: ${props => (props.last ? "0" : "1.33em")};
-  padding-bottom: 0.66em;
-  border-bottom: ${props => (props.last ? "0" : "1px")} solid
-    ${colors.secondaryBlack};
+  display: flex;
+
   &:hover > a,
   &:focus > a {
     color: ${colors.secondaryBlack};
   }
+
   a {
-    font-size: 1.1em;
-    font-weight: 300;
-    text-transform: uppercase;
+    font-size: 1.3em;
+    padding: 0.66em 1.66em;
+    width: 100%;
+    text-transform: lowercase;
     color: ${colors.secondaryBlack};
     transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
     -webkit-backface-visibility: hidden;
-    padding-bottom: 1.28em;
+    border-right-width: 3px;
+    border-right-style: solid;
+
     &.activeLink {
       font-weight: 600;
+      border-right-color: ${colors.accent};
     }
   }
 `
@@ -107,7 +110,7 @@ const SideDrawer = ({ show, click }) => {
             nieuws
           </StyledLink>
         </NavigationItem>
-        <NavigationItem>
+        <NavigationItem last>
           <StyledLink to="/contact/" activeClassName="activeLink">
             contact
           </StyledLink>

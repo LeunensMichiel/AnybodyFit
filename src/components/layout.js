@@ -2,7 +2,7 @@ import React, { PureComponent } from "react"
 import PropTypes from "prop-types"
 import { IconContext } from "react-icons"
 import _ from "lodash"
-import { isIE, isMobile } from "react-device-detect"
+import { isIE, isMobileOnly } from "react-device-detect"
 
 import Footer from "./Footer/Footer"
 import Navbar from "./Navigation/Navbar"
@@ -15,6 +15,7 @@ import "../stylesheets/af_style.scss"
 class Layout extends PureComponent {
   state = {
     sideDrawerOpen: false,
+    mobile: isMobileOnly || window.innerWidth < 768,
   }
 
   drawerToggleClickHandler = () => {
@@ -29,9 +30,28 @@ class Layout extends PureComponent {
     })
   }
 
+  updateDimensions = () => {
+    this.setState({
+      mobile: isMobileOnly || window.innerWidth < 768,
+    })
+  }
+
+  componentDidMount() {
+    window.addEventListener(
+      "resize",
+      _.throttle(() => {
+        this.updateDimensions()
+      }, 100)
+    )
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateDimensions)
+  }
+
   render() {
     const { children } = this.props
-    const { sideDrawerOpen } = this.state
+    const { sideDrawerOpen, mobile } = this.state
     let backdrop
     if (sideDrawerOpen) {
       backdrop = <Backdrop click={this.backdropToggleClickHandler} />
@@ -44,7 +64,7 @@ class Layout extends PureComponent {
       <>
         <IconContext.Provider value={{ className: "social__icons" }}>
           <div className="wrapper">
-            {isMobile ? (
+            {mobile ? (
               <>
                 <HamburgerNavbar
                   hamburgerClickHandler={this.drawerToggleClickHandler}
