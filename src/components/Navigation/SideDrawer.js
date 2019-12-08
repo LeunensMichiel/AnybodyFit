@@ -1,0 +1,120 @@
+import React from "react"
+import styled from "styled-components"
+import { Link } from "gatsby"
+
+import colors from "../Framework/Colors"
+
+import CrossIcon from "../../images/svg/cross.inline.svg"
+import screens from "../Framework/Screens"
+
+const Cross = styled(CrossIcon)`
+  position: absolute;
+  top: 1.66em;
+  right: 1.66em;
+  height: 45px;
+  width: 35px;
+  cursor: pointer;
+  fill: ${colors.black};
+  transition: 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  -webkit-backface-visibility: hidden;
+  &:focus {
+    outline: none;
+  }
+  &:hover,
+  &:focus {
+    transform: scale(0.95);
+  }
+`
+
+const Navigation = styled.nav`
+  height: 100%;
+  background: ${colors.secondaryWhite};
+  box-shadow: ${props =>
+    props.show === "true"
+      ? " 0 14px 28px rgba(0, 0, 0, 0.33), 0 10px 10px rgba(0, 0, 0, 0.33)"
+      : ""};
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  top: 0;
+  left: 0;
+  width: 70%;
+  max-width: 300px;
+  z-index: 200;
+  transform: ${props =>
+    props.show === "true" ? "translateX(0)" : "translateX(-100%)"};
+  transition: transform 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  overflow-y: auto;
+`
+const NavigationItems = styled.ul`
+  width: 100%;
+  list-style: none;
+  margin: 0;
+  margin: 50% 0;
+  padding: 0 1.66em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`
+const NavigationItem = styled.li`
+  margin-bottom: ${props => (props.last ? "0" : "1.33em")};
+  padding-bottom: 0.66em;
+  border-bottom: ${props => (props.last ? "0" : "1px")} solid
+    ${colors.secondaryBlack};
+  &:hover > a,
+  &:focus > a {
+    color: ${colors.secondaryBlack};
+  }
+  a {
+    font-size: 1.1em;
+    font-weight: 300;
+    text-transform: uppercase;
+    color: ${colors.secondaryBlack};
+    transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-backface-visibility: hidden;
+    padding-bottom: 1.28em;
+    &.activeLink {
+      font-weight: 600;
+    }
+  }
+`
+
+const StyledLink = styled(Link)`
+  color: ${colors.secondaryBlack};
+  text-decoration: none;
+`
+
+const SideDrawer = ({ show, click }) => {
+  return (
+    <Navigation show={show.toString()}>
+      <span onClick={click}>
+        <Cross />
+      </span>
+      <NavigationItems>
+        <NavigationItem>
+          <StyledLink to="/" activeClassName="activeLink">
+            home
+          </StyledLink>
+        </NavigationItem>
+        <NavigationItem>
+          <StyledLink to="/about/" activeClassName="activeLink">
+            over
+          </StyledLink>
+        </NavigationItem>
+        <NavigationItem>
+          <StyledLink to="/news/" activeClassName="activeLink">
+            nieuws
+          </StyledLink>
+        </NavigationItem>
+        <NavigationItem>
+          <StyledLink to="/contact/" activeClassName="activeLink">
+            contact
+          </StyledLink>
+        </NavigationItem>
+      </NavigationItems>
+    </Navigation>
+  )
+}
+
+export default SideDrawer

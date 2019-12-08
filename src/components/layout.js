@@ -1,48 +1,68 @@
-import React, { Component } from "react"
+import React, { PureComponent } from "react"
 import PropTypes from "prop-types"
 import { IconContext } from "react-icons"
 import _ from "lodash"
+import { isIE, isMobile } from "react-device-detect"
 
-import Footer from "./footer/Footer"
-import Navbar from "./header/Navbar"
+import Footer from "./Footer/Footer"
+import Navbar from "./Navigation/Navbar"
+import SideDrawer from "./Navigation/SideDrawer"
+import Backdrop from "./Navigation/Backdrop"
+import HamburgerNavbar from "./Navigation/HamburgerNavbar"
 
 import "../stylesheets/af_style.scss"
 
-class Layout extends Component {
+class Layout extends PureComponent {
   state = {
-    show: false,
+    sideDrawerOpen: false,
   }
 
-  handleScroll = () => {
-    this.setState({
-      show: window.scrollY > 50,
+  drawerToggleClickHandler = () => {
+    this.setState(prevState => {
+      return { sideDrawerOpen: !prevState.sideDrawerOpen }
     })
   }
 
-  componentDidMount() {
-    window.addEventListener("scroll", this.handleScroll)
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener(
-      "scroll",
-      _.throttle(() => {
-        this.handleScroll() // Still takes 20 ms, but now runs once in 100 ms
-      }, 500)
-    )
+  backdropToggleClickHandler = () => {
+    this.setState({
+      sideDrawerOpen: false,
+    })
   }
 
   render() {
     const { children } = this.props
-    const { show } = this.state
+    const { sideDrawerOpen } = this.state
+    let backdrop
+    if (sideDrawerOpen) {
+      backdrop = <Backdrop click={this.backdropToggleClickHandler} />
+    }
+    if (isIE)
+      alert(
+        "Internet Explorer is ancient and not supported. Please download a modern browser like Chrome, Firefox or Safari"
+      )
     return (
-      <IconContext.Provider value={{ className: "social__icons" }}>
-        <div className="wrapper">
-          <Navbar shouldChangeColor={show} />
-          <div className="content">{children}</div>
-          <Footer />
-        </div>
-      </IconContext.Provider>
+      <>
+        <IconContext.Provider value={{ className: "social__icons" }}>
+          <div className="wrapper">
+            {isMobile ? (
+              <>
+                <HamburgerNavbar
+                  hamburgerClickHandler={this.drawerToggleClickHandler}
+                />
+                <SideDrawer
+                  show={sideDrawerOpen}
+                  click={this.backdropToggleClickHandler}
+                />
+                {backdrop}
+              </>
+            ) : (
+              <Navbar />
+            )}
+            <div className="content">{children}</div>
+            <Footer />
+          </div>
+        </IconContext.Provider>
+      </>
     )
   }
 }

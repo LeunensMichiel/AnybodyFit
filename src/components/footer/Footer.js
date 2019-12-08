@@ -16,6 +16,11 @@ const FooterContainer = styled.footer`
   display: flex;
   align-items: center;
   clip-path: ellipse(80% 100% at 50% 100%);
+
+  a:visited {
+    color: ${colors.secondaryBlack};
+    text-decoration: none;
+  }
 `
 
 const FooterInnerContainer = styled.div`
@@ -47,11 +52,11 @@ const NavigationItem = styled(Link)`
   margin-top: 10px;
 
   &:hover {
-    font-weight: 700;
+    font-weight: 600;
   }
 
   &.activeLink {
-    font-weight: 700;
+    font-weight: 600;
   }
   &.smallNav {
     margin-top: 20px;

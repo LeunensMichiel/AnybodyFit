@@ -1,7 +1,7 @@
-import React from "react"
+import React, { PureComponent } from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
-import PropTypes, { bool } from "prop-types"
+import _ from "lodash"
 
 import colors from "../framework/colors"
 import screens from "../framework/Screens"
@@ -52,10 +52,34 @@ const NavigationItem = styled(Link)`
   }
 `
 
-const Navbar = ({ shouldChangeColor }) => {
-  return (
-    <>
-      <NavigationBar show={shouldChangeColor}>
+class Navbar extends PureComponent {
+  state = {
+    show: false,
+  }
+
+  handleScroll = () => {
+    this.setState({
+      show: window.scrollY > 50,
+    })
+  }
+
+  componentDidMount() {
+    window.addEventListener("scroll", this.handleScroll)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener(
+      "scroll",
+      _.throttle(() => {
+        this.handleScroll()
+      }, 500)
+    )
+  }
+
+  render() {
+    const { show } = this.state
+    return (
+      <NavigationBar show={show}>
         <Header>
           <StyledLogo />
           <NavigationItems>
@@ -74,12 +98,8 @@ const Navbar = ({ shouldChangeColor }) => {
           </NavigationItems>
         </Header>
       </NavigationBar>
-    </>
-  )
-}
-
-Navbar.propTypes = {
-  shouldChangeColor: bool,
+    )
+  }
 }
 
 export default Navbar
