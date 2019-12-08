@@ -15,7 +15,7 @@ class Layout extends Component {
 
   handleScroll = () => {
     this.setState({
-      show: window.scrollY > 200,
+      show: window.scrollY > 50,
     })
   }
 

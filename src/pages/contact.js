@@ -104,6 +104,7 @@ const FacebookComments = styled.div`
     width: 95%;
     margin: 2.5% auto;
     padding: 1em;
+    min-height: 400px;
 
     iframe {
       width: 100% !important;
