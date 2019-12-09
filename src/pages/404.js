@@ -4,7 +4,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 const ErrorContainer = styled.div`
-  width: 100%;
+  width: 90%;
   max-width: 1024px;
   margin: 0 auto;
   display: flex;
@@ -12,6 +12,7 @@ const ErrorContainer = styled.div`
   align-items: center;
   flex-direction: column;
   height: 80vh;
+  text-align: center;
 
   h1 {
     font-size: 3em;

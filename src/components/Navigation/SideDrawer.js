@@ -43,7 +43,7 @@ const Navigation = styled.nav`
   max-width: 300px;
   z-index: 200;
   transform: ${props =>
-    props.show === "true" ? "translateX(0)" : "translateX(-100%)"};
+    props.show === "true" ? "translateX(0)" : "translateX(-101%)"};
   transition: transform 0.3s cubic-bezier(0.19, 1, 0.22, 1);
   overflow-y: auto;
 `

@@ -153,7 +153,7 @@ const ContactBrand = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 2em;
-  flex: 1;
+  flex: 1.1;
 
   @media ${screens.tablet} {
     align-items: stretch;
@@ -233,7 +233,7 @@ class contact extends PureComponent {
           <Form
             name="contact"
             method="post"
-            action={`/`}
+            action={`/success/`}
             data-netlify="true"
             data-netlify-honeypot="bot-field"
           >

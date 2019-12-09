@@ -9,32 +9,52 @@ import colors from "../components/framework/Colors"
 import screens from "../components/framework/Screens"
 
 const Enlightment = styled.div`
-  width: 100%;
+  width: 90%;
   max-width: 1024px;
-  margin: 10em auto;
+  margin: 5em auto;
   display: flex;
   flex-direction: column;
+
+  @media ${screens.laptop} {
+    margin: 10em auto;
+  }
 `
 
 const Title = styled.h1`
-  font-size: 5em;
-  width: 50%;
-  margin-top: 0;
+  font-size: 2.5em;
   line-height: 1.5;
+  /* padding: 0 0.66em; */
+  z-index: 5;
+  position: relative;
+
+  @media ${screens.tablet} {
+    font-size: 4em;
+    width: 80%;
+  }
+  @media ${screens.laptop} {
+    padding: 0;
+    font-size: 5em;
+    width: 60%;
+  }
 `
 
 const Article = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
+
+  @media ${screens.laptop} {
+    flex-direction: row;
+    padding: 0;
+  }
 `
 
 const Paragraph = styled.div`
   flex: 1;
-  margin-right: 100px;
   text-align: justify;
+  font-size: 0.9em;
 
   p:first-of-type {
-    font-size: 1.2em;
     margin-bottom: 2em;
 
     &::first-letter {
@@ -50,16 +70,31 @@ const Paragraph = styled.div`
   p:nth-of-type(2) {
     font-size: 1em;
   }
+
+  @media ${screens.laptop} {
+    margin-right: 100px;
+    font-size: 1em;
+    p:first-of-type {
+      font-size: 1.2em;
+    }
+  }
 `
 
 const ArticleImage = styled.div`
   flex: 0.9;
   background: ${colors.secondaryWhite};
   position: relative;
-  padding: 1em;
+  padding: 0.5em;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
 
   div {
     position: relative;
+  }
+
+  @media ${screens.tablet} {
+    padding: 1em;
   }
 `
 
@@ -76,60 +111,96 @@ const Numbers = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 10em auto;
-  padding: 3em;
+  margin: 5em auto;
+  padding: 1.5em;
   overflow: hidden;
   position: relative;
   max-width: 650px;
-
   h1 {
-    font-size: 5em;
+    font-size: 3em;
     z-index: 2;
   }
 
   h3 {
+    font-size: 1em;
     color: ${colors.secondaryBlack};
     text-align: center;
     z-index: 2;
-    font-size: 1.2em;
+  }
+
+  @media ${screens.tablet} {
+    padding: 3em;
+    margin: 10em auto;
+
+    h1 {
+      font-size: 5em;
+    }
+
+    h3 {
+      font-size: 1.2em;
+    }
   }
 `
 
 const Circle = styled.div`
   background: ${props =>
     props.accent ? colors.accent2 : colors.secondaryWhite};
-  height: ${props => props.size}px;
-  width: ${props => props.size}px;
+  height: ${props => props.size / 2}px;
+  width: ${props => props.size / 2}px;
   border-radius: 100%;
   position: absolute;
-  top: ${props => (props.top ? props.top + "px" : "unset")};
-  bottom: ${props => (props.bottom ? props.bottom + "px" : "unset")};
-  left: ${props => (props.left ? props.left + "px" : "unset")};
-  right: ${props => (props.right ? props.right + "px" : "unset")};
+  top: ${props => (props.top ? props.top / 2 + "px" : "unset")};
+  bottom: ${props => (props.bottom ? props.bottom / 2 + "px" : "unset")};
+  left: ${props => (props.left ? props.left / 2 + "px" : "unset")};
+  right: ${props => (props.right ? props.right / 2 + "px" : "unset")};
   z-index: 1;
+
+  @media ${screens.tablet} {
+    height: ${props => props.size}px;
+    width: ${props => props.size}px;
+    top: ${props => (props.top ? props.top + "px" : "unset")};
+    bottom: ${props => (props.bottom ? props.bottom + "px" : "unset")};
+    left: ${props => (props.left ? props.left + "px" : "unset")};
+    right: ${props => (props.right ? props.right + "px" : "unset")};
+  }
 `
 
 const Charity = styled.div`
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
+
+  @media ${screens.laptop} {
+    flex-direction: row;
+    padding: 0;
+  }
 `
 
 const CharityInfo = styled.div`
   flex: 1;
   text-align: justify;
-  margin-right: 50px;
 
   p:nth-of-type(2) {
     margin-top: 3em;
+  }
+
+  @media ${screens.laptop} {
+    margin-right: 50px;
   }
 `
 
 const CharityCard = styled.div`
   flex: 0.9;
+  max-width: 500px;
   display: flex;
   flex-direction: column;
   background: ${colors.secondaryBlack};
-  padding: 0.66em 0.66em 3em 0.66em;
+  padding: 0.5em 0.5em 3em 0.5em;
+  margin: 0 auto;
+
+  @media ${screens.laptop} {
+    padding: 0.66em 0.66em 3em 0.66em;
+  }
 `
 
 const CharityCardItem = styled.div`
@@ -144,24 +215,37 @@ const CharityCardItem = styled.div`
 
     div {
       margin-right: 0;
-      margin-left: 32px;
+      margin-left: 16px;
       text-align: right;
+    }
+  }
+
+  @media ${screens.laptop} {
+    &:nth-of-type(2n) {
+      div {
+        margin-left: 32px;
+      }
     }
   }
 `
 
 const CharityNumber = styled.div`
   font-family: "Playfair Display", serif;
-  font-size: 1.3em;
+  font-size: 1em;
   border: 2px solid ${colors.black};
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 100%;
-  width: 45px;
-  height: 45px;
+  min-width: 45px;
+  min-height: 45px;
   padding-bottom: 4px;
-  margin-right: 32px;
+  margin-right: 16px;
+
+  @media ${screens.laptop} {
+    font-size: 1.3em;
+    margin-right: 32px;
+  }
 `
 
 const CharityText = styled.div`
@@ -169,36 +253,49 @@ const CharityText = styled.div`
   flex-direction: column;
 
   span:first-child {
-    font-size: 1.1em;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 300px;
+    font-size: 1em;
   }
 
   span:nth-child(2) {
-    font-size: 0.9em;
+    font-size: 0.8em;
     font-weight: 600;
     color: ${colors.secondaryBlack};
+  }
+
+  @media ${screens.tablet} {
+    span:first-child {
+      font-size: 1.1em;
+    }
+
+    span:nth-child(2) {
+      font-size: 0.9em;
+    }
   }
 `
 
 const Grow = styled.div`
   width: 100%;
   position: relative;
-  padding-right: 300px;
   overflow: hidden;
-  padding-bottom: 500px;
+
+  @media ${screens.laptop} {
+    padding-right: 5vw;
+    padding-bottom: 500px;
+  }
 `
 
 const GrowInnerContainer = styled.div`
   width: 100%;
   background: ${colors.accent2};
-  padding-left: 300px;
+
+  @media ${screens.laptop} {
+    padding-top: 2vw;
+    padding-left: 5vw;
+  }
 `
 
 const GrowTextContainer = styled.div`
-  width: 100%;
+  width: 90%;
   max-width: 1024px;
   margin: 0 auto;
   display: flex;
@@ -210,7 +307,7 @@ const GrowTextContainer = styled.div`
 const GrowDescription = styled.p`
   text-align: justify;
   text-align-last: right;
-  font-size: 1.2em;
+  font-size: 1em;
 
   &::first-letter {
     font-size: 200%;
@@ -219,16 +316,24 @@ const GrowDescription = styled.p`
   &::first-line {
     line-height: 1.2;
   }
+
+  @media ${screens.laptop} {
+    font-size: 1.2em;
+  }
 `
 
 const GrowFootnote = styled.p`
   text-align: justify;
   text-align-last: right;
   color: ${colors.secondaryBlack};
+  font-size: 0.9em;
+
+  @media ${screens.laptop} {
+    font-size: 1em;
+  }
 `
 
 const GrowImage = styled.div`
-  position: absolute;
   width: 100%;
   height: 500px;
   bottom: 0;
@@ -236,6 +341,10 @@ const GrowImage = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media ${screens.laptop} {
+    position: absolute;
+  }
 `
 
 const GrowImageContainer = styled.div`
@@ -272,18 +381,24 @@ const GrowCardText = styled.div`
 `
 
 const Holla = styled.div`
-  width: 100%;
+  width: 90%;
   max-width: 1024px;
-  margin: 10em auto;
+  margin: 5em auto;
   position: relative;
   padding-bottom: 5em;
+
+  @media ${screens.laptop} {
+    margin: 10em auto;
+  }
 `
 
 const HollaArticle = styled.div`
   display: flex;
   align-items: flex-end;
+  flex-direction: column;
   text-align: justify;
   z-index: 5;
+  font-size: 0.9em;
 
   p {
     flex: 1;
@@ -297,15 +412,23 @@ const HollaArticle = styled.div`
         color: ${colors.accent};
       }
     }
-    &:nth-of-type(2) {
-      text-align-last: center;
-    }
-    &:nth-of-type(3) {
-      text-align-last: right;
-    }
   }
   span {
     flex: 0.1;
+  }
+
+  @media ${screens.tablet} {
+    flex-direction: row;
+    font-size: 1em;
+
+    p {
+      &:nth-of-type(2) {
+        text-align-last: center;
+      }
+      &:nth-of-type(3) {
+        text-align-last: right;
+      }
+    }
   }
 `
 
@@ -402,7 +525,7 @@ export class news extends PureComponent {
               <CharityCardItem>
                 <CharityNumber>3</CharityNumber>
                 <CharityText>
-                  <span>Goed doel 3dwadadadawdawdadawdawdawdawd</span>
+                  <span>Goed doel 3 met iets meer tekst dan de vorige</span>
                   <span>€322.00</span>
                 </CharityText>
               </CharityCardItem>

@@ -12,7 +12,7 @@ import Logo from "../../images/svg/logo.inline.svg"
 
 const FooterContainer = styled.footer`
   width: 100%;
-  min-height: 450px;
+  min-height: 500px;
   background: ${colors.secondaryWhite};
   padding: 2em;
   display: flex;
@@ -25,6 +25,7 @@ const FooterContainer = styled.footer`
   }
 
   @media ${screens.tablet} {
+    min-height: 450px;
     clip-path: ellipse(80% 100% at 50% 100%);
   }
 `
@@ -35,8 +36,7 @@ const FooterInnerContainer = styled.div`
   height: 50%;
   margin: 0 auto;
   display: flex;
-  flex-direction: column;
-  justify-content: stretch;
+  flex-direction: column-reverse;
   align-items: center;
   position: relative;
 
@@ -120,8 +120,10 @@ const FooterRight = styled.div`
   flex: 1;
   height: 100%;
   width: 100%;
+  margin: 1.5em 0;
 
   @media ${screens.tablet} {
+    margin: 0;
     align-items: flex-end;
   }
 `
