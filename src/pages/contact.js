@@ -18,12 +18,19 @@ import "mapbox-gl/dist/mapbox-gl.css"
 import Pin from "../images/svg/pin.inline.svg"
 
 const ContactContainer = styled.div`
-  width: 100%;
+  width: 90%;
   max-width: 1024px;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: flex-start;
-  margin: 10em auto 10em auto;
+  align-items: center;
+  margin: 6em auto;
+
+  @media ${screens.laptop} {
+    margin: 10em auto;
+    flex-direction: row;
+    align-items: flex-start;
+  }
 `
 
 const Form = styled.form`
@@ -31,13 +38,25 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-right: 4em;
+  font-size: 0.9em;
+  width: 100%;
+  margin-bottom: 3em;
+
+  @media ${screens.laptop} {
+    margin-right: 4em;
+    font-size: 1em;
+    margin-bottom: 0;
+  }
 `
 
 const FormInfo = styled.p`
   margin: 0;
-  width: 80%;
   margin-bottom: 50px;
+  font-style: italic;
+
+  @media ${screens.laptop} {
+    width: 80%;
+  }
 `
 
 const FormInput = styled.input`
@@ -96,6 +115,7 @@ const FormButton = styled.button`
 
 const FacebookComments = styled.div`
   flex: 4;
+  width: 100%;
   background: ${colors.accent};
   padding-bottom: 4em;
 
@@ -114,20 +134,30 @@ const FacebookComments = styled.div`
 
 const MapContainer = styled.div`
   display: flex;
-  padding: 0.66em;
+  flex-direction: column;
   background: ${colors.secondaryWhite};
-  width: 100%;
+  width: 90%;
   max-width: 1024px;
   min-height: 420px;
   margin: 0 auto 10em auto;
+
+  @media ${screens.laptop} {
+    flex-direction: row;
+    padding: 0.66em;
+  }
 `
 
 const ContactBrand = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
   padding: 2em;
   flex: 1;
+
+  @media ${screens.tablet} {
+    align-items: stretch;
+  }
 `
 
 const Brand = styled.span`
@@ -140,12 +170,16 @@ const Info = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   margin-bottom: 24px;
 
   span:first-child {
     font-weight: 600;
     color: ${colors.secondaryBlack};
+  }
+
+  @media ${screens.tablet} {
+    align-items: flex-start;
   }
 `
 
@@ -153,16 +187,24 @@ const Address = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   span:first-child {
     font-weight: 600;
     color: ${colors.secondaryBlack};
+  }
+  @media ${screens.tablet} {
+    align-items: flex-start;
   }
 `
 
 const Map = styled.div`
   flex: 3;
   width: 100%;
+  height: 50vh;
+
+  @media ${screens.laptop} {
+    height: unset;
+  }
 `
 
 class contact extends PureComponent {
