@@ -49,7 +49,6 @@ const Navigation = styled.nav`
 const NavigationItems = styled.ul`
   width: 100%;
   list-style: none;
-  margin: 0;
   margin: 50% 0;
   display: flex;
   flex-direction: column;
