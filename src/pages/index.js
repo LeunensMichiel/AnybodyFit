@@ -32,8 +32,15 @@ const Landing = styled.div`
 `
 
 const StyledLogo = styled(Logo)`
-  width: 20%;
+  width: 50%;
   z-index: 5;
+
+  @media ${screens.laptop} {
+    width: 20%;
+  }
+  @media ${screens.ipadProPortrait} {
+    width: 30%;
+  }
 `
 const MainImage = styled.div`
   height: 100%;
@@ -43,7 +50,11 @@ const MainImage = styled.div`
   width: 100%;
   overflow: hidden;
   opacity: 0.33;
-  clip-path: ellipse(100% 100% at 50% 0%);
+  clip-path: ellipse(150% 100% at 50% 0%);
+
+  @media ${screens.laptop} {
+    clip-path: ellipse(100% 100% at 50% 0%);
+  }
 `
 
 const MainInfo = styled.div`
@@ -51,15 +62,22 @@ const MainInfo = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: 90%;
   max-width: 1024px;
   margin: 10em auto;
 `
 
 const MainHeader = styled.h1`
-  font-size: 5em;
+  font-size: 2.5em;
   text-align: center;
   margin-top: 0;
+
+  @media ${screens.tablet} {
+    font-size: 4em;
+  }
+  @media ${screens.laptop} {
+    font-size: 5em;
+  }
 `
 
 const MainParagraph = styled.p`
@@ -84,7 +102,7 @@ const MoreLink = styled(Link)`
 `
 
 const InfoCard = styled.div`
-  width: 100%;
+  width: 90%;
   max-width: 1024px;
   background: ${colors.secondaryWhite};
   margin: 0 auto;
@@ -93,17 +111,30 @@ const InfoCard = styled.div`
   margin-bottom: 50px;
   transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
   -webkit-backface-visibility: hidden;
+  flex-direction: column-reverse;
 
   &:nth-of-type(2n) {
     text-align: left;
-    flex-direction: row-reverse;
+    flex-direction: column-reverse;
     background: ${colors.accent2};
+  }
+
+  @media ${screens.tablet} {
+    flex-direction: row;
+
+    &:nth-of-type(2n) {
+      flex-direction: row-reverse;
+    }
   }
 `
 
 const CardImage = styled.div`
   width: 100%;
   position: relative;
+  height: 33vh;
+  @media ${screens.tablet} {
+    height: unset;
+  }
 `
 
 const CardImageContainer = styled.div`
@@ -121,13 +152,24 @@ const CardBody = styled.div`
 `
 
 const CardHeader = styled.h2`
-  font-size: 4em;
+  font-size: 2em;
+
+  @media ${screens.tablet} {
+    font-size: 3em;
+  }
+  @media ${screens.laptop} {
+    font-size: 4em;
+  }
 `
 
 const CardSubHeader = styled.p`
   font-style: italic;
-  font-size: 1.2em;
+  font-size: 0.9em;
   color: ${colors.secondaryBlack};
+
+  @media ${screens.tablet} {
+    font-size: 1.2em;
+  }
 `
 
 const CardItem = styled.div`
@@ -145,6 +187,11 @@ const CardItem = styled.div`
 
 const CardItemText = styled.span`
   flex: 1;
+  font-size: 0.9em;
+
+  @media ${screens.tablet} {
+    font-size: 1em;
+  }
 `
 
 const CardItemIcon = styled.div`
@@ -174,7 +221,7 @@ const CardMoreInfo = styled(Link)`
 `
 
 const Tom = styled.div`
-  width: 100%;
+  width: 90%;
   max-width: 1024px;
   display: flex;
   flex-direction: column;
@@ -188,32 +235,60 @@ const TomHeader = styled.div`
   flex-direction: column;
   align-items: flex-end;
   justify-content: flex-start;
+  text-align: right;
 `
 
 const TomTitle = styled.h1`
-  font-size: 5rem;
+  font-size: 3em;
   margin: 0;
+
+  @media ${screens.tablet} {
+    font-size: 4em;
+  }
+  @media ${screens.laptop} {
+    font-size: 5em;
+  }
 `
 
 const TomSubtitle = styled.h2`
-  font-size: 2rem;
+  font-size: 1.5em;
   color: ${colors.secondaryBlack};
   margin-top: 0.66em;
+
+  @media ${screens.tablet} {
+    font-size: 1.8em;
+  }
+  @media ${screens.laptop} {
+    font-size: 2em;
+  }
 `
 
 const TomAbout = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-direction: column;
+
+  @media ${screens.laptop} {
+    flex-direction: row;
+  }
 `
 
 const TomPicture = styled.div`
-  height: 400px;
-  width: 400px;
+  height: 250px;
+  width: 250px;
   background-color: ${colors.secondaryWhite};
   border-radius: 100%;
   position: relative;
-  border: 10px solid ${colors.secondaryWhite};
+  border: 5px solid ${colors.secondaryWhite};
+  margin-top: 1.5em;
+
+  @media ${screens.tablet} {
+    height: 400px;
+    width: 400px;
+    border: 10px solid ${colors.secondaryWhite};
+    margin-top: 0;
+  }
 
   img {
     border-radius: 100%;
@@ -259,18 +334,28 @@ const TomPicture = styled.div`
 const TomItems = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-evenly;
   min-height: 200px;
+  z-index: 5;
+  text-align: center;
+  margin-top: 3em;
+
+  @media ${screens.laptop} {
+    align-items: flex-end;
+    text-align: right;
+    margin-top: 0;
+  }
 `
 
 const TomItem = styled.div`
-  font-size: 1.2em;
   max-width: 400px;
-  text-align: right;
-
   span {
     font-weight: 600;
+  }
+
+  @media ${screens.tablet} {
+    font-size: 1.2em;
   }
 
   &:not(:last-child)::after {
@@ -279,23 +364,34 @@ const TomItem = styled.div`
     width: 40px;
     height: 1px;
     background-color: ${colors.accent};
-    margin: 0.33em -15px 0.33em auto;
+    margin: 0.5em auto;
+
+    @media ${screens.laptop} {
+      margin: 0.33em 0 0.33em auto;
+    }
   }
 `
 
 const Booking = styled.div`
-  width: 100%;
+  width: 90%;
   max-width: 1024px;
   display: flex;
+  flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  margin: 10em auto;
+  margin: 1.5em auto;
   z-index: 5;
+
+  @media ${screens.laptop} {
+    flex-direction: row;
+    margin: 10em auto;
+  }
 `
 
 const BookingCard = styled.div`
-  width: 380px;
-  height: 500px;
+  width: 100%;
+  max-width: 380px;
+  min-height: 500px;
   background-color: ${colors.white};
   border-radius: 50px;
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.1), 0 15px 12px rgba(0, 0, 0, 0.1);
@@ -304,10 +400,17 @@ const BookingCard = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
+  margin-bottom: 1.5em;
+
+  @media ${screens.laptop} {
+    height: 500px;
+    width: 380px;
+    margin-bottom: 0;
+  }
 `
 
 const BookingType = styled.h3`
-  font-size: 1.33em;
+  font-size: 1em;
   align-self: center;
   width: 100%;
   color: ${colors.accent};
@@ -318,23 +421,36 @@ const BookingType = styled.h3`
   text-transform: uppercase;
   border-bottom: 1px solid ${colors.accent};
   padding-bottom: 0.5em;
+
+  @media ${screens.tablet} {
+    font-size: 1.33em;
+  }
 `
 
 const BookingHeader = styled.div``
 
 const BookingPrice = styled.h2`
-  font-size: 4em;
+  font-size: 3em;
   margin: 0;
   margin-bottom: 0.1em;
+
   span {
     font-size: 0.33em;
     font-family: "Raleway", sans-serif;
     color: ${colors.secondaryBlack};
   }
+
+  @media ${screens.tablet} {
+    font-size: 4em;
+  }
 `
 
 const BookingDesc = styled.span`
   color: ${colors.secondaryBlack};
+  font-size: 0.9em;
+  @media ${screens.tablet} {
+    font-size: 1em;
+  }
 `
 
 const BookingItems = styled.div`
@@ -351,6 +467,10 @@ const BookingItem = styled.div`
 
 const BookingText = styled.span`
   line-height: 1;
+  font-size: 0.9em;
+  @media ${screens.tablet} {
+    font-size: 1em;
+  }
 `
 
 const BookingIcon = styled.div`

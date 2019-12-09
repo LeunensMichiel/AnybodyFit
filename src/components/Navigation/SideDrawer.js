@@ -2,10 +2,10 @@ import React from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
 
-import colors from "../Framework/Colors"
+import colors from "../framework/Colors"
+import screens from "../framework/Screens"
 
 import CrossIcon from "../../images/svg/cross.inline.svg"
-import screens from "../Framework/Screens"
 
 const Cross = styled(CrossIcon)`
   position: absolute;

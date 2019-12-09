@@ -4,11 +4,11 @@ import { IconContext } from "react-icons"
 import _ from "lodash"
 import { isIE, isMobileOnly } from "react-device-detect"
 
-import Footer from "./Footer/Footer"
-import Navbar from "./Navigation/Navbar"
-import SideDrawer from "./Navigation/SideDrawer"
-import Backdrop from "./Navigation/Backdrop"
-import HamburgerNavbar from "./Navigation/HamburgerNavbar"
+import Footer from "./footer/Footer"
+import Navbar from "./navigation/Navbar"
+import SideDrawer from "./navigation/SideDrawer"
+import Backdrop from "./navigation/Backdrop"
+import HamburgerNavbar from "./navigation/HamburgerNavbar"
 
 import "../stylesheets/af_style.scss"
 
