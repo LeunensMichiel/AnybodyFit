@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react"
 import styled from "styled-components"
-import { graphql, Link } from "gatsby"
+import { graphql } from "gatsby"
 import Helmet from "react-helmet"
 import MapGL, {
   Marker,

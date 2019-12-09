@@ -23,7 +23,6 @@ const Enlightment = styled.div`
 const Title = styled.h1`
   font-size: 2.5em;
   line-height: 1.5;
-  /* padding: 0 0.66em; */
   z-index: 5;
   position: relative;
 
@@ -480,7 +479,7 @@ export class news extends PureComponent {
             </ArticleImage>
           </Article>
           <Numbers>
-            <h1>€534.00</h1>
+            <h1>€94.20</h1>
             <h3>In totaal aan diverse goede doelen gedoneerd.</h3>
             <Circle size={200} right={120} top={"100"} />
             <Circle size={100} left={"0"} top={150} />
@@ -511,22 +510,22 @@ export class news extends PureComponent {
               <CharityCardItem>
                 <CharityNumber>1</CharityNumber>
                 <CharityText>
-                  <span>Goed doel 1</span>
-                  <span>€32.00</span>
+                  <span>Merhaba</span>
+                  <span>€28.45</span>
                 </CharityText>
               </CharityCardItem>
               <CharityCardItem>
                 <CharityNumber>2</CharityNumber>
                 <CharityText>
-                  <span>Goed doel 2</span>
-                  <span>€32.00</span>
+                  <span>Kom op tegen Kanker</span>
+                  <span>€44.00</span>
                 </CharityText>
               </CharityCardItem>
               <CharityCardItem>
                 <CharityNumber>3</CharityNumber>
                 <CharityText>
-                  <span>Goed doel 3 met iets meer tekst dan de vorige</span>
-                  <span>€322.00</span>
+                  <span>Amazon Frontlines</span>
+                  <span>€21.75</span>
                 </CharityText>
               </CharityCardItem>
             </CharityCard>

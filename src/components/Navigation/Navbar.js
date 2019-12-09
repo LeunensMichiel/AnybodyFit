@@ -3,7 +3,7 @@ import styled from "styled-components"
 import { Link } from "gatsby"
 import _ from "lodash"
 
-import colors from "../framework/colors"
+import colors from "../framework/Colors"
 import screens from "../framework/Screens"
 
 import SmallLogo from "../../images/svg/abf_only.inline.svg"

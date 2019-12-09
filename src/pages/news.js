@@ -5,13 +5,12 @@ import Helmet from "react-helmet"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import colors from "../components/framework/Colors"
 import screens from "../components/framework/Screens"
 
 const PostsGrid = styled.div`
-  width: 100%;
+  width: 90%;
   max-width: 1024px;
-  margin: 10em auto;
+  margin: 5em auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -19,6 +18,10 @@ const PostsGrid = styled.div`
 
   .fb-post {
     margin-bottom: 1em;
+  }
+
+  @media ${screens.tablet} {
+    margin: 10em auto;
   }
 `
 

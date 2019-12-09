@@ -15,7 +15,10 @@ import "../stylesheets/af_style.scss"
 class Layout extends PureComponent {
   state = {
     sideDrawerOpen: false,
-    mobile: isMobileOnly || window.innerWidth < 768,
+    mobile:
+      typeof window !== `undefined`
+        ? isMobileOnly || window.innerWidth < 768
+        : isMobileOnly,
   }
 
   drawerToggleClickHandler = () => {
@@ -32,7 +35,10 @@ class Layout extends PureComponent {
 
   updateDimensions = () => {
     this.setState({
-      mobile: isMobileOnly || window.innerWidth < 768,
+      mobile:
+        typeof window !== `undefined`
+          ? isMobileOnly || window.innerWidth < 768
+          : isMobileOnly,
     })
   }
 

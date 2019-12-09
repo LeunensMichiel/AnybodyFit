@@ -3,7 +3,6 @@ import styled from "styled-components"
 import { Link } from "gatsby"
 
 import colors from "../framework/Colors"
-import screens from "../framework/Screens"
 
 import CrossIcon from "../../images/svg/cross.inline.svg"
 
@@ -91,7 +90,7 @@ const StyledLink = styled(Link)`
 const SideDrawer = ({ show, click }) => {
   return (
     <Navigation show={show.toString()}>
-      <span onClick={click}>
+      <span onClick={click} role="button">
         <Cross />
       </span>
       <NavigationItems>
