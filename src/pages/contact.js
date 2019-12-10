@@ -118,8 +118,9 @@ const FacebookComments = styled.div`
   width: 100%;
   background: ${colors.accent};
   padding-bottom: 4em;
+  overflow: hidden;
 
-  #fb-root {
+  .innerDiv {
     background: ${colors.white};
     width: 95%;
     margin: 2.5% auto;
@@ -273,14 +274,16 @@ class contact extends PureComponent {
                 src="https://connect.facebook.net/nl_NL/sdk.js#xfbml=1&version=v5.0&appId=430133907653041&autoLogAppEvents=1"
               ></script>
             </Helmet>
-            <div id="fb-root">
-              <div
-                className="fb-comments"
-                data-href="https://developers.facebook.com/docs/plugins/comments#config"
-                data-width="100%"
-                data-numposts="3"
-                data-order-by="reverse-time"
-              ></div>
+            <div className="innerDiv">
+              <div id="fb-root">
+                <div
+                  className="fb-comments"
+                  data-href="https://www.anybody.fitness/contact/"
+                  data-width="100%"
+                  data-numposts="3"
+                  data-order-by="reverse-time"
+                ></div>
+              </div>
             </div>
           </FacebookComments>
         </ContactContainer>

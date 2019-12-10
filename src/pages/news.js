@@ -10,19 +10,19 @@ import screens from "../components/framework/Screens"
 const PostsGrid = styled.div`
   width: 90%;
   max-width: 1024px;
-  margin: 5em auto;
+  margin: 6em auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
 
-  .fb-post {
-    margin-bottom: 1em;
-  }
-
   @media ${screens.tablet} {
     margin: 10em auto;
   }
+`
+
+const Post = styled.div`
+  margin-bottom: 1em;
 `
 
 export class news extends PureComponent {
@@ -40,24 +40,30 @@ export class news extends PureComponent {
         </Helmet>
         <div id="fb-root"></div>
         <PostsGrid>
-          <div
-            className="fb-post"
-            data-href="https://www.facebook.com/AnyBodyFitCoaching/posts/149165219765009"
-            data-width=""
-            data-show-text="true"
-          ></div>
-          <div
-            className="fb-post"
-            data-href="https://www.facebook.com/AnyBodyFitCoaching/posts/152930642721800"
-            data-width=""
-            data-show-text="true"
-          ></div>
-          <div
-            className="fb-post"
-            data-href="https://www.facebook.com/AnyBodyFitCoaching/posts/137900440891487"
-            data-width=""
-            data-show-text="true"
-          ></div>
+          <Post>
+            <div
+              className="fb-post"
+              data-href="https://www.facebook.com/AnyBodyFitCoaching/posts/149165219765009"
+              data-width=""
+              data-show-text="true"
+            ></div>
+          </Post>
+          <Post>
+            <div
+              className="fb-post"
+              data-href="https://www.facebook.com/AnyBodyFitCoaching/posts/152930642721800"
+              data-width=""
+              data-show-text="true"
+            ></div>
+          </Post>
+          <Post>
+            <div
+              className="fb-post"
+              data-href="https://www.facebook.com/AnyBodyFitCoaching/posts/137900440891487"
+              data-width=""
+              data-show-text="true"
+            ></div>
+          </Post>
         </PostsGrid>
       </Layout>
     )
