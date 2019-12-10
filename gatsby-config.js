@@ -1,11 +1,26 @@
 module.exports = {
   siteMetadata: {
     title: `AnybodyFit`,
-    description: `AnybodyFit, personal coaching based in Ghent, Belgium`,
+    description: `AnybodyFit, personal coachingin Gent, België`,
     author: `@LeunensMichiel`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
+    {
+      // keep as first gatsby-source-filesystem plugin for gatsby image support
+      resolve: "gatsby-source-filesystem",
+      options: {
+        path: `${__dirname}/static/img`,
+        name: "img",
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/src/markdown`,
+        name: `markdown`,
+      },
+    },
     {
       resolve: "gatsby-source-filesystem",
       options: {
@@ -27,11 +42,11 @@ module.exports = {
       options: {
         name: `AnybodyFit - Personal Coaching`,
         short_name: `AnybodyFit`,
-        description: `AnybodyFit, personal coaching based in Ghent, Belgium`,
-        lang: `en`,
+        description: `AnybodyFit, personal coaching in Gent, België`,
+        lang: `nl`,
         start_url: `/`,
-        background_color: `#FF5858`,
-        theme_color: `#212121`,
+        background_color: `#fbf8c8`,
+        theme_color: `#262626`,
         display: `minimal-ui`,
         icon: `src/images/favicon.png`, // This path is relative to the root of the site.
       },
