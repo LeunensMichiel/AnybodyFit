@@ -393,16 +393,20 @@ const Holla = styled.div`
 
 const HollaArticle = styled.div`
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
   flex-direction: column;
   text-align: justify;
   z-index: 5;
+  position: relative;
   font-size: 0.9em;
+
+  margin-top: 20px;
 
   p {
     flex: 1;
 
     &:first-child {
+      margin-top: -12px;
       &::first-line {
         line-height: 1.1;
       }

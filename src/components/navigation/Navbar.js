@@ -85,7 +85,9 @@ class Navbar extends PureComponent {
     return (
       <NavigationBar show={show}>
         <Header>
-          <StyledLogo />
+          <Link to="/">
+            <StyledLogo />
+          </Link>
           <NavigationItems>
             <NavigationItem to="/" activeClassName="activeLink">
               home

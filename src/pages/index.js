@@ -27,8 +27,12 @@ const Landing = styled.div`
   display: flex;
   position: relative;
   width: 100%;
-  min-height: 95vh;
+  min-height: 92vh;
   justify-content: center;
+
+  @media ${screens.tablet} {
+    min-height: 95vh;
+  }
 `
 
 const StyledLogo = styled(Logo)`
@@ -50,7 +54,7 @@ const MainImage = styled.div`
   width: 100%;
   overflow: hidden;
   opacity: 0.33;
-  clip-path: ellipse(150% 100% at 50% 0%);
+  clip-path: ellipse(160% 100% at 50% 0%);
 
   @media ${screens.laptop} {
     clip-path: ellipse(100% 100% at 50% 0%);

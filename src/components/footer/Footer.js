@@ -17,7 +17,7 @@ const FooterContainer = styled.footer`
   padding: 2em;
   display: flex;
   align-items: center;
-  clip-path: ellipse(150% 100% at 50% 100%);
+  clip-path: ellipse(160% 100% at 50% 100%);
 
   a:visited {
     color: ${colors.secondaryBlack};

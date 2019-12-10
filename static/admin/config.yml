@@ -1,0 +1,55 @@
+backend:
+  name: git-gateway
+  branch: master
+
+media_folder: static/img
+public_folder: /img
+
+site_url: https://anybody.fitness
+logo_url: https://anybody.fitness/img/logo.svg
+
+publish_mode: editorial_workflow
+
+collections:
+  - label: "Charities"
+    name: "charity"
+    folder: "src/markdown/charities"
+    identifier_field: charityName
+    create: true
+    editor:
+      preview: true
+    fields:
+      - {
+          label: "Charity",
+          name: "charityName",
+          widget: "string",
+          hint: "De naam van het goede doel waar je geld aan hebt geschonken",
+        }
+      - {
+          label: "Amount",
+          name: "amount",
+          widget: "number",
+          valueType: "float",
+          hint: "Geld dat je hier gedoneerd hebt",
+        }
+      - {
+          label: "Date",
+          name: "donationDate",
+          widget: "datetime",
+          format: "DD MM YYYY",
+          hint: "Donatiedatum (voor in volgorde te sorteren)",
+        }
+  - label: "Facebook Posts"
+    name: "posts"
+    folder: "src/markdown/posts"
+    identifier_field: url
+    create: true
+    editor:
+      preview: true
+    fields:
+      - {
+          label: "URL",
+          name: "url",
+          widget: "string",
+          hint: "Url van je facebook post",
+        }
