@@ -523,10 +523,9 @@ export class news extends PureComponent {
               </p>
             </CharityInfo>
             <CharityCard>
-              {data.charities.edges.map((charity, i) => (
+              {_.slice(data.charities.edges, 0, 6).map((charity, i) => (
                 <CharityCardItem key={charity.node.frontmatter.charityName}>
                   <CharityNumber>{i + 1}</CharityNumber>
-                  {console.log(charity.node.frontmatter)}
                   <CharityText>
                     <span>{charity.node.frontmatter.charityName}</span>
                     <span>{charity.node.frontmatter.amount}</span>
@@ -641,7 +640,9 @@ export const query = graphql`
         }
       }
     }
-    charities: allMarkdownRemark {
+    charities: allMarkdownRemark(
+      sort: { fields: frontmatter___donationDate, order: DESC }
+    ) {
       edges {
         node {
           frontmatter {
