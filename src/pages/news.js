@@ -22,7 +22,10 @@ const PostsGrid = styled.div`
 `
 
 const Post = styled.div`
+  width: 100%;
   margin-bottom: 1em;
+  display: flex;
+  justify-content: center;
 `
 
 export class news extends PureComponent {
@@ -36,7 +39,7 @@ export class news extends PureComponent {
             async
             defer
             crossorigin="anonymous"
-            src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v5.0&appId=430133907653041&autoLogAppEvents=1"
+            src="https://connect.facebook.net/nl_NL/sdk.js#xfbml=1&version=v5.0&appId=430133907653041"
           ></script>
         </Helmet>
         <div id="fb-root"></div>
@@ -46,7 +49,6 @@ export class news extends PureComponent {
               <div
                 className="fb-post"
                 data-href={post.node.frontmatter.url}
-                data-width=""
                 data-show-text="true"
               ></div>
             </Post>
