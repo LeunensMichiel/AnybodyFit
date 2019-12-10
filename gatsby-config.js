@@ -6,21 +6,21 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
-    // {
-    //   // keep as first gatsby-source-filesystem plugin for gatsby image support
-    //   resolve: "gatsby-source-filesystem",
-    //   options: {
-    //     path: `${__dirname}/static/img`,
-    //     name: "img",
-    //   },
-    // },
-    // {
-    //   resolve: `gatsby-source-filesystem`,
-    //   options: {
-    //     path: `${__dirname}/src/markdown`,
-    //     name: `markdown`,
-    //   },
-    // },
+    {
+      // keep as first gatsby-source-filesystem plugin for gatsby image support
+      resolve: "gatsby-source-filesystem",
+      options: {
+        path: `${__dirname}/static/img`,
+        name: "img",
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/src/markdown`,
+        name: `markdown`,
+      },
+    },
     {
       resolve: "gatsby-source-filesystem",
       options: {
@@ -37,6 +37,7 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    `gatsby-transformer-remark`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {

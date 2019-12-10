@@ -11,7 +11,7 @@ logo_url: https://anybody.fitness/img/logo.svg
 publish_mode: editorial_workflow
 
 collections:
-  - label: "Charities"
+  - label: "Charity"
     name: "charity"
     folder: "src/markdown/charities"
     identifier_field: charityName
@@ -39,7 +39,7 @@ collections:
           format: "DD MM YYYY",
           hint: "Donatiedatum (voor in volgorde te sorteren)",
         }
-  - label: "Facebook Posts"
+  - label: "Facebook Post"
     name: "posts"
     folder: "src/markdown/posts"
     identifier_field: url
@@ -51,5 +51,12 @@ collections:
           label: "URL",
           name: "url",
           widget: "string",
-          hint: "Url van je facebook post",
+          hint: "Url van je facebook post. Klik op je post > Embed > Advanced Options > De URL die je daar ziet",
+        }
+      - {
+          label: "Date",
+          name: "postDate",
+          widget: "datetime",
+          format: "DD MM YYYY",
+          hint: "Datum van post",
         }

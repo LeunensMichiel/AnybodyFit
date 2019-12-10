@@ -48,22 +48,6 @@ export class news extends PureComponent {
               data-show-text="true"
             ></div>
           </Post>
-          <Post>
-            <div
-              className="fb-post"
-              data-href="https://www.facebook.com/AnyBodyFitCoaching/posts/152930642721800"
-              data-width=""
-              data-show-text="true"
-            ></div>
-          </Post>
-          <Post>
-            <div
-              className="fb-post"
-              data-href="https://www.facebook.com/AnyBodyFitCoaching/posts/137900440891487"
-              data-width=""
-              data-show-text="true"
-            ></div>
-          </Post>
         </PostsGrid>
       </Layout>
     )

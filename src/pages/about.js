@@ -2,6 +2,7 @@ import React, { PureComponent } from "react"
 import styled from "styled-components"
 import Img from "gatsby-image/withIEPolyfill"
 import { graphql } from "gatsby"
+import _ from "lodash"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -197,7 +198,13 @@ const CharityCard = styled.div`
   padding: 0.5em 0.5em 3em 0.5em;
   margin: 0 auto;
 
+  @media ${screens.tablet} {
+    max-width: unset;
+    margin: unset;
+  }
+
   @media ${screens.laptop} {
+    max-width: unset;
     padding: 0.66em 0.66em 3em 0.66em;
   }
 `
@@ -483,7 +490,12 @@ export class news extends PureComponent {
             </ArticleImage>
           </Article>
           <Numbers>
-            <h1>€94.20</h1>
+            <h1>
+              €
+              {_.sumBy(data.charities.edges, "node.frontmatter.amount").toFixed(
+                2
+              )}
+            </h1>
             <h3>In totaal aan diverse goede doelen gedoneerd.</h3>
             <Circle size={200} right={120} top={"100"} />
             <Circle size={100} left={"0"} top={150} />
@@ -511,27 +523,16 @@ export class news extends PureComponent {
               </p>
             </CharityInfo>
             <CharityCard>
-              <CharityCardItem>
-                <CharityNumber>1</CharityNumber>
-                <CharityText>
-                  <span>Merhaba</span>
-                  <span>€28.45</span>
-                </CharityText>
-              </CharityCardItem>
-              <CharityCardItem>
-                <CharityNumber>2</CharityNumber>
-                <CharityText>
-                  <span>Kom op tegen Kanker</span>
-                  <span>€44.00</span>
-                </CharityText>
-              </CharityCardItem>
-              <CharityCardItem>
-                <CharityNumber>3</CharityNumber>
-                <CharityText>
-                  <span>Amazon Frontlines</span>
-                  <span>€21.75</span>
-                </CharityText>
-              </CharityCardItem>
+              {data.charities.edges.map((charity, i) => (
+                <CharityCardItem key={charity.node.frontmatter.charityName}>
+                  <CharityNumber>{i + 1}</CharityNumber>
+                  {console.log(charity.node.frontmatter)}
+                  <CharityText>
+                    <span>{charity.node.frontmatter.charityName}</span>
+                    <span>{charity.node.frontmatter.amount}</span>
+                  </CharityText>
+                </CharityCardItem>
+              ))}
             </CharityCard>
           </Charity>
         </Enlightment>
@@ -637,6 +638,17 @@ export const query = graphql`
           presentationWidth
           presentationHeight
           ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+    charities: allMarkdownRemark {
+      edges {
+        node {
+          frontmatter {
+            amount
+            charityName
+            donationDate
+          }
         }
       }
     }
