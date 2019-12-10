@@ -3,6 +3,8 @@ import styled from "styled-components"
 import Img from "gatsby-image/withIEPolyfill"
 import { graphql } from "gatsby"
 import _ from "lodash"
+import CountUp from "react-countup"
+import VisibilitySensor from "react-visibility-sensor"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -443,6 +445,16 @@ const HollaArticle = styled.div`
 `
 
 export class news extends PureComponent {
+  state = {
+    didViewCountUp: false,
+  }
+
+  onVisibilityChange = isVisible => {
+    if (isVisible) {
+      this.setState({ didViewCountUp: true })
+    }
+  }
+
   render() {
     const { data } = this.props
     return (
@@ -490,12 +502,28 @@ export class news extends PureComponent {
             </ArticleImage>
           </Article>
           <Numbers>
-            <h1>
-              €
-              {_.sumBy(data.charities.edges, "node.frontmatter.amount").toFixed(
-                2
-              )}
-            </h1>
+            <VisibilitySensor
+              onChange={this.onVisibilityChange}
+              offset={{
+                top: 10,
+              }}
+              delayedCall
+            >
+              <CountUp
+                decimals={2}
+                decimal=","
+                prefix="€ "
+                start={0}
+                end={
+                  this.state.didViewCountUp
+                    ? _.sumBy(data.charities.edges, "node.frontmatter.amount")
+                    : 0
+                }
+                delay={0}
+              >
+                {({ countUpRef }) => <h1 ref={countUpRef} />}
+              </CountUp>
+            </VisibilitySensor>
             <h3>In totaal aan diverse goede doelen gedoneerd.</h3>
             <Circle size={200} right={120} top={"100"} />
             <Circle size={100} left={"0"} top={150} />
