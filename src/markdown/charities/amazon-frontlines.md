@@ -1,6 +1,5 @@
 ---
 charityName: Amazon Frontlines
 amount: 21.75
-donationDate: 30 09 2019
+donationDate: 09 30 2019
 ---
-

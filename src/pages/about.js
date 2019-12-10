@@ -642,6 +642,7 @@ export const query = graphql`
     }
     charities: allMarkdownRemark(
       sort: { fields: frontmatter___donationDate, order: DESC }
+      filter: { fileAbsolutePath: { regex: "/charities/" } }
     ) {
       edges {
         node {

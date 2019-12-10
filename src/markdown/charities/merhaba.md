@@ -1,6 +1,5 @@
 ---
 charityName: Merhaba
 amount: 28.45
-donationDate: 30 11 2019
+donationDate: 11 30 2019
 ---
-

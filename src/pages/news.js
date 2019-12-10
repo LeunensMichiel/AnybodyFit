@@ -27,6 +27,7 @@ const Post = styled.div`
 
 export class news extends PureComponent {
   render() {
+    const { data } = this.props
     return (
       <Layout>
         <SEO title="News" description="Recent posts of AnybodyFit" />
@@ -40,14 +41,16 @@ export class news extends PureComponent {
         </Helmet>
         <div id="fb-root"></div>
         <PostsGrid>
-          <Post>
-            <div
-              className="fb-post"
-              data-href="https://www.facebook.com/AnyBodyFitCoaching/posts/149165219765009"
-              data-width=""
-              data-show-text="true"
-            ></div>
-          </Post>
+          {data.posts.edges.map(post => (
+            <Post key={post.node.frontmatter.url}>
+              <div
+                className="fb-post"
+                data-href={post.node.frontmatter.url}
+                data-width=""
+                data-show-text="true"
+              ></div>
+            </Post>
+          ))}
         </PostsGrid>
       </Layout>
     )
@@ -55,3 +58,21 @@ export class news extends PureComponent {
 }
 
 export default news
+
+export const query = graphql`
+  query {
+    posts: allMarkdownRemark(
+      sort: { fields: frontmatter___postDate, order: DESC }
+      filter: { fileAbsolutePath: { regex: "/posts/" } }
+    ) {
+      edges {
+        node {
+          frontmatter {
+            postDate
+            url
+          }
+        }
+      }
+    }
+  }
+`
