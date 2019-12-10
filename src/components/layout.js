@@ -45,7 +45,7 @@ class Layout extends PureComponent {
   componentDidMount() {
     window.addEventListener(
       "resize",
-      _.throttle(() => {
+      _.debounce(() => {
         this.updateDimensions()
       }, 100)
     )
