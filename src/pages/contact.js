@@ -1,11 +1,11 @@
 import React, { PureComponent } from "react"
 import styled from "styled-components"
-import Helmet from "react-helmet"
 import MapGL, {
   Marker,
   NavigationControl,
   FullscreenControl,
 } from "react-map-gl"
+import { FacebookProvider, Comments } from "react-facebook"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -229,15 +229,6 @@ class contact extends PureComponent {
           title="Contact"
           description="Contact Tom Janssens, Founder of AnybodyFit."
         />
-        <Helmet>
-          <script
-            async
-            defer
-            crossorigin="anonymous"
-            src="https://connect.facebook.net/nl_BE/sdk.js#xfbml=1&version=v5.0&appId=430133907653041"
-          ></script>
-        </Helmet>
-        <div id="fb-root"></div>
         <ContactContainer>
           <Form
             name="contact"
@@ -275,13 +266,14 @@ class contact extends PureComponent {
           </Form>
           <FacebookComments>
             <div className="innerDiv">
-              <div
-                className="fb-comments"
-                data-href="https://www.anybody.fitness/contact/"
-                data-width="100%"
-                data-numposts="3"
-                data-order-by="reverse-time"
-              ></div>
+              <FacebookProvider appId={`${process.env.GATSBY_FB_API}`}>
+                <Comments
+                  href="https://www.anybody.fitness/contact/"
+                  width="100%"
+                  numPosts="3"
+                  orderBy="reverse-time"
+                />
+              </FacebookProvider>
             </div>
           </FacebookComments>
         </ContactContainer>

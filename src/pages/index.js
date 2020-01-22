@@ -388,7 +388,7 @@ const Booking = styled.div`
 
   @media ${screens.laptop} {
     flex-direction: row;
-    margin: 10em auto;
+    margin: 10em auto 5em auto;
   }
 `
 
@@ -507,6 +507,57 @@ const BookingButton = styled.a`
     color: ${colors.white};
   }
 `
+const Practical = styled.div`
+  width: 90%;
+  max-width: 1024px;
+  margin: 1.5em auto;
+  text-align: center;
+
+  @media ${screens.laptop} {
+    margin: 1.5em auto 5em auto;
+    text-align: left;
+  }
+`
+
+const PracticalInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @media ${screens.laptop} {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+`
+
+const Address = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .extra {
+    font-weight: 600;
+    color: ${colors.secondaryBlack};
+  }
+  @media ${screens.laptop} {
+    align-items: flex-start;
+  }
+`
+
+const Extra = styled.div`
+  text-align: center;
+  width: 100%;
+  margin: 1.5em auto;
+  a {
+    text-decoration: none;
+    color: ${colors.accent};
+
+    &:hover {
+      color: ${colors.secondaryBlack};
+      transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+  }
+`
 
 const IndexPage = ({ data }) => (
   <Layout>
@@ -613,7 +664,7 @@ const IndexPage = ({ data }) => (
           <Img
             fluid={data.secondCard.childImageSharp.fluid}
             objectFit="cover"
-            objectPosition="70% 50%"
+            objectPosition="30% 50%"
             alt="Breathe"
             title="Breathe"
             style={{ position: "static" }}
@@ -698,7 +749,7 @@ const IndexPage = ({ data }) => (
         <BookingType>Yoga</BookingType>
         <BookingHeader>
           <BookingPrice>
-            €9<span> /sessie</span>
+            €10<span> /sessie</span>
           </BookingPrice>
           <BookingDesc>
             Om even tot rust te kunnen komen. U krijgt de volgende voordelen:
@@ -720,7 +771,7 @@ const IndexPage = ({ data }) => (
         </BookingItems>
         <BookingButton
           id="Setmore_button_iframe"
-          href="https://my.setmore.com/bookingpage/c2f88312-cc6e-4dd2-ad87-2d8811b1ed3b"
+          href=" https://my.setmore.com/bookingpage/c2f88312-cc6e-4dd2-ad87-2d8811b1ed3b/bookclass"
         >
           Boek Yoga
         </BookingButton>
@@ -757,6 +808,26 @@ const IndexPage = ({ data }) => (
         </BookingButton>
       </BookingCard>
     </Booking>
+    <Practical>
+      <TomTitle>Praktisch</TomTitle>
+      <PracticalInfo>
+        <Address>
+          <TomSubtitle>Wanneer</TomSubtitle>
+          <span>Yoga Conditioning: Maandag van 19u00 tot 20u15</span>
+          <span>Yoga & Mindfulness: Maandag van 20u15 tot 21u30</span>
+          <span>Coaching: Donderdag tussen 18u30 en 21u30</span>
+        </Address>
+        <Address>
+          <TomSubtitle>Waar</TomSubtitle>
+          <span className="extra">De lessen gaan door in de</span>
+          <span>Vlaanderenstraat 53</span>
+          <span>9000 Gent</span>
+        </Address>
+      </PracticalInfo>
+      <Extra>
+        Evenement of privélessen? Neem <Link to="/contact/">contact</Link> op.
+      </Extra>
+    </Practical>
   </Layout>
 )
 
@@ -800,7 +871,7 @@ export const query = graphql`
         }
       }
     }
-    tom: file(relativePath: { eq: "tom.jpg" }) {
+    tom: file(relativePath: { eq: "tomj.jpg" }) {
       childImageSharp {
         fluid(maxWidth: 1080, quality: 85) {
           presentationWidth

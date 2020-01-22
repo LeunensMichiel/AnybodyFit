@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react"
 import styled from "styled-components"
 import { graphql } from "gatsby"
-import Helmet from "react-helmet"
+import { FacebookProvider, EmbeddedPost } from "react-facebook"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -23,6 +23,7 @@ const PostsGrid = styled.div`
 
 const Post = styled.div`
   width: 100%;
+  max-width: 100%;
   margin-bottom: 1em;
   display: flex;
   justify-content: center;
@@ -34,26 +35,18 @@ export class news extends PureComponent {
     return (
       <Layout>
         <SEO title="News" description="Recent posts of AnybodyFit" />
-        <Helmet>
-          <script
-            async
-            defer
-            crossorigin="anonymous"
-            src="https://connect.facebook.net/nl_NL/sdk.js#xfbml=1&version=v5.0&appId=430133907653041"
-          ></script>
-        </Helmet>
-        <div id="fb-root"></div>
-        <PostsGrid>
-          {data.posts.edges.map(post => (
-            <Post key={post.node.frontmatter.url}>
-              <div
-                className="fb-post"
-                data-href={post.node.frontmatter.url}
-                data-show-text="true"
-              ></div>
-            </Post>
-          ))}
-        </PostsGrid>
+        <FacebookProvider appId={`${process.env.GATSBY_FB_API}`}>
+          <PostsGrid>
+            {data.posts.edges.map(post => (
+              <Post key={post.node.frontmatter.url}>
+                <EmbeddedPost
+                  href={post.node.frontmatter.url}
+                  showText="true"
+                />
+              </Post>
+            ))}
+          </PostsGrid>
+        </FacebookProvider>
       </Layout>
     )
   }
