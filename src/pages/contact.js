@@ -229,6 +229,15 @@ class contact extends PureComponent {
           title="Contact"
           description="Contact Tom Janssens, Founder of AnybodyFit."
         />
+        <Helmet>
+          <script
+            async
+            defer
+            crossorigin="anonymous"
+            src="https://connect.facebook.net/nl_BE/sdk.js#xfbml=1&version=v5.0&appId=430133907653041"
+          ></script>
+        </Helmet>
+        <div id="fb-root"></div>
         <ContactContainer>
           <Form
             name="contact"
@@ -265,24 +274,14 @@ class contact extends PureComponent {
             <FormButton type="submit">Verstuur</FormButton>
           </Form>
           <FacebookComments>
-            <Helmet>
-              <script
-                async
-                defer
-                crossorigin="anonymous"
-                src="https://connect.facebook.net/nl_NL/sdk.js#xfbml=1&version=v5.0&appId=430133907653041&autoLogAppEvents=1"
-              ></script>
-            </Helmet>
             <div className="innerDiv">
-              <div id="fb-root">
-                <div
-                  className="fb-comments"
-                  data-href="https://www.anybody.fitness/contact/"
-                  data-width="100%"
-                  data-numposts="3"
-                  data-order-by="reverse-time"
-                ></div>
-              </div>
+              <div
+                className="fb-comments"
+                data-href="https://www.anybody.fitness/contact/"
+                data-width="100%"
+                data-numposts="3"
+                data-order-by="reverse-time"
+              ></div>
             </div>
           </FacebookComments>
         </ContactContainer>

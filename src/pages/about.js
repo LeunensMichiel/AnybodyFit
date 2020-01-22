@@ -2,6 +2,9 @@ import React, { PureComponent } from "react"
 import styled from "styled-components"
 import Img from "gatsby-image/withIEPolyfill"
 import { graphql } from "gatsby"
+import _ from "lodash"
+import CountUp from "react-countup"
+import VisibilitySensor from "react-visibility-sensor"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -197,7 +200,13 @@ const CharityCard = styled.div`
   padding: 0.5em 0.5em 3em 0.5em;
   margin: 0 auto;
 
+  @media ${screens.tablet} {
+    max-width: unset;
+    margin: unset;
+  }
+
   @media ${screens.laptop} {
+    max-width: unset;
     padding: 0.66em 0.66em 3em 0.66em;
   }
 `
@@ -436,6 +445,16 @@ const HollaArticle = styled.div`
 `
 
 export class news extends PureComponent {
+  state = {
+    didViewCountUp: false,
+  }
+
+  onVisibilityChange = isVisible => {
+    if (isVisible) {
+      this.setState({ didViewCountUp: true })
+    }
+  }
+
   render() {
     const { data } = this.props
     return (
@@ -483,7 +502,28 @@ export class news extends PureComponent {
             </ArticleImage>
           </Article>
           <Numbers>
-            <h1>€94.20</h1>
+            <VisibilitySensor
+              onChange={this.onVisibilityChange}
+              offset={{
+                top: 10,
+              }}
+              delayedCall
+            >
+              <CountUp
+                decimals={2}
+                decimal=","
+                prefix="€ "
+                start={0}
+                end={
+                  this.state.didViewCountUp
+                    ? _.sumBy(data.charities.edges, "node.frontmatter.amount")
+                    : 0
+                }
+                delay={0}
+              >
+                {({ countUpRef }) => <h1 ref={countUpRef} />}
+              </CountUp>
+            </VisibilitySensor>
             <h3>In totaal aan diverse goede doelen gedoneerd.</h3>
             <Circle size={200} right={120} top={"100"} />
             <Circle size={100} left={"0"} top={150} />
@@ -511,27 +551,15 @@ export class news extends PureComponent {
               </p>
             </CharityInfo>
             <CharityCard>
-              <CharityCardItem>
-                <CharityNumber>1</CharityNumber>
-                <CharityText>
-                  <span>Merhaba</span>
-                  <span>€28.45</span>
-                </CharityText>
-              </CharityCardItem>
-              <CharityCardItem>
-                <CharityNumber>2</CharityNumber>
-                <CharityText>
-                  <span>Kom op tegen Kanker</span>
-                  <span>€44.00</span>
-                </CharityText>
-              </CharityCardItem>
-              <CharityCardItem>
-                <CharityNumber>3</CharityNumber>
-                <CharityText>
-                  <span>Amazon Frontlines</span>
-                  <span>€21.75</span>
-                </CharityText>
-              </CharityCardItem>
+              {_.slice(data.charities.edges, 0, 6).map((charity, i) => (
+                <CharityCardItem key={charity.node.frontmatter.charityName}>
+                  <CharityNumber>{i + 1}</CharityNumber>
+                  <CharityText>
+                    <span>{charity.node.frontmatter.charityName}</span>
+                    <span>{charity.node.frontmatter.amount}</span>
+                  </CharityText>
+                </CharityCardItem>
+              ))}
             </CharityCard>
           </Charity>
         </Enlightment>
@@ -637,6 +665,20 @@ export const query = graphql`
           presentationWidth
           presentationHeight
           ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+    charities: allMarkdownRemark(
+      sort: { fields: frontmatter___donationDate, order: DESC }
+      filter: { fileAbsolutePath: { regex: "/charities/" } }
+    ) {
+      edges {
+        node {
+          frontmatter {
+            amount
+            charityName
+            donationDate
+          }
         }
       }
     }
