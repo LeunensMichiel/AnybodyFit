@@ -5,13 +5,15 @@ backend:
 media_folder: static/img
 public_folder: /img
 
+local_backend: true
+
 site_url: https://anybody.fitness
 logo_url: https://anybody.fitness/img/logo.svg
 
 publish_mode: editorial_workflow
 
 collections:
-  - label: "Charity"
+  - label: "Goede Doelen"
     name: "charity"
     folder: "src/markdown/charities"
     identifier_field: charityName
@@ -36,7 +38,7 @@ collections:
           label: "Date",
           name: "donationDate",
           widget: "datetime",
-          format: "MM DD YYYY",
+          format: "YYYY MM DD",
           hint: "Donatiedatum (voor in volgorde te sorteren)",
         }
   - label: "Facebook Post"
@@ -57,6 +59,277 @@ collections:
           label: "Date",
           name: "postDate",
           widget: "datetime",
-          format: "MM DD YYYY",
+          format: "YYYY MM DD",
           hint: "Datum van post",
         }
+  - label: "Kwalificaties"
+    name: "qualification"
+    folder: "src/markdown/qualifications"
+    create: true
+    editor:
+      preview: true
+    fields:
+      - {
+          label: "Kwalificatie",
+          name: "title",
+          widget: "string",
+          hint: "Een gehaalde Kwalificatie. Congrats babe x",
+        }
+  - label: "Diensten Kaartjes"
+    name: "services"
+    folder: "src/markdown/services"
+    identifier_field: title
+    create: true
+    editor:
+      preview: true
+    fields:
+      - {
+          label: "Titel",
+          name: "title",
+          widget: "string",
+          hint: "Titel van je dienst",
+        }
+      - {
+          label: "Mini-Beschrijving",
+          name: "shortDesc",
+          widget: "string",
+          hint: "Een heel kleine beschrijving van je dienst. Hou dit best tot 1 zin.",
+        }
+      - {
+          label: "Description",
+          name: "description",
+          widget: "text",
+          hint: "Beschrijving van de dienst",
+        }
+      - {
+          label: "Prijs",
+          name: "price",
+          widget: "number",
+          valueType: "float",
+          hint: "Prijs van je dienst in euro €0.00",
+        }
+      - {
+          label: "Per uur?",
+          name: "isPerHour",
+          widget: "boolean",
+          default: false,
+          hint: "Zet dit aan als de prijs per uur is, anders default naar per sessie.",
+        }
+      - {
+          label: "URL Boekknop",
+          name: "url",
+          widget: "string",
+          hint: "URL van de boekknop.",
+        }
+      - {
+          label: "Weekdag en uur",
+          name: "date",
+          widget: "datetime",
+          format: "e HH:mm",
+          hint: "Datum van de dienst, wordt gebruikt om op te sorteren. Eerste is dag van de week, beginnend van zondag (0). Rest is het uur. Selecteer maar een random dag in een random week, maakt niet veel uit",
+        }
+      - {
+          label: "Naam Locatie",
+          name: "location",
+          widget: "string",
+          hint: "bvb Klimzaal Biover",
+        }
+      - label: "Adres"
+        name: "address"
+        widget: "object"
+        fields:
+          - { label: "Straat", name: "street", widget: "string" }
+          - { label: "Stad", name: "city", widget: "string" }
+          - { label: "Postcode", name: "post-code", widget: "string" }
+      - {
+          label: "Longitude",
+          name: "longitude",
+          widget: "number",
+          valueType: "float",
+          hint: "Longitude van je adres (voor de map te genereren. Kan je op google maps bekijken. (rechterklik op item op maps -> What's here?)",
+        }
+      - {
+          label: "Latitude",
+          name: "latitude",
+          widget: "number",
+          valueType: "float",
+          hint: "Latitude van je adres (voor de map te genereren. Kan je op google maps bekijken. (rechterklik op item op maps -> What's here?)",
+        }
+  - label: "Grote Info Kaarten"
+    name: "infocard"
+    media_folder: ""
+    public_folder: ""
+    folder: "src/markdown/infocards"
+    create: true
+    editor:
+      preview: true
+    fields:
+      - {
+          label: "Titel",
+          name: "title",
+          widget: "string",
+          hint: "Titel van het kaartje",
+        }
+      - {
+          label: "Beschrijving",
+          name: "description",
+          widget: "string",
+          hint: "Beschrijving van het kaartje",
+        }
+      - label: "Afbeelding kaartje"
+        name: "image"
+        widget: "image"
+        media_library:
+          config:
+            multiple: false
+      - {
+          label: "Rang",
+          name: "rank",
+          widget: "number",
+          valueType: "int",
+          hint: "Rang om te ordenen",
+        }
+  - label: "FAQ"
+    name: "faq"
+    folder: "src/markdown/faq"
+    identifier_field: question
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Vraag", name: "question", widget: "text" }
+      - { label: "Antwoord", name: "answer", widget: "text" }
+      - {
+          label: "Rang",
+          name: "rank",
+          widget: "number",
+          valueType: "int",
+          hint: "Rang om te ordenen",
+        }
+  - label: "Notificatie"
+    name: "notifications"
+    identifier_field: description
+    editor:
+      preview: true
+    files:
+      - label: "Notificatie"
+        name: "notification"
+        file: "src/markdown/notification.md"
+        fields:
+          - { label: "Titel", name: "title", widget: "string", required: false }
+          - { label: "Beschrijving", name: "description", widget: "text" }
+          - {
+              label: "Actief?",
+              name: "isActive",
+              widget: "boolean",
+              default: false,
+              hint: "Zet dit aan als notificatie actief moet zijn.",
+            }
+  - label: "Paginas"
+    name: "pages"
+    editor:
+      preview: true
+    files:
+      - label: "Hoofdpagina"
+        name: "landingpage"
+        media_folder: ""
+        public_folder: ""
+        file: "src/markdown/pages/landing.md"
+        fields:
+          - {
+              label: "Titel",
+              name: "title",
+              widget: "string",
+              hint: "Hoofdpagina Titel (the big one)",
+            }
+          - {
+              label: "Beschrijving",
+              name: "description",
+              widget: "text",
+              hint: "Hoofdpagina beschrijving (the big one)",
+            }
+          - label: "Profile Pic"
+            name: "profilePic"
+            widget: "image"
+            media_library:
+              config:
+                multiple: false
+          - {
+              label: "TomTitle",
+              name: "tomTitle",
+              widget: "string",
+              hint: "Zet hier wat er boven uw profile pic staat, gescheiden door een ';'. Bv: Ontmoet Tom,;uw persoonlijke coach",
+            }
+      - label: "Algemene Voorwaarden"
+        name: "termspage"
+        file: "src/markdown/pages/terms.md"
+        fields:
+          - { label: "Algemene Voorwaarden", name: "title", widget: "text" }
+      - label: "About pagina"
+        media_folder: ""
+        public_folder: ""
+        name: "aboutpage"
+        file: "src/markdown/pages/about.md"
+        fields:
+          - {
+              label: "Titel 1",
+              name: "title",
+              widget: "string",
+              hint: "De eerste titel, helemaal vanboven de pagina.",
+            }
+          - {
+              label: "Beschrijving 1",
+              name: "description",
+              widget: "markdown",
+              hint: "Beschrijving van het eerste deel, vanboven op de pagina.",
+            }
+          - label: "Afbeelding 1"
+            name: "image"
+            widget: "image"
+            hint: "Afbeelding vanboven op de pagina"
+            media_library:
+              config:
+                multiple: false
+          - {
+              label: "Titel 2",
+              name: "title2",
+              widget: "string",
+              hint: "De tweede titel, in het gele deel.",
+            }
+          - {
+              label: "Beschrijving 2",
+              name: "description2",
+              widget: "markdown",
+              hint: "Beschrijving van gele stuk",
+            }
+          - {
+              label: "Footnote",
+              name: "footnote",
+              widget: "string",
+              hint: "Footnote in het gele stuk",
+            }
+          - {
+              label: "Cardnote",
+              name: "cardnote",
+              widget: "string",
+              hint: "Tekst in het Klein zwart kaartje in het gele stuk",
+            }
+          - label: "Afbeelding 2"
+            name: "image2"
+            widget: "image"
+            hint: "Afbeelding in het gele stuk"
+            media_library:
+              config:
+                multiple: false
+          - {
+              label: "Titel 3",
+              name: "title3",
+              widget: "string",
+              hint: "De derde titel, onderaan de pagina",
+            }
+          - {
+              label: "Beschrijving 3",
+              name: "description3",
+              widget: "markdown",
+              hint: "Beschrijving van het onderste stuk. Gaat in 3 kolommen opgesplitst worden.",
+            }

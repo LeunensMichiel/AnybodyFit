@@ -16,9 +16,7 @@ class Layout extends PureComponent {
   state = {
     sideDrawerOpen: false,
     mobile:
-      typeof window !== `undefined`
-        ? isMobileOnly || window.innerWidth < 768
-        : isMobileOnly,
+      typeof window !== `undefined` ? window.innerWidth < 768 : isMobileOnly,
   }
 
   drawerToggleClickHandler = () => {
@@ -36,9 +34,7 @@ class Layout extends PureComponent {
   updateDimensions = () => {
     this.setState({
       mobile:
-        typeof window !== `undefined`
-          ? isMobileOnly || window.innerWidth < 768
-          : isMobileOnly,
+        typeof window !== `undefined` ? window.innerWidth < 768 : isMobileOnly,
     })
   }
 
@@ -47,7 +43,7 @@ class Layout extends PureComponent {
       "resize",
       _.debounce(() => {
         this.updateDimensions()
-      }, 100)
+      }, 150)
     )
   }
 

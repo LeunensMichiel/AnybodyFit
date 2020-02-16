@@ -412,21 +412,8 @@ const HollaArticle = styled.div`
   margin-top: 20px;
 
   p {
-    flex: 1;
-
-    &:first-child {
-      margin-top: -12px;
-      &::first-line {
-        line-height: 1.1;
-      }
-      &::first-letter {
-        font-size: 200%;
-        color: ${colors.accent};
-      }
-    }
-  }
-  span {
-    flex: 0.1;
+    columns: 3 320px;
+    column-gap: 1em;
   }
 
   @media ${screens.tablet} {
@@ -551,12 +538,12 @@ export class news extends PureComponent {
               </p>
             </CharityInfo>
             <CharityCard>
-              {_.slice(data.charities.edges, 0, 6).map((charity, i) => (
+              {_.slice(data.charities.edges, 0, 5).map((charity, i) => (
                 <CharityCardItem key={charity.node.frontmatter.charityName}>
                   <CharityNumber>{i + 1}</CharityNumber>
                   <CharityText>
                     <span>{charity.node.frontmatter.charityName}</span>
-                    <span>{charity.node.frontmatter.amount}</span>
+                    <span>€ {charity.node.frontmatter.amount.toFixed(2)}</span>
                   </CharityText>
                 </CharityCardItem>
               ))}
@@ -616,29 +603,23 @@ export class news extends PureComponent {
               gezondheid zo veel meer: zelfvertrouwen, mindset, een stimulerende
               sociale cirkel, stress-management etc. Door elk apart aspect onder
               handen te nemen komen we tot een gezond lichaam, een positieve
-              mindset, en een gepassioneerde ziel.
-            </p>
-            <span />
-            <p>
-              Iedereen is anders, en hier spelen we op in. Samen zoeken we welke
-              technieken & oefeningen werken, hoeveel sessies ideaal zijn, en
-              hoeveel follow-up je nodig hebt. Je bepaalt zelf het tempo, en de
-              hoeveelheid moeite die je erin steekt. Daarom hechten we ook enorm
-              veel belang aan jouw input. Wees dus zeker niet bang om je mening
-              duidelijk te maken, of zelf iets voor te stellen.
-            </p>
-            <span />
-            <p>
-              Personen met speciale noden zijn ook steeds welkom. Bel of mail
-              gerust om te vragen wat de mogelijkheden zijn. Je kan ook steeds
-              terecht voor een gratis intake gesprek, waarbij we samen kijken
-              hoe we de yogalessen kunnen aanpassen. Indien hieruit blijkt dat
-              we zelf niet aan jouw noden kunnen voldoen, zetten we toch alles
-              op alles om een plek te vinden waar dat wel kan!
+              mindset, en een gepassioneerde ziel. Iedereen is anders, en hier
+              spelen we op in. Samen zoeken we welke technieken & oefeningen
+              werken, hoeveel sessies ideaal zijn, en hoeveel follow-up je nodig
+              hebt. Je bepaalt zelf het tempo, en de hoeveelheid moeite die je
+              erin steekt. Daarom hechten we ook enorm veel belang aan jouw
+              input. Wees dus zeker niet bang om je mening duidelijk te maken,
+              of zelf iets voor te stellen. Personen met speciale noden zijn ook
+              steeds welkom. Bel of mail gerust om te vragen wat de
+              mogelijkheden zijn. Je kan ook steeds terecht voor een gratis
+              intake gesprek, waarbij we samen kijken hoe we de yogalessen
+              kunnen aanpassen. Indien hieruit blijkt dat we zelf niet aan jouw
+              noden kunnen voldoen, zetten we toch alles op alles om een plek te
+              vinden waar dat wel kan!
             </p>
           </HollaArticle>
           <Circle size={150} top={130} right="200" />
-          <Circle size={66} top={80} right="100" />
+          <Circle accent size={66} top={80} right="100" />
           <Circle size={45} bottom="0" right="100" />
         </Holla>
       </Layout>

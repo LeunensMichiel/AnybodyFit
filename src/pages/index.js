@@ -507,57 +507,6 @@ const BookingButton = styled.a`
     color: ${colors.white};
   }
 `
-const Practical = styled.div`
-  width: 90%;
-  max-width: 1024px;
-  margin: 1.5em auto;
-  text-align: center;
-
-  @media ${screens.laptop} {
-    margin: 1.5em auto 5em auto;
-    text-align: left;
-  }
-`
-
-const PracticalInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  @media ${screens.laptop} {
-    flex-direction: row;
-    justify-content: space-between;
-  }
-`
-
-const Address = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  .extra {
-    font-weight: 600;
-    color: ${colors.secondaryBlack};
-  }
-  @media ${screens.laptop} {
-    align-items: flex-start;
-  }
-`
-
-const Extra = styled.div`
-  text-align: center;
-  width: 100%;
-  margin: 1.5em auto;
-  a {
-    text-decoration: none;
-    color: ${colors.accent};
-
-    &:hover {
-      color: ${colors.secondaryBlack};
-      transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-    }
-  }
-`
 
 const IndexPage = ({ data }) => (
   <Layout>
@@ -586,18 +535,9 @@ const IndexPage = ({ data }) => (
       <StyledLogo />
     </Landing>
     <MainInfo>
-      <MainHeader>
-        Yoga & <br />
-        Personal Coaching
-      </MainHeader>
-      <MainParagraph>
-        AnyBodyFit streeft ernaar om een gezonde levensstijl voor iedereen
-        toegankelijk te maken. Door het ondersteunen van de individuele groei,
-        het creëren van een sociaal vangnet, en het hanteren van een
-        allesomvattende aanpak, leggen we de basis voor een optimaal fysiek,
-        mentaal & emotioneel welzijn.
-      </MainParagraph>
-      <MoreLink to="/about/">meer over ons</MoreLink>
+      <MainHeader>{data.landing.frontmatter.title}</MainHeader>
+      <MainParagraph>{data.landing.frontmatter.description}</MainParagraph>
+      <MoreLink to="/about/">meer over mezelf</MoreLink>
     </MainInfo>
     <InfoCard>
       <CardBody>
@@ -624,14 +564,14 @@ const IndexPage = ({ data }) => (
       </CardBody>
       <CardImage>
         <CardImageContainer>
-          <Img
+          {/* <Img
             fluid={data.firstCard.childImageSharp.fluid}
             objectFit="cover"
             objectPosition="50% 50%"
             alt="Picture of someone doing yoga"
             title="Yoga"
             style={{ position: "static" }}
-          />
+          /> */}
         </CardImageContainer>
       </CardImage>
     </InfoCard>
@@ -661,14 +601,14 @@ const IndexPage = ({ data }) => (
       </CardBody>
       <CardImage>
         <CardImageContainer>
-          <Img
+          {/* <Img
             fluid={data.secondCard.childImageSharp.fluid}
             objectFit="cover"
             objectPosition="30% 50%"
             alt="Breathe"
             title="Breathe"
             style={{ position: "static" }}
-          />
+          /> */}
         </CardImageContainer>
       </CardImage>
     </InfoCard>
@@ -699,14 +639,14 @@ const IndexPage = ({ data }) => (
       </CardBody>
       <CardImage>
         <CardImageContainer>
-          <Img
+          {/* <Img
             fluid={data.thirdCard.childImageSharp.fluid}
             objectFit="cover"
             objectPosition="50% 90%"
             alt="Think outside the box"
             title="Think outside the box"
             style={{ position: "static" }}
-          />
+          /> */}
         </CardImageContainer>
       </CardImage>
     </InfoCard>
@@ -718,7 +658,7 @@ const IndexPage = ({ data }) => (
       <TomAbout>
         <TomPicture>
           <Img
-            fluid={data.tom.childImageSharp.fluid}
+            fluid={data.landing.frontmatter.profilePic.childImageSharp.fluid}
             objectFit="cover"
             objectPosition="50% 50%"
             alt="Tom"
@@ -730,17 +670,9 @@ const IndexPage = ({ data }) => (
           <div className="circle small" />
         </TomPicture>
         <TomItems>
-          <TomItem>
-            <span>NASM/EREPS4</span> Personal Trainer
-          </TomItem>
-          <TomItem>
-            <span>YA 200Hr</span> Yoga Instructeur
-          </TomItem>
-          <TomItem>4 jaar coaching-ervaring</TomItem>
-          <TomItem>
-            Student revalidatiewetenschappen & kinesitherapie @ UGent
-          </TomItem>
-          <TomItem>Student precision nutrition</TomItem>
+          {data.qualifications.edges.map(item => (
+            <TomItem>{item.node.frontmatter.title}</TomItem>
+          ))}
         </TomItems>
       </TomAbout>
     </Tom>
@@ -771,7 +703,7 @@ const IndexPage = ({ data }) => (
         </BookingItems>
         <BookingButton
           id="Setmore_button_iframe"
-          href=" https://my.setmore.com/bookingpage/c2f88312-cc6e-4dd2-ad87-2d8811b1ed3b/bookclass"
+          href="https://my.setmore.com/bookingpage/c2f88312-cc6e-4dd2-ad87-2d8811b1ed3b/bookclass"
         >
           Boek Yoga
         </BookingButton>
@@ -808,26 +740,6 @@ const IndexPage = ({ data }) => (
         </BookingButton>
       </BookingCard>
     </Booking>
-    <Practical>
-      <TomTitle>Praktisch</TomTitle>
-      <PracticalInfo>
-        <Address>
-          <TomSubtitle>Wanneer</TomSubtitle>
-          <span>Yoga Conditioning: Maandag van 19u00 tot 20u15</span>
-          <span>Yoga & Mindfulness: Maandag van 20u15 tot 21u30</span>
-          <span>Coaching: Donderdag tussen 18u30 en 21u30</span>
-        </Address>
-        <Address>
-          <TomSubtitle>Waar</TomSubtitle>
-          <span className="extra">De lessen gaan door in de</span>
-          <span>Vlaanderenstraat 53</span>
-          <span>9000 Gent</span>
-        </Address>
-      </PracticalInfo>
-      <Extra>
-        Evenement of privélessen? Neem <Link to="/contact/">contact</Link> op.
-      </Extra>
-    </Practical>
   </Layout>
 )
 
@@ -844,6 +756,34 @@ export const query = graphql`
         }
       }
     }
+    qualifications: allMarkdownRemark(
+      filter: { fileAbsolutePath: { regex: "/qualifications/" } }
+    ) {
+      edges {
+        node {
+          frontmatter {
+            title
+          }
+        }
+      }
+    }
+    landing: markdownRemark(fileAbsolutePath: { regex: "/pages/landing/" }) {
+      frontmatter {
+        title
+        tomTitle
+        description
+        profilePic {
+          childImageSharp {
+            fluid(maxWidth: 1080, quality: 85) {
+              presentationWidth
+              presentationHeight
+              ...GatsbyImageSharpFluid_withWebp
+            }
+          }
+        }
+      }
+    }
+
     firstCard: file(relativePath: { eq: "firstCard.jpg" }) {
       childImageSharp {
         fluid(maxWidth: 1080, quality: 85) {

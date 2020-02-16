@@ -287,7 +287,7 @@ class contact extends PureComponent {
               <span>BE 0731.824.913</span>
             </Info>
             <Address>
-              <span>De lessen gaan door in de</span>
+              <span>Mijn go-to kantoor</span>
               <span>Vlaanderenstraat 53</span>
               <span>9000 Gent</span>
               <span>België</span>

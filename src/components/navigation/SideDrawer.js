@@ -104,9 +104,9 @@ const SideDrawer = ({ show, click }) => {
           </StyledLink>
         </NavigationItem>
         <NavigationItem>
-          <StyledLink to="/news/" activeClassName="activeLink">
+          {/* <StyledLink to="/news/" activeClassName="activeLink">
             nieuws
-          </StyledLink>
+          </StyledLink> */}
         </NavigationItem>
         <NavigationItem last>
           <StyledLink to="/contact/" activeClassName="activeLink">

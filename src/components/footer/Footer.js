@@ -210,10 +210,10 @@ const Footer = () => {
               <FaInstagram />
             </a>
           </SocialIcons>
-          <LangContainer>
+          {/* <LangContainer>
             <StyledSpan>english</StyledSpan>
             <StyledSpan>nederlands</StyledSpan>
-          </LangContainer>
+          </LangContainer> */}
         </FooterRight>
       </FooterInnerContainer>
     </FooterContainer>
