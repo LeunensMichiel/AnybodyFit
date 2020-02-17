@@ -7,7 +7,7 @@ import { StaticQuery, graphql } from "gatsby"
 
 import Footer from "./footer/Footer"
 import Navbar from "./navigation/Navbar"
-import Notification from "./popup/Notification"
+import Notification from "./Popup/Notification"
 import SideDrawer from "./navigation/SideDrawer"
 import Backdrop from "./navigation/Backdrop"
 import HamburgerNavbar from "./navigation/HamburgerNavbar"
