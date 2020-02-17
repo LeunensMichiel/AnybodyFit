@@ -11,13 +11,12 @@ price: 10
 isPerHour: false
 url: >-
   https://my.setmore.com/bookingpage/c2f88312-cc6e-4dd2-ad87-2d8811b1ed3b/bookclass
-date: '1 17:32'
+date: "1 17:32"
 location: BlinkOut
 address:
   city: Gent
-  post-code: '9000'
+  postcode: "9000"
   street: Vlaanderenstraat 53
-longitude: 51.050669
-latitude: 3.729774
+latitude: 51.050669
+longitude: 3.729774
 ---
-

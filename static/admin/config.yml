@@ -140,20 +140,20 @@ collections:
         fields:
           - { label: "Straat", name: "street", widget: "string" }
           - { label: "Stad", name: "city", widget: "string" }
-          - { label: "Postcode", name: "post-code", widget: "string" }
-      - {
-          label: "Longitude",
-          name: "longitude",
-          widget: "number",
-          valueType: "float",
-          hint: "Longitude van je adres (voor de map te genereren. Kan je op google maps bekijken. (rechterklik op item op maps -> What's here?)",
-        }
+          - { label: "Postcode", name: "postcode", widget: "string" }
       - {
           label: "Latitude",
           name: "latitude",
           widget: "number",
           valueType: "float",
           hint: "Latitude van je adres (voor de map te genereren. Kan je op google maps bekijken. (rechterklik op item op maps -> What's here?)",
+        }
+      - {
+          label: "Longitude",
+          name: "longitude",
+          widget: "number",
+          valueType: "float",
+          hint: "Longitude van je adres (voor de map te genereren. Kan je op google maps bekijken. (rechterklik op item op maps -> What's here?)",
         }
   - label: "Grote Info Kaarten"
     name: "infocard"
@@ -189,6 +189,23 @@ collections:
           valueType: "int",
           hint: "Rang om te ordenen",
         }
+      - label: "Puntjes"
+        hint: "Puntjes van je dienst"
+        name: "items"
+        widget: "list"
+        fields:
+          - {
+              label: Text van puntje,
+              name: itemText,
+              widget: string,
+              hint: "Text van een puntje dat je wil toevoegen",
+            }
+          - label: "Icoontje van puntje"
+            name: "itemIcon"
+            widget: "image"
+            media_library:
+              config:
+                multiple: false
   - label: "FAQ"
     name: "faq"
     folder: "src/markdown/faq"

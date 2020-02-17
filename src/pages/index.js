@@ -1,8 +1,10 @@
-import React from "react"
+import React, { PureComponent } from "react"
 import styled from "styled-components"
 import Helmet from "react-helmet"
 import Img from "gatsby-image/withIEPolyfill"
 import { graphql, Link } from "gatsby"
+import _ from "lodash"
+import MapGL, { Marker, FlyToInterpolator } from "react-map-gl"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -12,16 +14,9 @@ import screens from "../components/framework/Screens"
 import Logo from "../images/svg/logo.inline.svg"
 
 import next from "../images/svg/next.svg"
-import donation from "../images/svg/donation.svg"
-import care from "../images/svg/care.svg"
-import emotions from "../images/svg/emotions.svg"
-import group from "../images/svg/group.svg"
-import helping from "../images/svg/helping.svg"
-import innovation from "../images/svg/innovation.svg"
-import social from "../images/svg/social-care.svg"
-import startup from "../images/svg/startup.svg"
-import waves from "../images/svg/waves.svg"
-import check from "../images/svg/check.svg"
+import Pin from "../images/svg/pin.inline.svg"
+
+import "mapbox-gl/dist/mapbox-gl.css"
 
 const Landing = styled.div`
   display: flex;
@@ -80,7 +75,7 @@ const MainHeader = styled.h1`
     font-size: 4em;
   }
   @media ${screens.laptop} {
-    font-size: 5em;
+    font-size: 4.5em;
   }
 `
 
@@ -160,9 +155,6 @@ const CardHeader = styled.h2`
 
   @media ${screens.tablet} {
     font-size: 3em;
-  }
-  @media ${screens.laptop} {
-    font-size: 4em;
   }
 `
 
@@ -377,120 +369,104 @@ const TomItem = styled.div`
 `
 
 const Booking = styled.div`
-  width: 90%;
+  width: 100%;
   max-width: 1024px;
   display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
+  align-items: flex-start;
+  height: auto;
   margin: 1.5em auto;
   z-index: 5;
-
   @media ${screens.laptop} {
-    flex-direction: row;
-    margin: 10em auto 5em auto;
+    margin: 10em auto;
   }
 `
 
-const BookingCard = styled.div`
-  width: 100%;
-  max-width: 380px;
-  min-height: 500px;
-  background-color: ${colors.white};
-  border-radius: 50px;
-  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.1), 0 15px 12px rgba(0, 0, 0, 0.1);
-  padding: 1.5em;
+const MasterDetailView = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin-bottom: 1.5em;
-
-  @media ${screens.laptop} {
-    height: 500px;
-    width: 380px;
-    margin-bottom: 0;
-  }
 `
 
-const BookingType = styled.h3`
-  font-size: 1em;
-  align-self: center;
+const Master = styled.div`
+  background: ${props => (props.active ? colors.secondaryWhite : colors.white)};
+  flex: 1;
+  border-left: 3px solid
+    ${props => (props.active ? colors.accent : colors.white)};
+  padding: 1.5em;
   width: 100%;
-  color: ${colors.accent};
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-transform: uppercase;
-  border-bottom: 1px solid ${colors.accent};
-  padding-bottom: 0.5em;
+  max-width: 300px;
+  transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  -webkit-backface-visibility: hidden;
 
-  @media ${screens.tablet} {
-    font-size: 1.33em;
+  &:hover {
+    background: ${colors.accent};
+    cursor: pointer;
   }
 `
 
-const BookingHeader = styled.div``
+const MasterTitle = styled.h3`
+  font-size: 1.5em;
+`
 
-const BookingPrice = styled.h2`
-  font-size: 3em;
-  margin: 0;
+const MasterDate = styled.span`
+  font-size: 0.9em;
+  color: ${colors.secondaryBlack};
+  text-transform: uppercase;
+`
+
+const Detail = styled.div`
+  background: ${colors.secondaryWhite};
+  flex: 4;
+  padding: 1.5em 2.5em;
+`
+
+const DetailHeader = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3em;
+`
+
+const DetailTitle = styled.h2`
+  font-size: 3.5em;
+  margin-top: 0;
   margin-bottom: 0.1em;
+`
+
+const DetailSubtitle = styled.p`
+  margin-bottom: 0em;
+  color: ${colors.secondaryBlack};
+`
+
+const DetailDescription = styled.p`
+  font-style: italic;
+  text-align: justify;
+`
+
+const DetailFooter = styled.div`
+  width: 100%;
+  padding-top: 4em;
+  padding-bottom: 2em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid ${colors.accent};
+`
+
+const DetailPrice = styled.p`
+  margin: 0;
+  font-weight: 700;
+  color: ${colors.accent};
+  font-size: 2em;
+  margin-right: 25px;
 
   span {
-    font-size: 0.33em;
-    font-family: "Raleway", sans-serif;
+    font-size: 0.5em;
     color: ${colors.secondaryBlack};
   }
-
-  @media ${screens.tablet} {
-    font-size: 4em;
-  }
-`
-
-const BookingDesc = styled.span`
-  color: ${colors.secondaryBlack};
-  font-size: 0.9em;
-  @media ${screens.tablet} {
-    font-size: 1em;
-  }
-`
-
-const BookingItems = styled.div`
-  display: flex;
-  flex-direction: column;
-`
-
-const BookingItem = styled.div`
-  display: flex;
-  justify-items: flex-start;
-  align-items: center;
-  margin-bottom: 16px;
-`
-
-const BookingText = styled.span`
-  line-height: 1;
-  font-size: 0.9em;
-  @media ${screens.tablet} {
-    font-size: 1em;
-  }
-`
-
-const BookingIcon = styled.div`
-  background-image: url(${check});
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  height: 20px;
-  width: 20px;
-  margin-right: 16px;
 `
 
 const BookingButton = styled.a`
-  align-self: center;
-  width: 100%;
-  padding: 1em 0;
+  width: 200px;
+  padding: 0.66em 1.33em;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -508,240 +484,283 @@ const BookingButton = styled.a`
   }
 `
 
-const IndexPage = ({ data }) => (
-  <Layout>
-    <SEO
-      title="Home"
-      description="Homepage of Anybodyfit, a personal home coaching business based in Ghent, Belgium"
-    />
-    <Helmet>
-      <script
-        id="setmore_script"
-        type="text/javascript"
-        src="https://my.setmore.com/webapp/js/src/others/setmore_iframe.js"
-      ></script>
-    </Helmet>
-    <Landing>
-      <MainImage>
-        <Img
-          fluid={data.mainImage.childImageSharp.fluid}
-          objectFit="cover"
-          objectPosition="50% 100%"
-          alt="Picture of someone doing yoga"
-          title="Main Page Header"
-          style={{ position: "static" }}
+const MapContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 250px;
+  max-width: 1024px;
+  margin-top: 4em;
+  margin-bottom: 4em;
+  background: ${colors.accent2};
+  padding: 1em;
+
+  @media ${screens.laptop} {
+    flex-direction: row;
+  }
+`
+
+const ContactBrand = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1.3;
+
+  @media ${screens.tablet} {
+    align-items: stretch;
+    justify-content: flex-start;
+  }
+`
+
+const Address = styled.div`
+  font-size: 0.9em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: ${colors.secondaryBlack};
+  span:first-child {
+    font-weight: 600;
+  }
+  @media ${screens.tablet} {
+    align-items: flex-start;
+    margin-bottom: 1em;
+  }
+`
+
+const Map = styled.div`
+  flex: 3;
+  width: 100%;
+  height: 33vh;
+
+  @media ${screens.laptop} {
+    height: 100%;
+  }
+`
+
+class IndexPage extends PureComponent {
+  state = {
+    item: 0,
+    viewport: {
+      longitude: 3.73,
+      latitude: 51.051,
+      zoom: 13,
+    },
+  }
+
+  changeItem = item => {
+    this.setState((state, props) => ({
+      item: item,
+      viewport: {
+        longitude: props.data.services.edges[item].node.frontmatter.longitude,
+        latitude: props.data.services.edges[item].node.frontmatter.latitude,
+        zoom: 13,
+      },
+    }))
+  }
+
+  updateViewport = viewport => {
+    this.setState({ viewport })
+  }
+
+  render() {
+    const { data } = this.props
+    const { item, viewport } = this.state
+    let selectedItem = data.services.edges[item]
+    const tomWords = _.split(data.landing.frontmatter.tomTitle, ";")
+    const weekdays = [
+      "Zondag",
+      "Maandag",
+      "Dinsdag",
+      "Woensdag",
+      "Donderdag",
+      "Vrijdag",
+      "Zaterdag",
+    ]
+    return (
+      <Layout>
+        <SEO
+          title="Home"
+          description="Homepage of Anybodyfit, a personal home coaching business based in Ghent, Belgium"
         />
-      </MainImage>
-      <StyledLogo />
-    </Landing>
-    <MainInfo>
-      <MainHeader>{data.landing.frontmatter.title}</MainHeader>
-      <MainParagraph>{data.landing.frontmatter.description}</MainParagraph>
-      <MoreLink to="/about/">meer over mezelf</MoreLink>
-    </MainInfo>
-    <InfoCard>
-      <CardBody>
-        <CardHeader>Verrijken & verbinden</CardHeader>
-        <CardSubHeader>
-          Een veilige ruimte creëren waar kwetsbaarheid & zelfexpressie centraal
-          staan
-        </CardSubHeader>
-        <CardItem>
-          <CardItemText>10% doneren aan goede doelen</CardItemText>
-          <CardItemIcon svg={donation}></CardItemIcon>
-        </CardItem>
-        <CardItem>
-          <CardItemText>Oase van rust in het centrum van Gent</CardItemText>
-          <CardItemIcon svg={waves}></CardItemIcon>
-        </CardItem>
-        <CardItem>
-          <CardItemText>
-            Netwerk van professionals om aan elke hulpvraag te kunnen voldoen
-          </CardItemText>
-          <CardItemIcon svg={group}></CardItemIcon>
-        </CardItem>
-        <CardMoreInfo to="/about/" svg={next}></CardMoreInfo>
-      </CardBody>
-      <CardImage>
-        <CardImageContainer>
-          {/* <Img
-            fluid={data.firstCard.childImageSharp.fluid}
-            objectFit="cover"
-            objectPosition="50% 50%"
-            alt="Picture of someone doing yoga"
-            title="Yoga"
-            style={{ position: "static" }}
-          /> */}
-        </CardImageContainer>
-      </CardImage>
-    </InfoCard>
-    <InfoCard>
-      <CardBody>
-        <CardHeader>Leren Groeien</CardHeader>
-        <CardSubHeader>
-          Leren uw comfortzone te verlaten & te verruimen
-        </CardSubHeader>
-        <CardItem reverse>
-          <CardItemText>
-            Tools geven om zelfstandig te werk te gaan
-          </CardItemText>
-          <CardItemIcon svg={innovation}></CardItemIcon>
-        </CardItem>
-        <CardItem reverse>
-          <CardItemText>Boostersessies voor wanneer je vastzit</CardItemText>
-          <CardItemIcon svg={startup}></CardItemIcon>
-        </CardItem>
-        <CardItem reverse>
-          <CardItemText>
-            Creëren van een community die elkaars proces ondersteunt
-          </CardItemText>
-          <CardItemIcon svg={social}></CardItemIcon>
-        </CardItem>
-        <CardMoreInfo to="/about/" svg={next}></CardMoreInfo>
-      </CardBody>
-      <CardImage>
-        <CardImageContainer>
-          {/* <Img
-            fluid={data.secondCard.childImageSharp.fluid}
-            objectFit="cover"
-            objectPosition="30% 50%"
-            alt="Breathe"
-            title="Breathe"
-            style={{ position: "static" }}
-          /> */}
-        </CardImageContainer>
-      </CardImage>
-    </InfoCard>
-    <InfoCard>
-      <CardBody>
-        <CardHeader>Holistische aanpak</CardHeader>
-        <CardSubHeader>
-          Coaching op vlak van gezondheid, mindset, zelfbeeld en meer
-        </CardSubHeader>
-        <CardItem>
-          <CardItemText>
-            Focus niet enkel op het fysieke, maar ook het mentale en spirituele
-            aspect
-          </CardItemText>
-          <CardItemIcon svg={emotions}></CardItemIcon>
-        </CardItem>
-        <CardItem>
-          <CardItemText>Persoonlijke formule </CardItemText>
-          <CardItemIcon svg={helping}></CardItemIcon>
-        </CardItem>
-        <CardItem>
-          <CardItemText>
-            Accomoderen van personen met speciale noden
-          </CardItemText>
-          <CardItemIcon svg={care}></CardItemIcon>
-        </CardItem>
-        <CardMoreInfo to="/about/" svg={next}></CardMoreInfo>
-      </CardBody>
-      <CardImage>
-        <CardImageContainer>
-          {/* <Img
-            fluid={data.thirdCard.childImageSharp.fluid}
-            objectFit="cover"
-            objectPosition="50% 90%"
-            alt="Think outside the box"
-            title="Think outside the box"
-            style={{ position: "static" }}
-          /> */}
-        </CardImageContainer>
-      </CardImage>
-    </InfoCard>
-    <Tom>
-      <TomHeader>
-        <TomTitle>Ontmoet Tom,</TomTitle>
-        <TomSubtitle>uw persoonlijke coach</TomSubtitle>
-      </TomHeader>
-      <TomAbout>
-        <TomPicture>
-          <Img
-            fluid={data.landing.frontmatter.profilePic.childImageSharp.fluid}
-            objectFit="cover"
-            objectPosition="50% 50%"
-            alt="Tom"
-            title="Tom"
-            style={{ position: "static" }}
-          />
-          <div className="circle" />
-          <div className="circle middle" />
-          <div className="circle small" />
-        </TomPicture>
-        <TomItems>
-          {data.qualifications.edges.map(item => (
-            <TomItem>{item.node.frontmatter.title}</TomItem>
-          ))}
-        </TomItems>
-      </TomAbout>
-    </Tom>
-    <Booking>
-      <BookingCard>
-        <BookingType>Yoga</BookingType>
-        <BookingHeader>
-          <BookingPrice>
-            €10<span> /sessie</span>
-          </BookingPrice>
-          <BookingDesc>
-            Om even tot rust te kunnen komen. U krijgt de volgende voordelen:
-          </BookingDesc>
-        </BookingHeader>
-        <BookingItems>
-          <BookingItem>
-            <BookingIcon />
-            <BookingText>Gratis proefles</BookingText>
-          </BookingItem>
-          <BookingItem>
-            <BookingIcon />
-            <BookingText>Kleine groepjes</BookingText>
-          </BookingItem>
-          <BookingItem>
-            <BookingIcon />
-            <BookingText>Oefeningen op maat</BookingText>
-          </BookingItem>
-        </BookingItems>
-        <BookingButton
-          id="Setmore_button_iframe"
-          href="https://my.setmore.com/bookingpage/c2f88312-cc6e-4dd2-ad87-2d8811b1ed3b/bookclass"
-        >
-          Boek Yoga
-        </BookingButton>
-      </BookingCard>
-      <BookingCard>
-        <BookingType>Personal Coaching</BookingType>
-        <BookingHeader>
-          <BookingPrice>
-            €30<span> /uur</span>
-          </BookingPrice>
-          <BookingDesc>
-            Voor een gezondere levensstijl. U krijgt de volgende voordelen:
-          </BookingDesc>
-        </BookingHeader>
-        <BookingItems>
-          <BookingItem>
-            <BookingIcon />
-            <BookingText>Gratis intake gesprek</BookingText>
-          </BookingItem>
-          <BookingItem>
-            <BookingIcon />
-            <BookingText>Gedragsverandering leren</BookingText>
-          </BookingItem>
-          <BookingItem>
-            <BookingIcon />
-            <BookingText>Gezondheids- en mindset coaching</BookingText>
-          </BookingItem>
-        </BookingItems>
-        <BookingButton
-          id="Setmore_button_iframe"
-          href="https://my.setmore.com/bookingpage/c2f88312-cc6e-4dd2-ad87-2d8811b1ed3b"
-        >
-          Boek Coaching
-        </BookingButton>
-      </BookingCard>
-    </Booking>
-  </Layout>
-)
+        <Helmet>
+          <script
+            id="setmore_script"
+            type="text/javascript"
+            src="https://my.setmore.com/webapp/js/src/others/setmore_iframe.js"
+          ></script>
+        </Helmet>
+        <Landing>
+          <MainImage>
+            <Img
+              fluid={data.mainImage.childImageSharp.fluid}
+              objectFit="cover"
+              objectPosition="50% 100%"
+              alt="Picture of someone doing yoga"
+              title="Main Page Header"
+              style={{ position: "static" }}
+            />
+          </MainImage>
+          <StyledLogo />
+        </Landing>
+        <MainInfo>
+          <MainHeader>{data.landing.frontmatter.title}</MainHeader>
+          <MainParagraph>{data.landing.frontmatter.description}</MainParagraph>
+          <MoreLink to="/about/">meer over mezelf</MoreLink>
+        </MainInfo>
+        {data.bigCards.edges.map(card => (
+          <InfoCard key={card.node.frontmatter.title}>
+            <CardBody>
+              <CardHeader>{card.node.frontmatter.title}</CardHeader>
+              <CardSubHeader>{card.node.frontmatter.description}</CardSubHeader>
+              {card.node.frontmatter.items.map(subItem => (
+                <CardItem key={subItem.itemText}>
+                  <CardItemText>{subItem.itemText}</CardItemText>
+                  <CardItemIcon svg={subItem.itemIcon.publicURL}></CardItemIcon>
+                </CardItem>
+              ))}
+              <CardMoreInfo to="/about/" svg={next}></CardMoreInfo>
+            </CardBody>
+            <CardImage>
+              <CardImageContainer>
+                <Img
+                  fluid={card.node.frontmatter.image.childImageSharp.fluid}
+                  objectFit="cover"
+                  objectPosition="50% 50%"
+                  alt={card.node.frontmatter.title}
+                  title={card.node.frontmatter.title}
+                  style={{ position: "static" }}
+                />
+              </CardImageContainer>
+            </CardImage>
+          </InfoCard>
+        ))}
+        <Tom>
+          <TomHeader>
+            <TomTitle>{tomWords[0]}</TomTitle>
+            <TomSubtitle>{tomWords[1]}</TomSubtitle>
+          </TomHeader>
+          <TomAbout>
+            <TomPicture>
+              <Img
+                fluid={
+                  data.landing.frontmatter.profilePic.childImageSharp.fluid
+                }
+                objectFit="cover"
+                objectPosition="50% 50%"
+                alt="Picture of Tom Janssens"
+                title="Tom Janssens"
+                style={{ position: "static" }}
+              />
+              <div className="circle" />
+              <div className="circle middle" />
+              <div className="circle small" />
+            </TomPicture>
+            <TomItems>
+              {data.qualifications.edges.map(item => (
+                <TomItem key={item.node.frontmatter.title}>
+                  {item.node.frontmatter.title}
+                </TomItem>
+              ))}
+            </TomItems>
+          </TomAbout>
+        </Tom>
+        <Booking>
+          <MasterDetailView>
+            {data.services.edges.map((service, index) => (
+              <Master
+                key={service.node.frontmatter.title}
+                onClick={() => this.changeItem(index)}
+                active={index === item}
+              >
+                <MasterTitle>{service.node.frontmatter.title}</MasterTitle>
+                <MasterDate>
+                  {_.replace(
+                    service.node.frontmatter.date,
+                    service.node.frontmatter.date.substring(0, 1),
+                    weekdays[service.node.frontmatter.date.substring(0, 1)]
+                  )}
+                </MasterDate>
+              </Master>
+            ))}
+          </MasterDetailView>
+          <Detail>
+            <DetailHeader>
+              <DetailTitle>{selectedItem.node.frontmatter.title}</DetailTitle>
+              <DetailSubtitle>
+                {selectedItem.node.frontmatter.shortDesc}
+              </DetailSubtitle>
+            </DetailHeader>
+            <DetailDescription>
+              {selectedItem.node.frontmatter.description}
+            </DetailDescription>
+            <MapContainer>
+              <ContactBrand>
+                <Address>
+                  <span>{selectedItem.node.frontmatter.location}</span>
+                  <span>{selectedItem.node.frontmatter.address.street}</span>
+                  <span>
+                    {selectedItem.node.frontmatter.address.city}{" "}
+                    {selectedItem.node.frontmatter.address.postcode}
+                  </span>
+                  <span>België</span>
+                </Address>
+                <Address>
+                  <span>
+                    {_.replace(
+                      selectedItem.node.frontmatter.date.substring(0, 1),
+                      selectedItem.node.frontmatter.date.substring(0, 1),
+                      weekdays[
+                        selectedItem.node.frontmatter.date.substring(0, 1)
+                      ]
+                    )}
+                  </span>
+                  <span>
+                    om {selectedItem.node.frontmatter.date.substring(2)}
+                  </span>
+                </Address>
+              </ContactBrand>
+              <Map>
+                <MapGL
+                  {...viewport}
+                  width="100%"
+                  height="100%"
+                  transitionDuration={500}
+                  transitionInterpolator={new FlyToInterpolator()}
+                  mapStyle={`${process.env.GATSBY_MAP_STYLE}`}
+                  onViewportChange={this.updateViewport}
+                  mapboxApiAccessToken={`${process.env.GATSBY_MAP_API}`}
+                >
+                  <Marker
+                    longitude={selectedItem.node.frontmatter.longitude}
+                    latitude={selectedItem.node.frontmatter.latitude}
+                  >
+                    <Pin />
+                  </Marker>
+                </MapGL>
+              </Map>
+            </MapContainer>
+            <DetailFooter>
+              <DetailPrice>
+                €{selectedItem.node.frontmatter.price.toFixed(2)}
+                <span>
+                  /{selectedItem.node.frontmatter.isPerHour ? "uur" : "sessie"}
+                </span>
+              </DetailPrice>
+              <BookingButton
+                id="Setmore_button_iframe"
+                href={selectedItem.node.frontmatter.url}
+              >
+                Boek
+              </BookingButton>
+            </DetailFooter>
+          </Detail>
+        </Booking>
+      </Layout>
+    )
+  }
+}
 
 export default IndexPage
 
@@ -767,6 +786,61 @@ export const query = graphql`
         }
       }
     }
+    bigCards: allMarkdownRemark(
+      filter: { fileAbsolutePath: { regex: "/infocards/" } }
+      sort: { fields: frontmatter___rank }
+    ) {
+      edges {
+        node {
+          frontmatter {
+            title
+            description
+            image {
+              childImageSharp {
+                fluid(maxWidth: 1080, quality: 85) {
+                  presentationWidth
+                  presentationHeight
+                  ...GatsbyImageSharpFluid_withWebp
+                }
+              }
+            }
+            rank
+            items {
+              itemText
+              itemIcon {
+                publicURL
+              }
+            }
+          }
+        }
+      }
+    }
+    services: allMarkdownRemark(
+      filter: { fileAbsolutePath: { regex: "/services/" } }
+      sort: { fields: frontmatter___date }
+    ) {
+      edges {
+        node {
+          frontmatter {
+            title
+            description
+            address {
+              city
+              postcode
+              street
+            }
+            date
+            isPerHour
+            latitude
+            location
+            longitude
+            price
+            url
+            shortDesc
+          }
+        }
+      }
+    }
     landing: markdownRemark(fileAbsolutePath: { regex: "/pages/landing/" }) {
       frontmatter {
         title
@@ -780,43 +854,6 @@ export const query = graphql`
               ...GatsbyImageSharpFluid_withWebp
             }
           }
-        }
-      }
-    }
-
-    firstCard: file(relativePath: { eq: "firstCard.jpg" }) {
-      childImageSharp {
-        fluid(maxWidth: 1080, quality: 85) {
-          presentationWidth
-          presentationHeight
-          ...GatsbyImageSharpFluid_withWebp
-        }
-      }
-    }
-    secondCard: file(relativePath: { eq: "secondCard.jpg" }) {
-      childImageSharp {
-        fluid(maxWidth: 1080, quality: 85) {
-          presentationWidth
-          presentationHeight
-          ...GatsbyImageSharpFluid_withWebp
-        }
-      }
-    }
-    thirdCard: file(relativePath: { eq: "thirdCard.jpg" }) {
-      childImageSharp {
-        fluid(maxWidth: 1080, quality: 85) {
-          presentationWidth
-          presentationHeight
-          ...GatsbyImageSharpFluid_withWebp
-        }
-      }
-    }
-    tom: file(relativePath: { eq: "tomj.jpg" }) {
-      childImageSharp {
-        fluid(maxWidth: 1080, quality: 85) {
-          presentationWidth
-          presentationHeight
-          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
