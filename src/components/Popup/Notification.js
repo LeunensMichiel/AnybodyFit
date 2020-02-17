@@ -93,7 +93,7 @@ const Notification = ({ notification, click, isVisible }) => {
       <span onClick={click} role="button">
         <StyledCross />
       </span>
-      <h3>{notification.title}</h3>
+      <h3>{notification.title || ""}</h3>
       <p>{notification.description}</p>
     </NotificationContainer>
   )

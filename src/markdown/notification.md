@@ -1,5 +1,5 @@
 ---
 title: Dit is een test
-description: Maandag geen les lolol!
+description: Maandag geen les lololol!
 isActive: true
 ---
