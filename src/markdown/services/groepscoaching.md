@@ -19,4 +19,23 @@ address:
   street: Vlaanderenstraat 53
 latitude: 51.050669
 longitude: 3.729774
+items:
+  - bullet: Ademen
+    isNextSession: false
+  - bullet: Lachen
+    isNextSession: false
+  - bullet: Alien
+    isNextSession: false
+  - bullet: Orval
+    isNextSession: false
+  - bullet: Epico
+    isNextSession: false
+  - bullet: BASS
+    isNextSession: false
+  - bullet: Pokemon
+    isNextSession: true
+  - bullet: Episch zijn
+    isNextSession: false
+  - bullet: Koffietjes ☕
+    isNextSession: true
 ---

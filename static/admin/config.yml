@@ -155,6 +155,24 @@ collections:
           valueType: "float",
           hint: "Longitude van je adres (voor de map te genereren. Kan je op google maps bekijken. (rechterklik op item op maps -> What's here?)",
         }
+      - label: "Themas"
+        hint: "Themas van je dienst"
+        name: "items"
+        widget: "list"
+        fields:
+          - {
+              label: Text van thema,
+              name: bullet,
+              widget: string,
+              hint: "Text van een puntje dat je wil toevoegen",
+            }
+          - {
+              label: "Actief volgende sessie?",
+              name: "isNextSession",
+              widget: "boolean",
+              default: false,
+              hint: "Zet dit aan als je ze wil aanduiden voor volgende sessie",
+            }
   - label: "Grote Info Kaarten"
     name: "infocard"
     media_folder: ""

@@ -510,9 +510,50 @@ const DetailSubtitle = styled.p`
   }
 `
 
+const DetailSubSubtitle = styled.p`
+  margin-bottom: 1em;
+  color: ${colors.secondaryBlack};
+  font-size: 0.6em;
+  font-weight: 700;
+
+  @media ${screens.tablet} {
+    font-size: 0.66em;
+  }
+`
+
 const DetailDescription = styled.p`
   font-style: italic;
   text-align: justify;
+`
+
+const DetailItems = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+
+  @media ${screens.tablet} {
+    justify-content: stretch;
+  }
+`
+
+const DetailItem = styled.span`
+  font-weight: 700;
+  color: ${props => (props.active ? colors.black : colors.white)};
+  background: ${props =>
+    props.active ? colors.accent2 : colors.secondaryBlack};
+  font-size: 0.7em;
+  backface-visibility: hidden;
+  margin: 0.5em;
+  padding: 0.33em 0.66em;
+  border-radius: 50px;
+  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1) 0s;
+
+  @media ${screens.tablet} {
+    &:first-of-type {
+      margin-left: 0;
+    }
+  }
 `
 
 const DetailFooter = styled.div`
@@ -860,6 +901,20 @@ class IndexPage extends PureComponent {
                   <DetailDescription>
                     {selectedItem.node.frontmatter.description}
                   </DetailDescription>
+                  <DetailSubtitle>Thema's die aan bod komen</DetailSubtitle>
+                  <DetailSubSubtitle>
+                    Gekleurde thema's komen binnenkort aan bod!
+                  </DetailSubSubtitle>
+                  <DetailItems>
+                    {selectedItem.node.frontmatter.items.map(subItem => (
+                      <DetailItem
+                        key={subItem.bullet}
+                        active={subItem.isNextSession}
+                      >
+                        {subItem.bullet}
+                      </DetailItem>
+                    ))}
+                  </DetailItems>
                   <MapContainer>
                     <ContactBrand>
                       <Address>
@@ -1042,6 +1097,10 @@ export const query = graphql`
             price
             url
             shortDesc
+            items {
+              bullet
+              isNextSession
+            }
           }
         }
       }

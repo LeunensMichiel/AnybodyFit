@@ -16,4 +16,9 @@ address:
   street: Campinglaan 2
 latitude: 51.048834
 longitude: 3.681284
+items:
+  - bullet: Denken aan Fazanten
+    isNextSession: false
+  - bullet: Zot zijn
+    isNextSession: true
 ---
