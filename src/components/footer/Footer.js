@@ -67,6 +67,7 @@ const NavigationItem = styled(Link)`
   transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
   -webkit-backface-visibility: hidden;
   margin-top: 10px;
+  font-size: 0.8em;
 
   &:hover {
     font-weight: 600;
@@ -79,6 +80,10 @@ const NavigationItem = styled(Link)`
     margin-top: 20px;
     font-size: 0.8em;
   }
+
+  @media ${screens.tablet} {
+    font-size: 1em;
+  }
 `
 
 const FooterCenter = styled.div`
@@ -89,10 +94,10 @@ const FooterCenter = styled.div`
   height: 100%;
   width: 100%;
 
-  margin-bottom: 1.5em;
+  margin: 1.5em 0;
 
   @media ${screens.tablet} {
-    margin-bottom: 0;
+    margin: 0;
   }
 `
 
@@ -133,11 +138,6 @@ const SocialIcons = styled.div`
   justify-content: space-evenly;
   align-items: center;
   width: 66px;
-  margin-bottom: 1.5em;
-
-  @media ${screens.tablet} {
-    margin-bottom: 50px;
-  }
 `
 
 const LangContainer = styled.div`
@@ -178,13 +178,6 @@ const Footer = () => {
           <NavigationItem to="/contact/" activeClassName="activeLink">
             contact
           </NavigationItem>
-          <NavigationItem
-            to="/terms/"
-            activeClassName="activeLink"
-            className="smallNav"
-          >
-            algemene voorwaarden
-          </NavigationItem>
         </NavigationItems>
         <FooterCenter>
           <StyledLogo />
@@ -210,10 +203,17 @@ const Footer = () => {
               <FaInstagram />
             </a>
           </SocialIcons>
-          <LangContainer>
+          <NavigationItem
+            to="/terms/"
+            activeClassName="activeLink"
+            className="smallNav"
+          >
+            algemene voorwaarden
+          </NavigationItem>
+          {/* <LangContainer>
             <StyledSpan>english</StyledSpan>
             <StyledSpan>nederlands</StyledSpan>
-          </LangContainer>
+          </LangContainer> */}
         </FooterRight>
       </FooterInnerContainer>
     </FooterContainer>

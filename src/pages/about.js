@@ -77,7 +77,7 @@ const Paragraph = styled.div`
     margin-right: 100px;
     font-size: 1em;
     p:first-of-type {
-      font-size: 1.2em;
+      font-size: 1.1em;
     }
   }
 `
@@ -315,8 +315,8 @@ const GrowTextContainer = styled.div`
 const GrowDescription = styled.p`
   text-align: justify;
   text-align-last: right;
-  font-size: 1em;
-
+  font-size: 0.9em;
+  text-justify: newspaper;
   &::first-letter {
     font-size: 200%;
     color: ${colors.accent};
@@ -334,7 +334,7 @@ const GrowFootnote = styled.p`
   text-align: justify;
   text-align-last: right;
   color: ${colors.secondaryBlack};
-  font-size: 0.9em;
+  font-size: 0.8em;
 
   @media ${screens.laptop} {
     font-size: 1em;
@@ -385,7 +385,13 @@ const GrowCardText = styled.div`
   font-style: italic;
   width: 100%;
   max-width: 400px;
+  text-align: justify;
   padding: 1.5em;
+  font-size: 0.9em;
+
+  @media ${screens.laptop} {
+    font-size: 1em;
+  }
 `
 
 const Holla = styled.div`
@@ -403,17 +409,16 @@ const Holla = styled.div`
 const HollaArticle = styled.div`
   display: flex;
   align-items: flex-start;
+  justify-content: space-between;
   flex-direction: column;
   text-align: justify;
   z-index: 5;
   position: relative;
   font-size: 0.9em;
-
   margin-top: 20px;
 
   p {
-    flex: 1;
-
+    width: 100%;
     &:first-child {
       margin-top: -12px;
       &::first-line {
@@ -425,15 +430,14 @@ const HollaArticle = styled.div`
       }
     }
   }
-  span {
-    flex: 0.1;
-  }
 
   @media ${screens.tablet} {
     flex-direction: row;
     font-size: 1em;
 
     p {
+      width: 32%;
+
       &:nth-of-type(2) {
         text-align-last: center;
       }
@@ -464,37 +468,22 @@ export class news extends PureComponent {
           description="More information regarding anybodyfit"
         />
         <Enlightment>
-          <Title>Verrijken & Verbinden</Title>
+          <Title>{data.about.frontmatter.title}</Title>
           <Article>
-            <Paragraph>
-              <p>
-                Bij AnyBodyFit trachten we een veilige ruimte te creëren waar
-                kwetsbaarheid & zelfexpressie centraal staan. In het BlinkHuis
-                in de Vlaanderenstraat vind je een rustige omgeving, waar je op
-                je eigen tempo jezelf kan leren kennen en ontplooien. Hier vind
-                je ook een netwerk van gelijkgezinde mensen, waarbij je terecht
-                kan voor ondersteuning, het delen van ervaringen, of gewoon een
-                goed gesprek. We verwelkomen iedereen; ongeacht geaardheid,
-                afkomst of geloofsovertuiging.
-              </p>
-              <p>
-                Voor specifieke hulpvragen staat er, bovenop het eerder
-                vernoemde netwerk, een netwerk van professionals uit
-                verschillende sectoren voor je klaar. De coach, Tom, is hiervoor
-                je eerste aanspreekpunt. Samen zoeken we de beste manier om jouw
-                persoonlijke groei te ondersteunen. Door inlichtingen te nemen,
-                of eventueel door te verwijzen komen we zo tot een totaalpakket.
-              </p>
-            </Paragraph>
+            <Paragraph
+              dangerouslySetInnerHTML={{
+                __html: data.about.frontmatter.description,
+              }}
+            ></Paragraph>
             <ArticleImage>
               <div>
                 <ImageContainer>
                   <Img
-                    fluid={data.yoga.childImageSharp.fluid}
+                    fluid={data.about.frontmatter.image.childImageSharp.fluid}
                     objectFit="cover"
                     objectPosition="50% 50%"
-                    alt="Picture of someone doing yoga"
-                    title="Yoga"
+                    alt={data.about.frontmatter.title}
+                    title={data.about.frontmatter.title}
                     style={{ position: "static" }}
                   />
                 </ImageContainer>
@@ -551,12 +540,12 @@ export class news extends PureComponent {
               </p>
             </CharityInfo>
             <CharityCard>
-              {_.slice(data.charities.edges, 0, 6).map((charity, i) => (
+              {_.slice(data.charities.edges, 0, 5).map((charity, i) => (
                 <CharityCardItem key={charity.node.frontmatter.charityName}>
                   <CharityNumber>{i + 1}</CharityNumber>
                   <CharityText>
                     <span>{charity.node.frontmatter.charityName}</span>
-                    <span>{charity.node.frontmatter.amount}</span>
+                    <span>€ {charity.node.frontmatter.amount.toFixed(2)}</span>
                   </CharityText>
                 </CharityCardItem>
               ))}
@@ -566,36 +555,30 @@ export class news extends PureComponent {
         <Grow>
           <GrowInnerContainer>
             <GrowTextContainer>
-              <Title>Leren Groeien</Title>
-              <GrowDescription>
-                Groeien is een actief & systematisch proces. Hier krijg je de
-                tools om zelfstandig je potentieel te verkennen en bereiken. In
-                de coaching sessies leer je over technieken en theorieën van
-                gedragsverandering, leer je doelen stellen en bereiken, en
-                ruimen we obstakels uit de weg. Tijdens de yoga sessies wordt er
-                steeds een link gelegd met dagelijkse ervaringen. Het einddoel:
-                jou coachen, totdat je jezelf kan coachen.
-              </GrowDescription>
-              <GrowFootnote>
-                Toch een dipje? Plan een boostersessie in waar we samen een
-                kijkje nemen naar je huidige doel, en hoe we hier het best
-                geraken. Daarnaast nemen we tussen sessies contact op om de
-                motivatie hoog te houden, en bij te sturen indien nodig.
-              </GrowFootnote>
+              <Title>{data.about.frontmatter.title2}</Title>
+              <GrowDescription
+                dangerouslySetInnerHTML={{
+                  __html: data.about.frontmatter.description2,
+                }}
+              ></GrowDescription>
+              <GrowFootnote
+                dangerouslySetInnerHTML={{
+                  __html: data.about.frontmatter.footnote,
+                }}
+              ></GrowFootnote>
             </GrowTextContainer>
             <GrowImage>
               <GrowCard>
-                <GrowCardText>
-                  Om jouw groei verder te ondersteunen trachten we je steeds in
-                  contact te stellen met mensen die een gelijkaardige ervaring
-                  hebben. Door samen oplossingen te zoeken en elkaar te
-                  motiveren bereik je nog meer dan alleen.
-                </GrowCardText>
+                <GrowCardText
+                  dangerouslySetInnerHTML={{
+                    __html: data.about.frontmatter.cardnote,
+                  }}
+                ></GrowCardText>
               </GrowCard>
               <GrowImageContainer>
                 <GrowImageInnerContainer>
                   <Img
-                    fluid={data.plants.childImageSharp.fluid}
+                    fluid={data.about.frontmatter.image2.childImageSharp.fluid}
                     objectFit="cover"
                     objectPosition="50% 50%"
                     alt="Plants growing"
@@ -608,37 +591,14 @@ export class news extends PureComponent {
           </GrowInnerContainer>
         </Grow>
         <Holla>
-          <Title>Holistische Aanpak</Title>
-          <HollaArticle>
-            <p>
-              Gezondheid gaat niet enkel over het lichaam. Gezonde voeding,
-              sport & slaap zijn allemaal belangrijk. Alleen omvat een goede
-              gezondheid zo veel meer: zelfvertrouwen, mindset, een stimulerende
-              sociale cirkel, stress-management etc. Door elk apart aspect onder
-              handen te nemen komen we tot een gezond lichaam, een positieve
-              mindset, en een gepassioneerde ziel.
-            </p>
-            <span />
-            <p>
-              Iedereen is anders, en hier spelen we op in. Samen zoeken we welke
-              technieken & oefeningen werken, hoeveel sessies ideaal zijn, en
-              hoeveel follow-up je nodig hebt. Je bepaalt zelf het tempo, en de
-              hoeveelheid moeite die je erin steekt. Daarom hechten we ook enorm
-              veel belang aan jouw input. Wees dus zeker niet bang om je mening
-              duidelijk te maken, of zelf iets voor te stellen.
-            </p>
-            <span />
-            <p>
-              Personen met speciale noden zijn ook steeds welkom. Bel of mail
-              gerust om te vragen wat de mogelijkheden zijn. Je kan ook steeds
-              terecht voor een gratis intake gesprek, waarbij we samen kijken
-              hoe we de yogalessen kunnen aanpassen. Indien hieruit blijkt dat
-              we zelf niet aan jouw noden kunnen voldoen, zetten we toch alles
-              op alles om een plek te vinden waar dat wel kan!
-            </p>
-          </HollaArticle>
+          <Title>{data.about.frontmatter.title3}</Title>
+          <HollaArticle
+            dangerouslySetInnerHTML={{
+              __html: data.about.frontmatter.description3,
+            }}
+          ></HollaArticle>
           <Circle size={150} top={130} right="200" />
-          <Circle size={66} top={80} right="100" />
+          <Circle accent size={66} top={80} right="100" />
           <Circle size={45} bottom="0" right="100" />
         </Holla>
       </Layout>
@@ -650,22 +610,34 @@ export default news
 
 export const query = graphql`
   query {
-    yoga: file(relativePath: { eq: "yoga.jpg" }) {
-      childImageSharp {
-        fluid(maxWidth: 2048, quality: 85) {
-          presentationWidth
-          presentationHeight
-          ...GatsbyImageSharpFluid_withWebp
+    about: markdownRemark(fileAbsolutePath: { regex: "/pages/about/" }) {
+      frontmatter {
+        title
+        description
+        image {
+          childImageSharp {
+            fluid(maxWidth: 1080, quality: 80) {
+              presentationWidth
+              presentationHeight
+              ...GatsbyImageSharpFluid_withWebp
+            }
+          }
         }
-      }
-    }
-    plants: file(relativePath: { eq: "plants.jpg" }) {
-      childImageSharp {
-        fluid(maxWidth: 2048, quality: 85) {
-          presentationWidth
-          presentationHeight
-          ...GatsbyImageSharpFluid_withWebp
+        image2 {
+          childImageSharp {
+            fluid(maxWidth: 2048, quality: 76) {
+              presentationWidth
+              presentationHeight
+              ...GatsbyImageSharpFluid_withWebp
+            }
+          }
         }
+        description2
+        description3
+        cardnote
+        title2
+        title3
+        footnote
       }
     }
     charities: allMarkdownRemark(

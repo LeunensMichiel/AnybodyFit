@@ -3,22 +3,42 @@ import PropTypes from "prop-types"
 import { IconContext } from "react-icons"
 import _ from "lodash"
 import { isIE, isMobileOnly } from "react-device-detect"
+import { StaticQuery, graphql } from "gatsby"
 
 import Footer from "./footer/Footer"
 import Navbar from "./navigation/Navbar"
+import Notification from "./popup/Notification"
 import SideDrawer from "./navigation/SideDrawer"
 import Backdrop from "./navigation/Backdrop"
 import HamburgerNavbar from "./navigation/HamburgerNavbar"
 
 import "../stylesheets/af_style.scss"
 
+export default props => (
+  <StaticQuery
+    query={graphql`
+      query {
+        notification: markdownRemark(
+          fileAbsolutePath: { regex: "/notification/" }
+        ) {
+          frontmatter {
+            title
+            description
+            isActive
+          }
+        }
+      }
+    `}
+    render={data => <Layout data={data} {...props} />}
+  />
+)
+
 class Layout extends PureComponent {
   state = {
     sideDrawerOpen: false,
+    notificationOpen: true,
     mobile:
-      typeof window !== `undefined`
-        ? isMobileOnly || window.innerWidth < 768
-        : isMobileOnly,
+      typeof window !== `undefined` ? window.innerWidth < 768 : isMobileOnly,
   }
 
   drawerToggleClickHandler = () => {
@@ -33,12 +53,17 @@ class Layout extends PureComponent {
     })
   }
 
+  removeNotification = desc => {
+    this.setState({
+      notificationOpen: false,
+    })
+    localStorage.setItem("notification", desc)
+  }
+
   updateDimensions = () => {
     this.setState({
       mobile:
-        typeof window !== `undefined`
-          ? isMobileOnly || window.innerWidth < 768
-          : isMobileOnly,
+        typeof window !== `undefined` ? window.innerWidth < 768 : isMobileOnly,
     })
   }
 
@@ -47,8 +72,14 @@ class Layout extends PureComponent {
       "resize",
       _.debounce(() => {
         this.updateDimensions()
-      }, 100)
+      }, 150)
     )
+
+    this.setState({
+      notificationOpen:
+        localStorage.getItem("notification") !==
+        this.props.data.notification.frontmatter.description,
+    })
   }
 
   componentWillUnmount() {
@@ -56,39 +87,51 @@ class Layout extends PureComponent {
   }
 
   render() {
-    const { children } = this.props
-    const { sideDrawerOpen, mobile } = this.state
+    const { children, data } = this.props
+    const { sideDrawerOpen, notificationOpen, mobile } = this.state
     let backdrop
+
     if (sideDrawerOpen) {
       backdrop = <Backdrop click={this.backdropToggleClickHandler} />
     }
+
     if (isIE)
       alert(
         "Internet Explorer is ancient and not supported. Please download a modern browser like Chrome, Firefox or Safari"
       )
+
     return (
-      <>
-        <IconContext.Provider value={{ className: "social__icons" }}>
-          <div className="wrapper">
-            {mobile ? (
-              <>
-                <HamburgerNavbar
-                  hamburgerClickHandler={this.drawerToggleClickHandler}
-                />
-                <SideDrawer
-                  show={sideDrawerOpen}
-                  click={this.backdropToggleClickHandler}
-                />
-                {backdrop}
-              </>
-            ) : (
-              <Navbar />
-            )}
-            <div className="content">{children}</div>
-            <Footer />
-          </div>
-        </IconContext.Provider>
-      </>
+      <IconContext.Provider value={{ className: "social__icons" }}>
+        <div className="wrapper">
+          {mobile ? (
+            <>
+              <HamburgerNavbar
+                hamburgerClickHandler={this.drawerToggleClickHandler}
+              />
+              <SideDrawer
+                show={sideDrawerOpen}
+                click={this.backdropToggleClickHandler}
+              />
+              {backdrop}
+            </>
+          ) : (
+            <Navbar />
+          )}
+          {data.notification && data.notification.frontmatter.isActive && (
+            <Notification
+              notification={data.notification.frontmatter}
+              click={() =>
+                this.removeNotification(
+                  data.notification.frontmatter.description
+                )
+              }
+              isVisible={notificationOpen}
+            />
+          )}
+          <div className="content">{children}</div>
+          <Footer />
+        </div>
+      </IconContext.Provider>
     )
   }
 }
@@ -96,5 +139,3 @@ class Layout extends PureComponent {
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
 }
-
-export default Layout

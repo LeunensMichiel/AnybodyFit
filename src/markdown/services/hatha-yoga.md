@@ -1,0 +1,24 @@
+---
+title: Hatha Yoga
+shortDesc: Lorem Ipsum que doloret.
+description: >
+  Uitdagende les met een focus op kracht en evenwicht. De oefeningen worden
+  steeds aangepast aan jouw mogelijkheden.
+price: 90
+isPerHour: true
+url: >-
+  https://my.setmore.com/bookingpage/c2f88312-cc6e-4dd2-ad87-2d8811b1ed3b/bookclass
+date: "3 18:45"
+location: Klimzaal Biover
+address:
+  city: Gent
+  postcode: "9000"
+  street: Campinglaan 2
+latitude: 51.048834
+longitude: 3.681284
+items:
+  - bullet: Denken aan Fazanten
+    isNextSession: false
+  - bullet: Zot zijn
+    isNextSession: true
+---

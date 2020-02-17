@@ -95,9 +95,9 @@ class Navbar extends PureComponent {
             <NavigationItem to="/about/" activeClassName="activeLink">
               over
             </NavigationItem>
-            <NavigationItem to="/news/" activeClassName="activeLink">
+            {/* <NavigationItem to="/news/" activeClassName="activeLink">
               nieuws
-            </NavigationItem>
+            </NavigationItem> */}
             <NavigationItem to="/contact/" activeClassName="activeLink">
               contact
             </NavigationItem>
