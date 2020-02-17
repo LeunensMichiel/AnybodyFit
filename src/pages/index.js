@@ -389,7 +389,7 @@ const Booking = styled.div`
   z-index: 5;
 
   @media ${screens.laptop} {
-    margin: 10em auto;
+    margin: 10em auto 5em auto;
   }
 `
 
@@ -425,7 +425,6 @@ const Master = styled.div`
   width: 100%;
   transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
   -webkit-backface-visibility: hidden;
-
   &:focus {
     background: ${colors.accent};
     cursor: pointer;
@@ -628,6 +627,72 @@ const Map = styled.div`
   }
 `
 
+const Faq = styled.div`
+  width: 90%;
+  max-width: 1024px;
+  margin: 2em auto 5em auto;
+  display: flex;
+  flex-direction: column;
+
+  @media ${screens.tablet} {
+    margin: 2em auto 10em auto;
+  }
+`
+
+const FaqHeader = styled.h2`
+  font-size: 2em;
+  @media ${screens.tablet} {
+    font-size: 2.66em;
+  }
+`
+
+const FaqItem = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+const Question = styled.div`
+  font-size: 1.1em;
+  font-weight: 700;
+  background: ${props => (props.active ? colors.accent : colors.white)};
+  padding: 1em;
+  transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  -webkit-backface-visibility: hidden;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  span {
+    width: 90%;
+  }
+
+  svg {
+    height: 20px;
+    transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+    transform: ${props => (props.active ? "rotate(90deg)" : "")};
+    color: ${colors.secondaryBlack};
+  }
+
+  &:focus {
+    background: ${colors.accent};
+    cursor: pointer;
+  }
+
+  @media ${screens.laptop} {
+    &:hover {
+      background: ${colors.accent};
+      cursor: pointer;
+    }
+  }
+`
+
+const Answer = styled.p`
+  background: ${colors.white};
+  padding: 1em;
+  margin: 0;
+`
+
 class IndexPage extends PureComponent {
   state = {
     item: 0,
@@ -652,7 +717,7 @@ class IndexPage extends PureComponent {
 
   changeFaqItem = faqItem => {
     this.setState((state, props) => ({
-      faqItem,
+      faqItem: state.faqItem === faqItem ? -1 : faqItem,
     }))
   }
 
@@ -662,7 +727,7 @@ class IndexPage extends PureComponent {
 
   render() {
     const { data } = this.props
-    const { item, viewport } = this.state
+    const { item, faqItem, viewport } = this.state
     let selectedItem = data.services.edges[item]
     const tomWords = _.split(data.landing.frontmatter.tomTitle, ";")
     const weekdays = [
@@ -864,10 +929,22 @@ class IndexPage extends PureComponent {
           ))}
         </Booking>
         <Faq>
-          {data.faq.edges.map((faqItem, index) => (
-            <FaqItem>
-              <Question></Question>
-              <Answer></Answer>
+          <FaqHeader>Veelgestelde Vragen</FaqHeader>
+          {data.faq.edges.map((question, index) => (
+            <FaqItem key={question.node.frontmatter.rank}>
+              <Question
+                onClick={e => {
+                  this.changeFaqItem(index)
+                  e.preventDefault()
+                }}
+                active={index === faqItem}
+              >
+                <span>{question.node.frontmatter.question}</span>
+                <Chevron />
+              </Question>
+              {index === faqItem && (
+                <Answer>{question.node.frontmatter.answer}</Answer>
+              )}
             </FaqItem>
           ))}
         </Faq>
@@ -930,7 +1007,7 @@ export const query = graphql`
       }
     }
     faq: allMarkdownRemark(
-      filter: { fileAbsolutePath: { regex: "/infocards/" } }
+      filter: { fileAbsolutePath: { regex: "/faq/" } }
       sort: { fields: frontmatter___rank }
     ) {
       edges {
