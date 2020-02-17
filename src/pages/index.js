@@ -729,7 +729,7 @@ const Question = styled.div`
 `
 
 const Answer = styled.p`
-  background: ${colors.white};
+  background: ${colors.secondaryWhite};
   padding: 1em;
   margin: 0;
 `
