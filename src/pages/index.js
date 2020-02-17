@@ -4,7 +4,7 @@ import Helmet from "react-helmet"
 import Img from "gatsby-image/withIEPolyfill"
 import { graphql, Link } from "gatsby"
 import _ from "lodash"
-import MapGL, { Marker, FlyToInterpolator } from "react-map-gl"
+import MapGL, { Marker } from "react-map-gl"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -15,6 +15,7 @@ import Logo from "../images/svg/logo.inline.svg"
 
 import next from "../images/svg/next.svg"
 import Pin from "../images/svg/pin.inline.svg"
+import Chevron from "../images/svg/right-chevron.inline.svg"
 
 import "mapbox-gl/dist/mapbox-gl.css"
 
@@ -147,13 +148,23 @@ const CardImageContainer = styled.div`
 
 const CardBody = styled.div`
   width: 100%;
-  padding: 3em 2em;
+  padding: 1em;
+
+  @media ${screens.tablet} {
+    padding: 2em;
+  }
+  @media ${screens.tablet} {
+    padding: 3em 2em;
+  }
 `
 
 const CardHeader = styled.h2`
-  font-size: 2em;
+  font-size: 1.8em;
 
   @media ${screens.tablet} {
+    font-size: 2.5em;
+  }
+  @media ${screens.laptop} {
     font-size: 3em;
   }
 `
@@ -371,40 +382,87 @@ const TomItem = styled.div`
 const Booking = styled.div`
   width: 100%;
   max-width: 1024px;
+  margin: 1.5em auto 5em auto;
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
   height: auto;
-  margin: 1.5em auto;
   z-index: 5;
+
   @media ${screens.laptop} {
     margin: 10em auto;
+  }
+`
+
+const BookingTitle = styled.h1`
+  font-size: 3em;
+  width: 90%;
+  margin: 0 auto 1em auto;
+  @media ${screens.tablet} {
+    font-size: 4em;
+  }
+  @media ${screens.laptop} {
+    font-size: 5em;
+    width: 100%;
   }
 `
 
 const MasterDetailView = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  @media ${screens.tablet} {
+    flex-direction: row;
+  }
 `
 
 const Master = styled.div`
   background: ${props => (props.active ? colors.secondaryWhite : colors.white)};
-  flex: 1;
   border-left: 3px solid
     ${props => (props.active ? colors.accent : colors.white)};
-  padding: 1.5em;
+  padding: 1em 1.5em;
   width: 100%;
-  max-width: 300px;
   transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
   -webkit-backface-visibility: hidden;
 
-  &:hover {
+  &:focus {
     background: ${colors.accent};
     cursor: pointer;
+  }
+
+  @media ${screens.tablet} {
+    max-width: 300px;
+    padding: 1.5em;
+  }
+  @media ${screens.laptop} {
+    &:hover {
+      background: ${colors.accent};
+      cursor: pointer;
+    }
   }
 `
 
 const MasterTitle = styled.h3`
-  font-size: 1.5em;
+  font-size: 1.3em;
+  margin-bottom: 0.5em;
+  @media ${screens.tablet} {
+    font-size: 1.5em;
+    margin-bottom: 1em;
+  }
+`
+
+const MasterFooter = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  svg {
+    height: 20px;
+    transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+    transform: ${props => (props.active ? "rotate(90deg)" : "")};
+    color: ${colors.secondaryBlack};
+  }
 `
 
 const MasterDate = styled.span`
@@ -416,24 +474,41 @@ const MasterDate = styled.span`
 const Detail = styled.div`
   background: ${colors.secondaryWhite};
   flex: 4;
-  padding: 1.5em 2.5em;
+  padding: 1.5em;
+
+  @media ${screens.laptop} {
+    padding: 1.5em 2.5em;
+  }
 `
 
 const DetailHeader = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 3em;
+  margin-bottom: 2em;
+
+  @media ${screens.tablet} {
+    margin-bottom: 3em;
+  }
 `
 
 const DetailTitle = styled.h2`
-  font-size: 3.5em;
+  font-size: 1.8em;
   margin-top: 0;
   margin-bottom: 0.1em;
+
+  @media ${screens.laptop} {
+    font-size: 3.5em;
+  }
 `
 
 const DetailSubtitle = styled.p`
   margin-bottom: 0em;
   color: ${colors.secondaryBlack};
+  font-size: 0.9em;
+
+  @media ${screens.tablet} {
+    font-size: 1em;
+  }
 `
 
 const DetailDescription = styled.p`
@@ -446,9 +521,15 @@ const DetailFooter = styled.div`
   padding-top: 4em;
   padding-bottom: 2em;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   border-top: 1px solid ${colors.accent};
+
+  @media ${screens.tablet} {
+    font-size: 1em;
+    flex-direction: row;
+  }
 `
 
 const DetailPrice = styled.p`
@@ -456,11 +537,15 @@ const DetailPrice = styled.p`
   font-weight: 700;
   color: ${colors.accent};
   font-size: 2em;
-  margin-right: 25px;
-
+  margin-bottom: 15px;
   span {
     font-size: 0.5em;
     color: ${colors.secondaryBlack};
+  }
+
+  @media ${screens.tablet} {
+    margin-bottom: 0;
+    margin-right: 25px;
   }
 `
 
@@ -488,15 +573,18 @@ const MapContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 250px;
+  min-height: 250px;
   max-width: 1024px;
-  margin-top: 4em;
-  margin-bottom: 4em;
+  margin-top: 2em;
+  margin-bottom: 2em;
   background: ${colors.accent2};
-  padding: 1em;
+  padding: 0.66em;
 
   @media ${screens.laptop} {
     flex-direction: row;
+    padding: 1em;
+    margin-top: 4em;
+    margin-bottom: 4em;
   }
 `
 
@@ -520,12 +608,13 @@ const Address = styled.div`
   justify-content: center;
   align-items: center;
   color: ${colors.secondaryBlack};
+  margin-bottom: 1em;
+
   span:first-child {
     font-weight: 600;
   }
   @media ${screens.tablet} {
     align-items: flex-start;
-    margin-bottom: 1em;
   }
 `
 
@@ -535,13 +624,14 @@ const Map = styled.div`
   height: 33vh;
 
   @media ${screens.laptop} {
-    height: 100%;
+    height: 250px;
   }
 `
 
 class IndexPage extends PureComponent {
   state = {
     item: 0,
+    faqItem: -1,
     viewport: {
       longitude: 3.73,
       latitude: 51.051,
@@ -551,12 +641,18 @@ class IndexPage extends PureComponent {
 
   changeItem = item => {
     this.setState((state, props) => ({
-      item: item,
+      item: state.item === item ? -1 : item,
       viewport: {
         longitude: props.data.services.edges[item].node.frontmatter.longitude,
         latitude: props.data.services.edges[item].node.frontmatter.latitude,
         zoom: 13,
       },
+    }))
+  }
+
+  changeFaqItem = faqItem => {
+    this.setState((state, props) => ({
+      faqItem,
     }))
   }
 
@@ -667,96 +763,114 @@ class IndexPage extends PureComponent {
           </TomAbout>
         </Tom>
         <Booking>
-          <MasterDetailView>
-            {data.services.edges.map((service, index) => (
+          <BookingTitle>Aanbod</BookingTitle>
+          {data.services.edges.map((service, index) => (
+            <MasterDetailView key={service.node.frontmatter.title}>
               <Master
-                key={service.node.frontmatter.title}
                 onClick={() => this.changeItem(index)}
                 active={index === item}
               >
                 <MasterTitle>{service.node.frontmatter.title}</MasterTitle>
-                <MasterDate>
-                  {_.replace(
-                    service.node.frontmatter.date,
-                    service.node.frontmatter.date.substring(0, 1),
-                    weekdays[service.node.frontmatter.date.substring(0, 1)]
-                  )}
-                </MasterDate>
-              </Master>
-            ))}
-          </MasterDetailView>
-          <Detail>
-            <DetailHeader>
-              <DetailTitle>{selectedItem.node.frontmatter.title}</DetailTitle>
-              <DetailSubtitle>
-                {selectedItem.node.frontmatter.shortDesc}
-              </DetailSubtitle>
-            </DetailHeader>
-            <DetailDescription>
-              {selectedItem.node.frontmatter.description}
-            </DetailDescription>
-            <MapContainer>
-              <ContactBrand>
-                <Address>
-                  <span>{selectedItem.node.frontmatter.location}</span>
-                  <span>{selectedItem.node.frontmatter.address.street}</span>
-                  <span>
-                    {selectedItem.node.frontmatter.address.city}{" "}
-                    {selectedItem.node.frontmatter.address.postcode}
-                  </span>
-                  <span>België</span>
-                </Address>
-                <Address>
-                  <span>
+                <MasterFooter active={index === item}>
+                  <MasterDate>
                     {_.replace(
-                      selectedItem.node.frontmatter.date.substring(0, 1),
-                      selectedItem.node.frontmatter.date.substring(0, 1),
-                      weekdays[
-                        selectedItem.node.frontmatter.date.substring(0, 1)
-                      ]
+                      service.node.frontmatter.date,
+                      service.node.frontmatter.date.substring(0, 1),
+                      weekdays[service.node.frontmatter.date.substring(0, 1)]
                     )}
-                  </span>
-                  <span>
-                    om {selectedItem.node.frontmatter.date.substring(2)}
-                  </span>
-                </Address>
-              </ContactBrand>
-              <Map>
-                <MapGL
-                  {...viewport}
-                  width="100%"
-                  height="100%"
-                  transitionDuration={500}
-                  transitionInterpolator={new FlyToInterpolator()}
-                  mapStyle={`${process.env.GATSBY_MAP_STYLE}`}
-                  onViewportChange={this.updateViewport}
-                  mapboxApiAccessToken={`${process.env.GATSBY_MAP_API}`}
-                >
-                  <Marker
-                    longitude={selectedItem.node.frontmatter.longitude}
-                    latitude={selectedItem.node.frontmatter.latitude}
-                  >
-                    <Pin />
-                  </Marker>
-                </MapGL>
-              </Map>
-            </MapContainer>
-            <DetailFooter>
-              <DetailPrice>
-                €{selectedItem.node.frontmatter.price.toFixed(2)}
-                <span>
-                  /{selectedItem.node.frontmatter.isPerHour ? "uur" : "sessie"}
-                </span>
-              </DetailPrice>
-              <BookingButton
-                id="Setmore_button_iframe"
-                href={selectedItem.node.frontmatter.url}
-              >
-                Boek
-              </BookingButton>
-            </DetailFooter>
-          </Detail>
+                  </MasterDate>
+                  <Chevron />
+                </MasterFooter>
+              </Master>
+              {index === item && (
+                <Detail>
+                  <DetailHeader>
+                    <DetailTitle>
+                      {selectedItem.node.frontmatter.title}
+                    </DetailTitle>
+                    <DetailSubtitle>
+                      {selectedItem.node.frontmatter.shortDesc}
+                    </DetailSubtitle>
+                  </DetailHeader>
+                  <DetailDescription>
+                    {selectedItem.node.frontmatter.description}
+                  </DetailDescription>
+                  <MapContainer>
+                    <ContactBrand>
+                      <Address>
+                        <span>{selectedItem.node.frontmatter.location}</span>
+                        <span>
+                          {selectedItem.node.frontmatter.address.street}
+                        </span>
+                        <span>
+                          {selectedItem.node.frontmatter.address.city}{" "}
+                          {selectedItem.node.frontmatter.address.postcode}
+                        </span>
+                        <span>België</span>
+                      </Address>
+                      <Address>
+                        <span>
+                          {_.replace(
+                            selectedItem.node.frontmatter.date.substring(0, 1),
+                            selectedItem.node.frontmatter.date.substring(0, 1),
+                            weekdays[
+                              selectedItem.node.frontmatter.date.substring(0, 1)
+                            ]
+                          )}
+                        </span>
+                        <span>
+                          om {selectedItem.node.frontmatter.date.substring(2)}
+                        </span>
+                      </Address>
+                    </ContactBrand>
+                    <Map>
+                      <MapGL
+                        {...viewport}
+                        width="100%"
+                        height="100%"
+                        mapStyle={`${process.env.GATSBY_MAP_STYLE}`}
+                        onViewportChange={this.updateViewport}
+                        mapboxApiAccessToken={`${process.env.GATSBY_MAP_API}`}
+                      >
+                        <Marker
+                          longitude={selectedItem.node.frontmatter.longitude}
+                          latitude={selectedItem.node.frontmatter.latitude}
+                        >
+                          <Pin />
+                        </Marker>
+                      </MapGL>
+                    </Map>
+                  </MapContainer>
+                  <DetailFooter>
+                    <DetailPrice>
+                      €{selectedItem.node.frontmatter.price.toFixed(2)}
+                      <span>
+                        /
+                        {selectedItem.node.frontmatter.isPerHour
+                          ? "uur"
+                          : "sessie"}
+                      </span>
+                    </DetailPrice>
+                    <BookingButton
+                      id="Setmore_button_iframe"
+                      href={selectedItem.node.frontmatter.url}
+                    >
+                      Boek
+                    </BookingButton>
+                  </DetailFooter>
+                </Detail>
+              )}
+            </MasterDetailView>
+          ))}
         </Booking>
+        <Faq>
+          {data.faq.edges.map((faqItem, index) => (
+            <FaqItem>
+              <Question></Question>
+              <Answer></Answer>
+            </FaqItem>
+          ))}
+        </Faq>
       </Layout>
     )
   }
@@ -811,6 +925,20 @@ export const query = graphql`
                 publicURL
               }
             }
+          }
+        }
+      }
+    }
+    faq: allMarkdownRemark(
+      filter: { fileAbsolutePath: { regex: "/infocards/" } }
+      sort: { fields: frontmatter___rank }
+    ) {
+      edges {
+        node {
+          frontmatter {
+            question
+            answer
+            rank
           }
         }
       }

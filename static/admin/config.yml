@@ -281,7 +281,12 @@ collections:
         name: "termspage"
         file: "src/markdown/pages/terms.md"
         fields:
-          - { label: "Algemene Voorwaarden", name: "title", widget: "text" }
+          - {
+              label: "Algemene Voorwaarden",
+              name: "title",
+              widget: "text",
+              hint: "Voor in alineas op te splitsen, zet je de tekst in een p tag (html voor paragraph). Deze syntax is als volgt. <p>Tekst</p>. Doe dit bvb 3 keer voor 3 paragrafen",
+            }
       - label: "About pagina"
         media_folder: ""
         public_folder: ""
@@ -298,7 +303,7 @@ collections:
               label: "Beschrijving 1",
               name: "description",
               widget: "markdown",
-              hint: "Beschrijving van het eerste deel, vanboven op de pagina.",
+              hint: "Beschrijving van het eerste deel, vanboven op de pagina. Voor in alineas op te splitsen, zet je de tekst in een p tag (html voor paragraph). Deze syntax is als volgt. <p>Tekst</p>. Doe dit bvb 3 keer voor 3 paragrafen",
             }
           - label: "Afbeelding 1"
             name: "image"
@@ -348,5 +353,5 @@ collections:
               label: "Beschrijving 3",
               name: "description3",
               widget: "markdown",
-              hint: "Beschrijving van het onderste stuk. Gaat in 3 kolommen opgesplitst worden.",
+              hint: "Beschrijving van het onderste stuk. Voor in 3 kolommen op te splitsen, zet je de tekst in een p tag (html voor paragraph). Deze syntax is als volgt. <p>Tekst</p>. Doe dit 3 keer voor 3 paragrafen",
             }
