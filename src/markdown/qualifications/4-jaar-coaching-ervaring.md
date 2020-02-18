@@ -1,4 +1,4 @@
 ---
-title: 4 jaar coaching-ervaring
+title: 4 jaar ervaring als instructeur
 ---
 
