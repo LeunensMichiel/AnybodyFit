@@ -18,12 +18,6 @@ address:
   street: Vlaanderenstraat 53
 latitude: 51.050669
 longitude: 3.729774
-items:
-  - bullet: Pokemon
-    isNextSession: false
-  - bullet: Jari
-    isNextSession: true
-  - bullet: Nico
-    isNextSession: false
+items: []
 ---
 
