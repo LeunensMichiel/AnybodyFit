@@ -907,20 +907,15 @@ class IndexPage extends PureComponent {
                     Gekleurde thema's komen binnenkort aan bod!
                   </DetailSubSubtitle>
                   <DetailItems>
-                    {
-                      (selectedItem.node.frontmatter.items &&
-                        _.map(selectedItem.node.frontmatter.items),
-                      subItem => {
-                        return (
-                          <DetailItem
-                            key={subItem.bullet}
-                            active={subItem.isNextSession}
-                          >
-                            {subItem.bullet}
-                          </DetailItem>
-                        )
-                      })
-                    }
+                    {selectedItem.node.frontmatter.items &&
+                      selectedItem.node.frontmatter.items.map(subItem => (
+                        <DetailItem
+                          key={subItem.bullet}
+                          active={subItem.isNextSession}
+                        >
+                          {subItem.bullet}
+                        </DetailItem>
+                      ))}
                   </DetailItems>
                   <MapContainer>
                     <ContactBrand>

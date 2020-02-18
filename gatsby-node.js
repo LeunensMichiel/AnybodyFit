@@ -21,7 +21,7 @@ exports.createSchemaCustomization = ({ actions }) => {
   }
   type Frontmatter {
     isActive: Boolean
-    items: Items
+    items: [Items]
   }
   type Items {
     bullet: String
