@@ -6,7 +6,7 @@ description: >-
   stabiliteit te bevorderen. Daarnaast werken we ook aan de beweeglijkheid en
   soepelheid van de spieren en gewrichten. De oefeningen worden steeds aangepast
   aan het niveau en de mogelijkheden van het individu.
-price: 10
+price: 11
 isPerHour: false
 url: >-
   https://my.setmore.com/bookingpage/c2f88312-cc6e-4dd2-ad87-2d8811b1ed3b/bookclass
