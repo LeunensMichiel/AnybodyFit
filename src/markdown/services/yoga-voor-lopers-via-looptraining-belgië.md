@@ -16,8 +16,12 @@ address:
   city: Gent
   postcode: '9000'
   street: Zuiderlaan 14
-latitude: 51.049296
-longitude: 2
-items: []
+latitude: 51.049131
+longitude: 3.684932
+items:
+  - bullet: Lopen is leuk
+    isNextSession: true
+  - bullet: Fijn
+    isNextSession: false
 ---
 
