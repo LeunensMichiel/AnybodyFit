@@ -37,8 +37,7 @@ class Layout extends PureComponent {
   state = {
     sideDrawerOpen: false,
     notificationOpen: true,
-    mobile:
-      typeof window !== `undefined` ? window.innerWidth < 768 : isMobileOnly,
+    mobile: isMobileOnly,
   }
 
   drawerToggleClickHandler = () => {
@@ -105,7 +104,7 @@ class Layout extends PureComponent {
       <IconContext.Provider value={{ className: "social__icons" }}>
         <div className="wrapper">
           {mobile ? (
-            <>
+            <div>
               <HamburgerNavbar
                 hamburgerClickHandler={this.drawerToggleClickHandler}
               />
@@ -114,7 +113,7 @@ class Layout extends PureComponent {
                 click={this.backdropToggleClickHandler}
               />
               {backdrop}
-            </>
+            </div>
           ) : (
             <Navbar />
           )}
