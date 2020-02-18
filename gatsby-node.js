@@ -20,12 +20,12 @@ exports.createSchemaCustomization = ({ actions }) => {
     frontmatter: Frontmatter
   }
   type Frontmatter {
-    isActive: Boolean!
+    isActive: Boolean
     items: Items
   }
   type Items {
-    bullet: String!
-    isNextSession: Boolean!
+    bullet: String
+    isNextSession: Boolean
   }
   `
   createTypes(typeDefs)
