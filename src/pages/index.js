@@ -770,6 +770,7 @@ class IndexPage extends PureComponent {
     const { data } = this.props
     const { item, faqItem, viewport } = this.state
     let selectedItem = data.services.edges[item]
+    console.log(selectedItem)
     const tomWords = _.split(data.landing.frontmatter.tomTitle, ";")
     const weekdays = [
       "Zondag",
@@ -905,18 +906,22 @@ class IndexPage extends PureComponent {
                   <DetailSubSubtitle>
                     Gekleurde thema's komen binnenkort aan bod!
                   </DetailSubSubtitle>
-                  {selectedItem.node.frontmatter.items.length && (
-                    <DetailItems>
-                      selectedItem.node.frontmatter.items.map(subItem => (
-                      <DetailItem
-                        key={subItem.bullet}
-                        active={subItem.isNextSession}
-                      >
-                        {subItem.bullet}
-                      </DetailItem>
-                      ))}
-                    </DetailItems>
-                  )}
+                  <DetailItems>
+                    {
+                      (selectedItem.node.frontmatter.items &&
+                        _.map(selectedItem.node.frontmatter.items),
+                      subItem => {
+                        return (
+                          <DetailItem
+                            key={subItem.bullet}
+                            active={subItem.isNextSession}
+                          >
+                            {subItem.bullet}
+                          </DetailItem>
+                        )
+                      })
+                    }
+                  </DetailItems>
                   <MapContainer>
                     <ContactBrand>
                       <Address>
