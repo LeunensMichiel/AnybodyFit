@@ -1,41 +1,23 @@
 ---
-title: Groepscoaching
-shortDesc: Om even tot rust te kunnen komen.
+title: Hatha Yoga
+shortDesc: Uitdagende les met een focus op kracht en evenwicht.
 description: >-
-  We werken telkens een aantal weken samen rond een bepaald thema (gezonde
-  gewoontes aanleren, voeding, sport...). De sessies bestaan uit een stukje
-  theorie, waarbij je alle nodige info krijgt, en een stukje praktijk, waarbij
-  we deze info op een gerichte manier toepassen. Klik op de ‘boek’-knop om te
-  kijken welke thema’s ingepland staan.
-price: 10
+  In deze les worden de houdingen specifiek gekozen om de spieruithouding en de
+  stabiliteit te bevorderen. Daarnaast werken we ook aan de beweeglijkheid en
+  soepelheid van de spieren en gewrichten. De oefeningen worden steeds aangepast
+  aan het niveau en de mogelijkheden van het individu.
+price: 11
 isPerHour: false
 url: >-
   https://my.setmore.com/bookingpage/c2f88312-cc6e-4dd2-ad87-2d8811b1ed3b/bookclass
-date: "1 17:32"
+date: '1 19:00'
 location: BlinkOut
 address:
   city: Gent
-  postcode: "9000"
+  postcode: '9000'
   street: Vlaanderenstraat 53
 latitude: 51.050669
 longitude: 3.729774
-items:
-  - bullet: Ademen
-    isNextSession: false
-  - bullet: Lachen
-    isNextSession: false
-  - bullet: Alien
-    isNextSession: false
-  - bullet: Orval
-    isNextSession: false
-  - bullet: Epico
-    isNextSession: false
-  - bullet: BASS
-    isNextSession: false
-  - bullet: Pokemon
-    isNextSession: true
-  - bullet: Episch zijn
-    isNextSession: false
-  - bullet: Koffietjes ☕
-    isNextSession: true
+items: []
 ---
+
