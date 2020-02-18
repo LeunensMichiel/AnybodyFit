@@ -10,14 +10,14 @@ price: 11
 isPerHour: false
 url: >-
   https://my.setmore.com/bookingpage/c2f88312-cc6e-4dd2-ad87-2d8811b1ed3b/bookclass
-date: '1 19:00'
-location: BlinkOut
+date: '2 18:30'
+location: Klimzaal Biover
 address:
   city: Gent
   postcode: '9000'
-  street: Vlaanderenstraat 53
-latitude: 51.050669
-longitude: 3.729774
+  street: Campinglaan 2
+latitude: 51.048891
+longitude: 3.681285
 items: []
 ---
 
