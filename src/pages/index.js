@@ -816,7 +816,7 @@ class IndexPage extends PureComponent {
             <CardBody>
               <CardHeader>{card.node.frontmatter.title}</CardHeader>
               <CardSubHeader>{card.node.frontmatter.description}</CardSubHeader>
-              {card.node.frontmatter.items.map(subItem => (
+              {card.node.frontmatter.bullets.map(subItem => (
                 <CardItem key={subItem.itemText}>
                   <CardItemText>{subItem.itemText}</CardItemText>
                   <CardItemIcon svg={subItem.itemIcon.publicURL}></CardItemIcon>
@@ -906,14 +906,15 @@ class IndexPage extends PureComponent {
                     Gekleurde thema's komen binnenkort aan bod!
                   </DetailSubSubtitle>
                   <DetailItems>
-                    {selectedItem.node.frontmatter.items.map(subItem => (
-                      <DetailItem
-                        key={subItem.bullet}
-                        active={subItem.isNextSession}
-                      >
-                        {subItem.bullet}
-                      </DetailItem>
-                    ))}
+                    {selectedItem.node.frontmatter.items &&
+                      selectedItem.node.frontmatter.items.map(subItem => (
+                        <DetailItem
+                          key={subItem.bullet}
+                          active={subItem.isNextSession}
+                        >
+                          {subItem.bullet}
+                        </DetailItem>
+                      ))}
                   </DetailItems>
                   <MapContainer>
                     <ContactBrand>
@@ -1051,7 +1052,7 @@ export const query = graphql`
               }
             }
             rank
-            items {
+            bullets {
               itemText
               itemIcon {
                 publicURL

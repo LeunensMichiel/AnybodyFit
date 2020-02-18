@@ -90,7 +90,7 @@ const StyledCross = styled(CrossIcon)`
 const Notification = ({ notification, click, isVisible }) => {
   return (
     <NotificationContainer isVisible={isVisible === true}>
-      <span onClick={click} role="button">
+      <span onClick={click} onKeyDown={click} tabIndex={0} role="button">
         <StyledCross />
       </span>
       <h3>{notification.title || ""}</h3>

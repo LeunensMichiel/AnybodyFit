@@ -140,26 +140,26 @@ const SocialIcons = styled.div`
   width: 66px;
 `
 
-const LangContainer = styled.div`
-  color: ${colors.secondaryBlack};
-  display: flex;
-  flex-direction: column;
-  justify-content: stretch;
-  align-items: center;
+// const LangContainer = styled.div`
+//   color: ${colors.secondaryBlack};
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: stretch;
+//   align-items: center;
 
-  @media ${screens.tablet} {
-    align-items: flex-end;
-  }
-`
+//   @media ${screens.tablet} {
+//     align-items: flex-end;
+//   }
+// `
 
-const StyledSpan = styled.span`
-  cursor: pointer;
-  transition: 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+// const StyledSpan = styled.span`
+//   cursor: pointer;
+//   transition: 0.3s cubic-bezier(0.19, 1, 0.22, 1);
 
-  &:hover {
-    font-weight: 700;
-  }
-`
+//   &:hover {
+//     font-weight: 700;
+//   }
+// `
 
 const Footer = () => {
   return (

@@ -76,9 +76,10 @@ class Layout extends PureComponent {
     )
 
     this.setState({
-      notificationOpen:
-        localStorage.getItem("notification") !==
-        this.props.data.notification.frontmatter.description,
+      notificationOpen: this.props.data.notification
+        ? localStorage.getItem("notification") !==
+          this.props.data.notification.frontmatter.description
+        : false,
     })
   }
 

@@ -89,17 +89,17 @@ const StyledLink = styled(Link)`
 const SideDrawer = ({ show, click }) => {
   return (
     <Navigation show={show.toString()}>
-      <span onClick={click} role="button">
+      <span onClick={click} onKeyDown={click} tabIndex={0} role="button">
         <Cross />
       </span>
       <NavigationItems>
         <NavigationItem>
-          <StyledLink to="/" activeClassName="activeLink">
+          <StyledLink to="/" activeClassName="activeLink" tabIndex={0}>
             home
           </StyledLink>
         </NavigationItem>
         <NavigationItem>
-          <StyledLink to="/about/" activeClassName="activeLink">
+          <StyledLink to="/about/" activeClassName="activeLink" tabIndex={0}>
             over
           </StyledLink>
         </NavigationItem>
@@ -109,7 +109,7 @@ const SideDrawer = ({ show, click }) => {
           </StyledLink> */}
         </NavigationItem>
         <NavigationItem last>
-          <StyledLink to="/contact/" activeClassName="activeLink">
+          <StyledLink to="/contact/" activeClassName="activeLink" tabIndex={0}>
             contact
           </StyledLink>
         </NavigationItem>
