@@ -3,7 +3,7 @@ title: Leren Groeien
 description: Technieken aanleren om zo snel mogelijk zelfstandig aan de slag te gaan
 image: secondCard.jpg
 rank: 2
-items:
+bullets:
   - itemIcon: innovation.svg
     itemText: Leren je comfortzone te verlaten en jezelf uit te dagen
   - itemIcon: startup.svg

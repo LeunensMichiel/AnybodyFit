@@ -207,7 +207,7 @@ collections:
         }
       - label: "Puntjes"
         hint: "Puntjes van je dienst"
-        name: "items"
+        name: "bullets"
         widget: "list"
         fields:
           - {
