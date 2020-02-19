@@ -5,8 +5,6 @@ backend:
 media_folder: static/img
 public_folder: /img
 
-local_backend: true
-
 site_url: https://anybody.fitness
 logo_url: https://anybody.fitness/img/logo.svg
 
