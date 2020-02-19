@@ -18,10 +18,6 @@ address:
   street: Zuiderlaan 14
 latitude: 51.049131
 longitude: 3.684932
-items:
-  - bullet: Lopen is leuk
-    isNextSession: true
-  - bullet: Fijn
-    isNextSession: false
+items: []
 ---
 
