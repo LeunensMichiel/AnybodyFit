@@ -861,10 +861,8 @@ class IndexPage extends PureComponent {
               <div className="circle small" />
             </TomPicture>
             <TomItems>
-              {data.qualifications.edges.map(item => (
-                <TomItem key={item.node.frontmatter.title}>
-                  {item.node.frontmatter.title}
-                </TomItem>
+              {data.landing.frontmatter.qualifications.map(qual => (
+                <TomItem key={qual.qualification}>{qual.qualification}</TomItem>
               ))}
             </TomItems>
           </TomAbout>
@@ -902,10 +900,14 @@ class IndexPage extends PureComponent {
                   <DetailDescription>
                     {selectedItem.node.frontmatter.description}
                   </DetailDescription>
-                  <DetailSubtitle>Thema's die aan bod komen</DetailSubtitle>
-                  <DetailSubSubtitle>
-                    Gekleurde thema's komen binnenkort aan bod!
-                  </DetailSubSubtitle>
+                  {!_.isEmpty(selectedItem.node.frontmatter.items) && (
+                    <div>
+                      <DetailSubtitle>Thema's die aan bod komen</DetailSubtitle>
+                      <DetailSubSubtitle>
+                        Gekleurde thema's komen binnenkort aan bod!
+                      </DetailSubSubtitle>
+                    </div>
+                  )}
                   <DetailItems>
                     {selectedItem.node.frontmatter.items &&
                       selectedItem.node.frontmatter.items.map(subItem => (
@@ -1023,17 +1025,6 @@ export const query = graphql`
         }
       }
     }
-    qualifications: allMarkdownRemark(
-      filter: { fileAbsolutePath: { regex: "/qualifications/" } }
-    ) {
-      edges {
-        node {
-          frontmatter {
-            title
-          }
-        }
-      }
-    }
     bigCards: allMarkdownRemark(
       filter: { fileAbsolutePath: { regex: "/infocards/" } }
       sort: { fields: frontmatter___rank }
@@ -1112,6 +1103,9 @@ export const query = graphql`
         title
         tomTitle
         description
+        qualifications {
+          qualification
+        }
         profilePic {
           childImageSharp {
             fluid(maxWidth: 1080, quality: 85) {

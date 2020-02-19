@@ -60,19 +60,6 @@ collections:
           format: "YYYY MM DD",
           hint: "Datum van post",
         }
-  - label: "Kwalificaties"
-    name: "qualification"
-    folder: "src/markdown/qualifications"
-    create: true
-    editor:
-      preview: true
-    fields:
-      - {
-          label: "Kwalificatie",
-          name: "title",
-          widget: "string",
-          hint: "Een gehaalde Kwalificatie. Congrats babe x",
-        }
   - label: "Diensten Kaartjes"
     name: "services"
     folder: "src/markdown/services"
@@ -293,6 +280,16 @@ collections:
               widget: "string",
               hint: "Zet hier wat er boven uw profile pic staat, gescheiden door een ';'. Bv: Ontmoet Tom,;uw persoonlijke coach",
             }
+          - label: "Kwalificaties"
+            hint: "Je kwalificaties"
+            name: "qualifications"
+            widget: "list"
+            fields:
+              - {
+                  label: Behaalde kwalificatie,
+                  name: qualification,
+                  widget: string,
+                }
       - label: "Algemene Voorwaarden"
         name: "termspage"
         file: "src/markdown/pages/terms.md"
