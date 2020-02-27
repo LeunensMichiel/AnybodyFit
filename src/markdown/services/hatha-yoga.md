@@ -9,7 +9,7 @@ price: 11
 isPerHour: false
 url: >-
   https://my.setmore.com/bookingpage/c2f88312-cc6e-4dd2-ad87-2d8811b1ed3b/bookclass
-date: '1 20:15'
+date: '1 20:00'
 location: BlinkOut
 address:
   city: Gent
