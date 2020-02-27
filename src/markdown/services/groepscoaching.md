@@ -1,11 +1,11 @@
 ---
-title: Hatha Yoga
-shortDesc: Uitdagende les met een focus op kracht en evenwicht.
+title: Groepscoaching
+shortDesc: Gezondheidsthema's worden in groep aangepakt.
 description: >-
-  In deze les worden de houdingen specifiek gekozen om de spieruithouding en de
-  stabiliteit te bevorderen. Daarnaast werken we ook aan de beweeglijkheid en
-  soepelheid van de spieren en gewrichten. De oefeningen worden steeds aangepast
-  aan het niveau en de mogelijkheden van het individu.
+  We werken telkens een aantal weken samen rond een bepaald thema (gezonde
+  gewoontes aanleren, voeding, sport...). De sessies bestaan uit een stukje
+  theorie, waarbij je alle nodige info krijgt, en een stukje praktijk, waarbij
+  we deze info op een gerichte manier toepassen.
 price: 11
 isPerHour: false
 url: >-
