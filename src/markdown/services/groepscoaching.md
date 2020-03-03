@@ -23,7 +23,7 @@ longitude: 3.729774
 items:
   - bullet: Dagelijks Bewegen (09/03)
     isNextSession: false
-  - bullet: 'Sport: Een Gewoonte (16/93)'
+  - bullet: 'Sport: Een Gewoonte (16/03)'
     isNextSession: false
   - bullet: Doelbewust Sporten (25/03)
     isNextSession: false
