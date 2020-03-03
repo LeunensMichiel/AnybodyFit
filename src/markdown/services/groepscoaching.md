@@ -27,11 +27,5 @@ items:
     isNextSession: false
   - bullet: Doelbewust Sporten (25/03)
     isNextSession: false
-  - bullet: Krachttraining (30/03)
-    isNextSession: true
-  - bullet: Uithoudingstraining (06/04)
-    isNextSession: true
-  - bullet: Lenigheidstraining (13/04)
-    isNextSession: true
 ---
 
