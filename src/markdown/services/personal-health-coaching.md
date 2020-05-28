@@ -18,8 +18,8 @@ address:
   city: Gent
   postcode: '9000'
   street: Vlaanderenstraat 53
-latitude: 51.050747
-longitude: -8
+latitude: 51.050832
+longitude: 3.729742
 items: []
 ---
 
